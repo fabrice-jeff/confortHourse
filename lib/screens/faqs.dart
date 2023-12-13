@@ -1,6 +1,4 @@
 import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/widgets/appbar.dart';
-import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/question_faqs.dart';
@@ -20,9 +18,6 @@ class _FaqsPageState extends State<FaqsPage> {
       appBar: AppBar(
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
-        title: AppBarWidget(
-          page: 0,
-        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

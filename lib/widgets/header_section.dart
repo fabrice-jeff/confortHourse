@@ -7,12 +7,13 @@ class HeaderSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 100),
       alignment: Alignment.center,
       width: double.infinity,
-      height: 400,
+      height: 340,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('images/IMG-20231114-WA0018.jpg'),
+          image: AssetImage('images/breadcrumb.jpg'),
           fit: BoxFit.cover,
           invertColors: false,
         ),
@@ -26,12 +27,14 @@ class HeaderSectionWidget extends StatelessWidget {
           ),
           Positioned(
             child: Container(
+              padding: EdgeInsets.all(5),
               alignment: Alignment.center,
               child: BigTextWidget(
                 text: text,
+                height: 1.2,
                 textColor: Colors.white,
                 fontWeight: FontWeight.bold,
-                sizeText: 40,
+                sizeText: 35,
               ),
             ),
           ),

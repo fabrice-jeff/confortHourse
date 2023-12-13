@@ -109,42 +109,49 @@ class LocationWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundColor,
-                  borderRadius: BorderRadius.circular(30),
-                  image: DecorationImage(
-                    image: AssetImage('images/user.webp'),
+          Expanded(
+            child: Row(
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundColor,
+                    borderRadius: BorderRadius.circular(30),
+                    image: DecorationImage(
+                      image: AssetImage('images/user.webp'),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              BigTextWidget(
-                text: "ConforthOurse",
-                sizeText: 17,
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 8, left: 5),
-                height: 18,
-                width: 18,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(9),
+                SizedBox(
+                  width: 5,
                 ),
-              ),
-              Spacer(),
-              InkWell(
-                onTap: () {},
-                child: Container(
+                BigTextWidget(
+                  text: "ConforthOurse",
+                  height: 0,
+                  sizeText: 17,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Container(
+                  height: 18,
+                  width: 18,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(9),
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 0.4,
+                        spreadRadius: 0.4,
+                      )
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: 8, left: 5),
-                  height: 45,
+                  height: 40,
                   width: 80,
                   decoration: BoxDecoration(
                     color: Colors.transparent,
@@ -154,16 +161,19 @@ class LocationWidget extends StatelessWidget {
                       width: 1,
                     ),
                   ),
-                  child: SimpleTextWidget(
-                    text: 'Détails',
-                    textColor: AppColors.secondColor,
-                    fontWeight: FontWeight.w400,
-                    sizeText: 18,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: SimpleTextWidget(
+                      text: 'Détails',
+                      textColor: AppColors.secondColor,
+                      fontWeight: FontWeight.w400,
+                      sizeText: 14,
+                    ),
                   ),
                 ),
-              )
-            ],
-          )
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:flutter/material.dart';

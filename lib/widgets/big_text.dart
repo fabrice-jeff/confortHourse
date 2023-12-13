@@ -7,6 +7,7 @@ class BigTextWidget extends StatelessWidget {
   final FontWeight fontWeight;
   final double height;
   final TextAlign textAlign;
+  final String fontFamily;
 
   const BigTextWidget({
     super.key,
@@ -16,6 +17,7 @@ class BigTextWidget extends StatelessWidget {
     this.fontWeight = FontWeight.bold,
     this.height = 1.7,
     this.textAlign = TextAlign.center,
+    this.fontFamily = "sans-serif",
   });
 
   @override

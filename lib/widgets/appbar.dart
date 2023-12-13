@@ -1,6 +1,5 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/widgets/big_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -41,7 +40,7 @@ class AppBarWidget extends StatelessWidget {
               child: Icon(
                 Icons.menu,
                 color: AppColors.textColor,
-                size: 26,
+                size: 30,
               ),
             ),
           )
