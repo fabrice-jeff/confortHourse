@@ -1,5 +1,5 @@
 import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/screens/security/sign.dart';
+import 'package:conforthourse/screens/security/register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
