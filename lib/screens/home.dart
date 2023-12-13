@@ -2,6 +2,7 @@ import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/categorie.dart';
+import 'package:conforthourse/widgets/list_temoignage.dart';
 import 'package:conforthourse/widgets/location.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:conforthourse/widgets/title_section.dart';
@@ -86,48 +87,48 @@ class MyHomePage extends StatelessWidget {
                   },
                 ),
               ),
-              // SizedBox(
-              //   height: 20,
-              // ),
+              SizedBox(
+                height: 20,
+              ),
               // VideoApp(),
-              // TitleSectionWidget(
-              //   firstText: "CONFORTHOUSE",
-              //   secondText: "Pourquoi Nous choisir",
-              // ),
-              // Container(
-              //   height: 400 * 3.3,
-              //   child: ListView.builder(
-              //     itemCount: 3,
-              //     physics: NeverScrollableScrollPhysics(),
-              //     itemBuilder: (BuildContext, position) {
-              //       return _listReasons(context);
-              //     },
-              //   ),
-              // ),
-              // Container(
-              //   alignment: Alignment.center,
-              //   height: 850,
-              //   width: double.infinity,
-              //   decoration: BoxDecoration(
-              //     color: Color(0xFF022956),
-              //   ),
-              //   child: Column(
-              //     children: <Widget>[
-              //       Container(
-              //         margin: EdgeInsets.only(top: 30, bottom: 20),
-              //         child: TitleSectionWidget(
-              //           firstText: "TEMOIGNAGES",
-              //           secondText: "Ce Que Nos Clients Disent",
-              //           colorSecondText: Colors.white,
-              //         ),
-              //       ),
-              //       Container(
-              //         height: 350,
-              //         child: const ListTemoignage(),
-              //       )
-              //     ],
-              //   ),
-              // ),
+              TitleSectionWidget(
+                firstText: "CONFORTHOUSE",
+                secondText: "Pourquoi Nous choisir",
+              ),
+              Container(
+                height: 400 * 3.3,
+                child: ListView.builder(
+                  itemCount: 3,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext, position) {
+                    return _listReasons(context);
+                  },
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: 850,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xFF022956),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(top: 30, bottom: 20),
+                      child: TitleSectionWidget(
+                        firstText: "TEMOIGNAGES",
+                        secondText: "Ce Que Nos Clients Disent",
+                        colorSecondText: Colors.white,
+                      ),
+                    ),
+                    Container(
+                      height: 350,
+                      child: const ListTemoignage(),
+                    )
+                  ],
+                ),
+              ),
               // SizedBox(
               //   height: 10,
               // ),

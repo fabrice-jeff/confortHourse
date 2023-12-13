@@ -1,5 +1,5 @@
 import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/screens/security/register.dart';
+import 'package:conforthourse/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
       debugShowCheckedModeBanner: false,
-      home: SignPage(),
+      home: MyHomePage(),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:conforthourse/colors.dart';
 import 'package:flutter/material.dart';
 
 class SimpleTextWidget extends StatelessWidget {

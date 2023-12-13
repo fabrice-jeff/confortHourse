@@ -145,11 +145,6 @@ class _LoginPagState extends State<LoginPage> {
                                         hintText: "Votre mot de passe",
                                         border: InputBorder.none,
                                       ),
-                                      validator: (value) {
-                                        if (value == null) {
-                                          return "Entrer un mot de passe";
-                                        }
-                                      },
                                       controller: _password,
                                     ),
                                   )
