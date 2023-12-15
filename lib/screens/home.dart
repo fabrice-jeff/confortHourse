@@ -1,15 +1,31 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/models/location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/categorie.dart';
 import 'package:conforthourse/widgets/list_temoignage.dart';
-import 'package:conforthourse/widgets/location.dart';
+import 'package:conforthourse/widgets/location_widget.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:conforthourse/widgets/title_section.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late var locations;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    locations = LocationController.all();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,18 +87,24 @@ class MyHomePage extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext, position) {
-                    return LocationWidget(
-                      image: 'images/IMG-20231114-WA0018.jpg',
-                      localisation: 'Cotonou',
-                      description:
-                          "*CHICS APPARTEMENTS MEUBLÉS À STE RITA* Disponibles à Ste Rita dans un immeuble moderne, plu ...",
-                      price: 800000,
-                      typeLocation: 'Appartements',
+                child: FutureBuilder<List<Location>>(
+                  future: locations,
+                  builder: (context, AsyncSnapshot<List<Location>> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext, i) {
+                        var location = snapshot.data![i];
+                        return LocationWidget(
+                          location: location,
+                        );
+                      },
                     );
                   },
                 ),

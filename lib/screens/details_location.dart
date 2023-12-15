@@ -1,13 +1,18 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/models/location.dart';
+import 'package:conforthourse/screens/location_by_categorie.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/location.dart';
+import 'package:conforthourse/widgets/location_widget.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:conforthourse/widgets/title_section.dart';
 import 'package:flutter/material.dart';
 
 class DetailsLocation extends StatelessWidget {
-  DetailsLocation({super.key});
+  final Location location;
+  final Future<List<Location>> locations;
+  const DetailsLocation(
+      {super.key, required this.location, required this.locations});
   Widget _options(IconData icon) {
     return Container(
       alignment: Alignment.center,
@@ -44,12 +49,14 @@ class DetailsLocation extends StatelessWidget {
               HeaderSectionWidget(text: 'DÉTAIL DE LA LOCATION'),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                height: 200,
                 width: double.infinity,
+                height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                    image: AssetImage("images/IMG-20231210-WA0002.jpg"),
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "images/${location.photo}",
+                    ),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -60,7 +67,7 @@ class DetailsLocation extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
-                child: const BigTextWidget(text: 'Abomey Calavi'),
+                child: BigTextWidget(text: location.localisation),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -73,7 +80,7 @@ class DetailsLocation extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.secondColor),
                   child: SimpleTextWidget(
-                    text: "Sanitaire",
+                    text: location.type,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -86,7 +93,7 @@ class DetailsLocation extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
                 child: SimpleTextWidget(
-                  text: "30.000 FCFA",
+                  text: "${location.prix} FCFA",
                   fontWeight: FontWeight.bold,
                   sizeText: 25,
                   textColor: AppColors.secondColor,
@@ -138,9 +145,7 @@ class DetailsLocation extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child: SimpleTextWidget(
-                          text:
-                              "Disponible immédiatement à Houega non loin de AGOUALAND, une chambre salon sanitaire propre avec douche et cuisine séparées. Accès véhicule, portail toujours fermé. Loyer mensuel : 25.000f Conditions: 03 mois d'avance 01 mois prépayé 01 mois commission Caution Électricité 30.000f Caution Eau: Gratuite (forage) 📲 : 40 38 99 10 appel et WhatsApp"),
+                      child: SimpleTextWidget(text: location.description),
                     ),
                   ],
                 ),
@@ -322,25 +327,38 @@ class DetailsLocation extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 5,
-                  itemBuilder: (BuildContext, position) {
-                    return LocationWidget(
-                      image: 'images/IMG-20231114-WA0018.jpg',
-                      localisation: 'Cotonou',
-                      description:
-                          "*CHICS APPARTEMENTS MEUBLÉS À STE RITA* Disponibles à Ste Rita dans un immeuble moderne, plu ...",
-                      price: 800000,
-                      typeLocation: 'Appartements',
+              FutureBuilder(
+                future: locations,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  },
-                ),
+                  }
+                  return Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext, position) {
+                        var loc = snapshot.data![position];
+                        return LocationWidget(
+                          location: loc,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return LocationByCategoriePage();
+                    }),
+                  );
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppColors.secondColor,
@@ -350,7 +368,7 @@ class DetailsLocation extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: BigTextWidget(
                     text: "Voir PLus De Chambres Familiales",
-                    textColor: Colors.white,
+                    textColor: const Color.fromARGB(255, 244, 212, 212),
                     sizeText: 16,
                   ),
                 ),

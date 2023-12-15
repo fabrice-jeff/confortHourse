@@ -1,22 +1,15 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/models/location.dart';
+import 'package:conforthourse/screens/details_location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
 
 class LocationWidget extends StatelessWidget {
-  final String image;
-  final String localisation;
-  final String description;
-  final int price;
-  final String typeLocation;
-  const LocationWidget({
-    super.key,
-    required this.image,
-    required this.localisation,
-    required this.description,
-    required this.price,
-    required this.typeLocation,
-  });
+  final Location location;
+
+  LocationWidget({super.key, required this.location});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +32,7 @@ class LocationWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: AssetImage(
-                        image,
+                        "images/${location.photo}",
                       ),
                       fit: BoxFit.cover),
                 ),
@@ -58,10 +51,10 @@ class LocationWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: SimpleTextWidget(
-                    text: typeLocation,
+                    text: location.type,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
-                    sizeText: 12,
+                    sizeText: 16,
                   ),
                 ),
               ),
@@ -73,16 +66,15 @@ class LocationWidget extends StatelessWidget {
           Container(
             alignment: Alignment.topLeft,
             child: BigTextWidget(
-              text: localisation,
+              text: location.localisation,
               textAlign: TextAlign.left,
             ),
           ),
           SizedBox(
             height: 5,
           ),
-          Container(
-            alignment: Alignment.topLeft,
-            child: SimpleTextWidget(text: description),
+          Expanded(
+            child: SimpleTextWidget(text: location.description),
           ),
           SizedBox(
             height: 10,
@@ -94,7 +86,7 @@ class LocationWidget extends StatelessWidget {
               ),
               Spacer(),
               BigTextWidget(
-                text: price.toString() + "F / Mois",
+                text: location.prix.toString() + "F / Mois",
                 textColor: AppColors.secondColor,
               ),
             ],
@@ -162,7 +154,20 @@ class LocationWidget extends StatelessWidget {
                     ),
                   ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      //Récupération de la location avec un  id particulier
+                      var autreLocation = LocationController.findByCategorie(
+                          location.code, location.idCategorie);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return DetailsLocation(
+                                location: location, locations: autreLocation);
+                          },
+                        ),
+                      );
+                    },
                     child: SimpleTextWidget(
                       text: 'Détails',
                       textColor: AppColors.secondColor,
