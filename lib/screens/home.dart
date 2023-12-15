@@ -1,6 +1,7 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/controllers/location_controller.dart';
 import 'package:conforthourse/models/location.dart';
+import 'package:conforthourse/screens/menu.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/categorie.dart';
@@ -37,6 +38,22 @@ class _HomePageState extends State<HomePage> {
           text: "ConforthOurse",
           fontWeight: FontWeight.w400,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              //Allez vers le menu
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return MenuPage();
+                  },
+                ),
+              );
+            },
+            icon: Icon(Icons.menu),
+          )
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -45,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 10,
               ),
-              // Title section
+              // Title
               TitleSectionWidget(
                 firstText: "CATÉGORIES",
                 secondText: "Choisissez Votre Catégorie",

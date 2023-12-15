@@ -1,13 +1,19 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/models/location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
+import 'package:conforthourse/widgets/location_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:flutter_pagination/widgets/button_styles.dart';
 
 class LocationByCategoriePage extends StatefulWidget {
+  final Future<List<Location>> locations;
+  final String categorie;
   const LocationByCategoriePage({
     super.key,
+    required this.categorie,
+    required this.locations,
   });
 
   @override
@@ -31,39 +37,43 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              HeaderSectionWidget(text: "CHAMBRE FAMILIALES"),
-              // Container(
-              //   height: 500 * 5,
-              //   child: PageView.builder(
-              //     physics: NeverScrollableScrollPhysics(),
-              //     itemCount: 10,
-              //     onPageChanged: (index) {
-              //       setState(() {
-              //         currentPage = index + 1;
-              //       });
-              //     },
-              //     itemBuilder: (context, index) {
-              //       index = currentPage;
-              //       return Container(
-              //         child: ListView.builder(
-              //           shrinkWrap: true,
-              //           physics: NeverScrollableScrollPhysics(),
-              //           itemCount: 10,
-              //           itemBuilder: (BuildContext, position) {
-              //             return LocationWidget(
-              //               image: 'images/IMG-20231114-WA0018.jpg',
-              //               localisation: 'Cotonou',
-              //               description:
-              //                   "*CHICS APPARTEMENTS MEUBLÉS À STE RITA* Disponibles à Ste Rita dans un immeuble moderne, plu ...",
-              //               price: index,
-              //               typeLocation: 'Appartements',
-              //             );
-              //           },
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // ),
+              HeaderSectionWidget(text: widget.categorie),
+              FutureBuilder(
+                future: widget.locations,
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Container(
+                    height: 530 * 2,
+                    child: PageView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 2,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentPage = index + 1;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                        index = currentPage;
+                        return Container(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: 2,
+                            itemBuilder: (BuildContext, position) {
+                              var location = snapshot.data![position];
+                              return LocationWidget(location: location);
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
               Container(
                 padding: EdgeInsets.symmetric(
                   vertical: 10,

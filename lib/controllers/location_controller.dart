@@ -41,7 +41,19 @@ class LocationController {
       location = Location.fromJson(location);
       locations.add(location);
     }
+    return locations;
+  }
 
+  static Future<List<Location>> allByCategorie(int categorie) async {
+    List<Location> locations = [];
+    final String url =
+        "https://conforthourse.000webhostapp.com/core/locations/all_by_categorie.php?categorie=${categorie}";
+    final response = await http.read(Uri.parse(url));
+    var results = jsonDecode(response);
+    for (var location in results) {
+      location = Location.fromJson(location);
+      locations.add(location);
+    }
     return locations;
   }
 }
