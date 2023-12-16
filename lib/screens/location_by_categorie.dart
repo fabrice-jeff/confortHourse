@@ -3,6 +3,7 @@ import 'package:conforthourse/models/location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/location_widget.dart';
+import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:flutter_pagination/widgets/button_styles.dart';
@@ -46,69 +47,80 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
                       child: CircularProgressIndicator(),
                     );
                   }
-                  return Container(
-                    height: 530 * 2,
-                    child: PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 2,
-                      onPageChanged: (index) {
-                        setState(() {
-                          currentPage = index + 1;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        index = currentPage;
-                        return Container(
-                          child: ListView.builder(
-                            shrinkWrap: true,
+                  if (snapshot.data!.isEmpty) {
+                    return Center(
+                      child: SimpleTextWidget(
+                          text: "Aucune location pour cette catégorie"),
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Container(
+                          height: 530 * 2,
+                          child: PageView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: 2,
-                            itemBuilder: (BuildContext, position) {
-                              var location = snapshot.data![position];
-                              return LocationWidget(location: location);
+                            onPageChanged: (index) {
+                              setState(() {
+                                currentPage = index + 1;
+                              });
+                            },
+                            itemBuilder: (context, index) {
+                              index = currentPage;
+                              return Container(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: 2,
+                                  itemBuilder: (BuildContext, position) {
+                                    var location = snapshot.data![position];
+                                    return LocationWidget(location: location);
+                                  },
+                                ),
+                              );
                             },
                           ),
-                        );
-                      },
-                    ),
-                  );
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                          child: Pagination(
+                            width: 200,
+                            paginateButtonStyles: PaginateButtonStyles(
+                              activeBackgroundColor: AppColors.primaryColor,
+                              backgroundColor: AppColors.secondColor,
+                            ),
+                            prevButtonStyles: PaginateSkipButton(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                              ),
+                              buttonBackgroundColor: AppColors.secondColor,
+                            ),
+                            nextButtonStyles: PaginateSkipButton(
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10),
+                              ),
+                              buttonBackgroundColor: AppColors.secondColor,
+                            ),
+                            onPageChange: (number) {
+                              setState(() {
+                                currentPage = number;
+                              });
+                            },
+                            useGroup: false,
+                            totalPage: 7,
+                            show: 1,
+                            currentPage: currentPage,
+                          ),
+                        )
+                      ],
+                    );
+                  }
                 },
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                child: Pagination(
-                  width: 200,
-                  paginateButtonStyles: PaginateButtonStyles(
-                    activeBackgroundColor: AppColors.primaryColor,
-                    backgroundColor: AppColors.secondColor,
-                  ),
-                  prevButtonStyles: PaginateSkipButton(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                    ),
-                    buttonBackgroundColor: AppColors.secondColor,
-                  ),
-                  nextButtonStyles: PaginateSkipButton(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    buttonBackgroundColor: AppColors.secondColor,
-                  ),
-                  onPageChange: (number) {
-                    setState(() {
-                      currentPage = number;
-                    });
-                  },
-                  useGroup: false,
-                  totalPage: 7,
-                  show: 1,
-                  currentPage: currentPage,
-                ),
-              )
             ],
           ),
         ),

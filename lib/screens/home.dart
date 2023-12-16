@@ -1,10 +1,13 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/controllers/categorie_controller.dart';
 import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/models/categorie.dart';
 import 'package:conforthourse/models/location.dart';
+import 'package:conforthourse/screens/location_by_categorie.dart';
 import 'package:conforthourse/screens/menu.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
-import 'package:conforthourse/widgets/categorie.dart';
+import 'package:conforthourse/widgets/categorie_widget.dart';
 import 'package:conforthourse/widgets/list_temoignage.dart';
 import 'package:conforthourse/widgets/location_widget.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
@@ -20,12 +23,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late var locations;
+  late Future<List<Categorie>> categories;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     locations = LocationController.all();
+    categories = CategorieController.all();
   }
 
   @override
@@ -70,28 +75,54 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                width: double.infinity,
-                child: GridView.builder(
-                  primary: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    mainAxisExtent: 215,
-                  ),
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return CategorieWidget(
-                      icon: Icons.shopify_outlined,
-                      text: "Chambres familiales",
-                      number: 156,
+              FutureBuilder<List<Categorie>>(
+                future: categories,
+                builder: (context, AsyncSnapshot<List<Categorie>> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  },
-                  padding: const EdgeInsets.all(20),
-                ),
+                  }
+                  return Container(
+                    width: double.infinity,
+                    child: GridView.builder(
+                      primary: false,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        mainAxisExtent: 215,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var categorie = snapshot.data![index];
+
+                        return InkWell(
+                          onTap: () {
+                            // Affiche la page de l'ensemble des locations pour  une catégorie donnée
+                            var locationsByCategorie =
+                                LocationController.allByCategorie(categorie.id);
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return LocationByCategoriePage(
+                                  categorie: categorie.titre,
+                                  locations: locationsByCategorie,
+                                );
+                              },
+                            ));
+                          },
+                          child: CategorieWidget(
+                            categorie: categorie,
+                          ),
+                        );
+                      },
+                      padding: const EdgeInsets.all(20),
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 20,

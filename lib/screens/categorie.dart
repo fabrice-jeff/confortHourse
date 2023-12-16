@@ -1,17 +1,19 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/controllers/categorie_controller.dart';
+import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/models/categorie.dart';
+import 'package:conforthourse/screens/location_by_categorie.dart';
 import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/categorie.dart';
+import 'package:conforthourse/widgets/categorie_widget.dart';
 import 'package:conforthourse/widgets/header_section.dart';
+import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
 
-class CategorieLocation {
-  CategorieLocation();
-}
-
-List<CategorieLocation> categoriesLocations = [];
+Future<List<Categorie>> _categories = CategorieController.all();
 
 class CategoriePage extends StatelessWidget {
-  const CategoriePage({super.key});
+  CategoriePage({super.key});
+  final Future<List<Categorie>> _categories = CategorieController.all();
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +34,59 @@ class CategoriePage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                width: double.infinity,
-                child: Container(
-                  width: double.infinity,
-                  child: GridView.builder(
-                    primary: false,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      mainAxisExtent: 215,
+              FutureBuilder<List<Categorie>>(
+                future: _categories,
+                builder: (context, AsyncSnapshot<List<Categorie>> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.data!.isEmpty) {
+                    return Center(
+                      child: SimpleTextWidget(text: "Aucune catégorie"),
+                    );
+                  }
+                  return Container(
+                    width: double.infinity,
+                    child: GridView.builder(
+                      primary: false,
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        mainAxisExtent: 215,
+                      ),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var categorie = snapshot.data![index];
+
+                        return InkWell(
+                          onTap: () {
+                            // Affiche la page de l'ensemble des locations pour  une catégorie donnée
+                            var locationsByCategorie =
+                                LocationController.allByCategorie(categorie.id);
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return LocationByCategoriePage(
+                                  categorie: categorie.titre,
+                                  locations: locationsByCategorie,
+                                );
+                              },
+                            ));
+                          },
+                          child: CategorieWidget(
+                            categorie: categorie,
+                          ),
+                        );
+                      },
+                      padding: const EdgeInsets.all(20),
                     ),
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {},
-                        child: CategorieWidget(
-                          icon: Icons.shopify_outlined,
-                          text: "Chambres familiales",
-                          number: 156,
-                        ),
-                      );
-                    },
-                    padding: const EdgeInsets.all(20),
-                  ),
-                ),
+                  );
+                },
               ),
             ],
           ),
