@@ -1,5 +1,5 @@
 import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/screens/home.dart';
+import 'package:conforthourse/screens/security/login.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }

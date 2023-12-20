@@ -302,7 +302,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationWidget(),
+      bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 

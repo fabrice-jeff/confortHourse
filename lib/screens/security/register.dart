@@ -1,7 +1,11 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/controllers/demarcheur_controller.dart';
+import 'package:conforthourse/models/demarcheur.dart';
+import 'package:conforthourse/screens/security/login.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
+import 'package:conforthourse/widgets/label_form.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +70,33 @@ class _SignPageState extends State<SignPage> {
   TextEditingController _email = TextEditingController();
   TextEditingController _psd = TextEditingController();
   TextEditingController _confirmPsd = TextEditingController();
+  late bool obscureTextPassword;
+  late bool obscureTextConfirmPassword;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    obscureTextPassword = true;
+    obscureTextConfirmPassword = true;
+  }
+
+  Future<void> register(context, Demarcheur demarcheur) async {
+    var result = await DemarcheurController.register(demarcheur);
+    print(result);
+    if (result) {
+      // L'inscription marche
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return LoginPage();
+      }));
+    } else {
+      // L'inscription en marche pas
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return SignPage();
+      }));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,10 +148,7 @@ class _SignPageState extends State<SignPage> {
                             //Nom
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Nom *",
-                                sizeText: 13,
-                              ),
+                              child: const LabelFormWidget(label: "Nom"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -148,11 +176,6 @@ class _SignPageState extends State<SignPage> {
                                         border: InputBorder.none,
                                       ),
                                       controller: _nom,
-                                      // validator: (value) {
-                                      //   if (value == null || value.isEmpty) {
-                                      //     return 'Entrer un mail valide';
-                                      //   }
-                                      // },
                                     ),
                                   )
                                 ],
@@ -164,10 +187,7 @@ class _SignPageState extends State<SignPage> {
                             //Prénoms
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Prénoms *",
-                                sizeText: 13,
-                              ),
+                              child: LabelFormWidget(label: "Prénoms"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -206,10 +226,7 @@ class _SignPageState extends State<SignPage> {
                             //Pays
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Pays *",
-                                sizeText: 13,
-                              ),
+                              child: LabelFormWidget(label: "Pays"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -258,10 +275,7 @@ class _SignPageState extends State<SignPage> {
                             //Ville
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Ville *",
-                                sizeText: 13,
-                              ),
+                              child: LabelFormWidget(label: "Ville"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -300,11 +314,7 @@ class _SignPageState extends State<SignPage> {
                             //Sexe
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Sexe *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
+                              child: LabelFormWidget(label: "Sexe"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -353,12 +363,8 @@ class _SignPageState extends State<SignPage> {
                             ),
                             Container(
                               alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text:
-                                    "Numéro de téléphone (avec indicatif du pays) *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
+                              child:
+                                  LabelFormWidget(label: "Numéro de téléphone"),
                             ),
                             Container(
                               alignment: Alignment.center,
@@ -395,14 +401,10 @@ class _SignPageState extends State<SignPage> {
                               height: 30,
                             ),
                             Container(
-                              alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text:
-                                    "Numéro Whatsapp (avec indicatif du pays) *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
+                                alignment: Alignment.topLeft,
+                                child: LabelFormWidget(
+                                  label: "Numéro Whatsapp",
+                                )),
                             Container(
                               alignment: Alignment.center,
                               padding:
@@ -438,13 +440,10 @@ class _SignPageState extends State<SignPage> {
                               height: 30,
                             ),
                             Container(
-                              alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Adresse email *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
+                                alignment: Alignment.topLeft,
+                                child: LabelFormWidget(
+                                  label: "Adresse email",
+                                )),
                             Container(
                               alignment: Alignment.center,
                               padding:
@@ -480,13 +479,10 @@ class _SignPageState extends State<SignPage> {
                               height: 30,
                             ),
                             Container(
-                              alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Mot de passe *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
+                                alignment: Alignment.topLeft,
+                                child: LabelFormWidget(
+                                  label: 'Mot de passe',
+                                )),
                             Container(
                               alignment: Alignment.center,
                               padding:
@@ -509,7 +505,7 @@ class _SignPageState extends State<SignPage> {
                                   Expanded(
                                     child: TextFormField(
                                       controller: _psd,
-                                      obscureText: true,
+                                      obscureText: obscureTextPassword,
                                       decoration: const InputDecoration(
                                         hintText: "**********",
                                         border: InputBorder.none,
@@ -519,9 +515,17 @@ class _SignPageState extends State<SignPage> {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Icon(
-                                    Icons.visibility,
-                                    color: Colors.grey,
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        obscureTextPassword =
+                                            !obscureTextPassword;
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.visibility,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -530,13 +534,10 @@ class _SignPageState extends State<SignPage> {
                               height: 30,
                             ),
                             Container(
-                              alignment: Alignment.topLeft,
-                              child: SimpleTextWidget(
-                                text: "Confirmation du mot de passe *",
-                                sizeText: 13,
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
+                                alignment: Alignment.topLeft,
+                                child: LabelFormWidget(
+                                  label: "Confirmation du mot de passe",
+                                )),
                             Container(
                               alignment: Alignment.center,
                               padding:
@@ -559,19 +560,33 @@ class _SignPageState extends State<SignPage> {
                                   Expanded(
                                     child: TextFormField(
                                       controller: _confirmPsd,
-                                      obscureText: true,
+                                      obscureText: obscureTextConfirmPassword,
                                       decoration: const InputDecoration(
                                         hintText: "**********",
                                         border: InputBorder.none,
                                       ),
+                                      validator: (value) {
+                                        if (value != _psd.value.text) {
+                                          return "Les mots de passe ne sont pas identique";
+                                        }
+                                        return null;
+                                      },
                                     ),
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Icon(
-                                    Icons.visibility,
-                                    color: Colors.grey,
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        obscureTextConfirmPassword =
+                                            !obscureTextConfirmPassword;
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.visibility,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -582,18 +597,20 @@ class _SignPageState extends State<SignPage> {
                             InkWell(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
-                                  print('Nom :  ${_nom.value.text}');
-                                  print('Prénoms : ${_prenoms.value.text}');
-                                  print('Pays : ${_paysChoise}');
-                                  print('Sexe : ${_genre}');
-                                  print(
-                                      'Numero Téléphone : ${_numeroTelephone.value.text}');
-                                  print(
-                                      'Numéro whatsApp : ${_numeroWhatsapp.value.text}');
-                                  print('Email : ${_email.value.text}');
-                                  print('Mot de passe : ${_psd.value.text}');
-                                  print(
-                                      'Confiirmation Mot de passe : ${_confirmPsd.value.text}');
+                                  // Création d'un objet de marcheur
+                                  var demarcheur = Demarcheur(
+                                    nom: _nom.value.text,
+                                    prenoms: _prenoms.value.text,
+                                    ville: _ville.value.text,
+                                    pays: _paysChoise,
+                                    sexe: _genre,
+                                    telephone: _numeroTelephone.value.text,
+                                    email: _email.value.text,
+                                    whatsapp: _numeroWhatsapp.value.text,
+                                    password: _psd.value.text,
+                                  );
+                                  //Faire l'enregistrement  du demarcheur dans la base de donnée
+                                  register(context, demarcheur);
                                 }
                               },
                               child: Container(
@@ -674,4 +691,14 @@ class _SignPageState extends State<SignPage> {
       bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
+}
+
+void messanger(context, text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: SimpleTextWidget(
+        text: text,
+      ),
+    ),
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/screens/security/register.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
@@ -37,7 +38,11 @@ class BottomNavigationWidget extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const SignPage();
+              }));
+            },
             child: Icon(
               Icons.person_2_outlined,
               color: AppColors.secondColor,

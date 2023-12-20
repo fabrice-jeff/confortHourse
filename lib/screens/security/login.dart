@@ -1,4 +1,6 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/controllers/demarcheur_controller.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
@@ -17,6 +19,21 @@ class _LoginPagState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+
+  Future<void> login(context, Map<String, String> data) async {
+    var result = await DemarcheurController.login(data);
+    print(result);
+    if (result == ConstantsValues.CORRECT_PSD) {
+      // LE MOT DE PASSE EST CORRECT
+      print("LE MOT DE PASSE EST CORRECT");
+    } else if (result == ConstantsValues.INCORRECT_PSD) {
+      // LE MOT DE PASSE EST INCORRECT
+      print("LE MOT DE PASSE EST INCORRECT");
+    } else if (result == ConstantsValues.NO_USER) {
+      // L'UTILISATEUR N'EXISTE PAS DANS LA BASE DE DONNÉE
+      print(" L'UTILISATEUR N'EXISTE PAS DANS LA BASE DE DONNÉE");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -170,8 +187,11 @@ class _LoginPagState extends State<LoginPage> {
                             InkWell(
                               onTap: () {
                                 if (_formkey.currentState!.validate()) {
-                                  print(_email.value.text);
-                                  print(_password.value.text);
+                                  Map<String, String> data = {
+                                    'email': _email.value.text,
+                                    'password': _password.value.text
+                                  };
+                                  login(context, data);
                                 }
                               },
                               child: Container(

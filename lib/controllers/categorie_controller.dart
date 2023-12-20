@@ -8,12 +8,13 @@ class CategorieController {
     List<Categorie> categories = [];
     final String url =
         "https://conforthourse.000webhostapp.com/core/categories/all.php";
-    final response = await http.read(Uri.parse(url));
-    print(response);
-    var results = jsonDecode(response);
-    for (var element in results) {
-      var categorie = Categorie.fromJson(element);
-      categories.add(categorie);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var results = jsonDecode(response.body);
+      for (var element in results) {
+        var categorie = Categorie.fromJson(element);
+        categories.add(categorie);
+      }
     }
     return categories;
   }

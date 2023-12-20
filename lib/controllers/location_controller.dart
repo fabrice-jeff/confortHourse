@@ -9,25 +9,29 @@ class LocationController {
     List<Location> locations = [];
     final String url =
         "https://conforthourse.000webhostapp.com/core/locations/all.php";
-    final response = await http.read(Uri.parse(url));
-    var results = jsonDecode(response);
-    for (var json in results) {
-      var location = Location.fromJson(json);
-      locations.add(location);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var results = jsonDecode(response.body);
+      for (var json in results) {
+        var location = Location.fromJson(json);
+        locations.add(location);
+      }
     }
     return locations;
   }
 
   //Récupération de la location avec un  id particulier
-  static Future<Location> find(String code) async {
+  static Future<Location?> find(String code) async {
     Location location;
     final String url =
         "https://conforthourse.000webhostapp.com/core/locations/find.php?code='${code}'";
-    final response = await http.read(
+    final response = await http.get(
       Uri.parse(url),
     );
-    location = Location.fromJson(jsonDecode(response));
-    return location;
+    if (response.statusCode == 200) {
+      location = Location.fromJson(jsonDecode(response.body));
+      return location;
+    }
   }
 
   static Future<List<Location>> findByCategorie(
@@ -35,12 +39,15 @@ class LocationController {
     List<Location> locations = [];
     final String url =
         "https://conforthourse.000webhostapp.com/core/locations/find_by_categorie.php?code='${code}'&categorie=${categorie}";
-    final response = await http.read(Uri.parse(url));
-    var results = jsonDecode(response);
-    for (var location in results) {
-      location = Location.fromJson(location);
-      locations.add(location);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var results = jsonDecode(response.body);
+      for (var location in results) {
+        location = Location.fromJson(location);
+        locations.add(location);
+      }
     }
+
     return locations;
   }
 
@@ -48,11 +55,13 @@ class LocationController {
     List<Location> locations = [];
     final String url =
         "https://conforthourse.000webhostapp.com/core/locations/all_by_categorie.php?categorie=${categorie}";
-    final response = await http.read(Uri.parse(url));
-    var results = jsonDecode(response);
-    for (var location in results) {
-      location = Location.fromJson(location);
-      locations.add(location);
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var results = jsonDecode(response.body);
+      for (var location in results) {
+        location = Location.fromJson(location);
+        locations.add(location);
+      }
     }
     return locations;
   }
