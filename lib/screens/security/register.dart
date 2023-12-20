@@ -11,14 +11,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:select_form_field/select_form_field.dart';
 
-class SignPage extends StatefulWidget {
-  const SignPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<SignPage> createState() => _SignPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignPageState extends State<SignPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final List<Map<String, dynamic>> _pays = [
     {
       'value': 'Benin',
@@ -92,7 +92,7 @@ class _SignPageState extends State<SignPage> {
     } else {
       // L'inscription en marche pas
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return SignPage();
+        return RegisterPage();
       }));
     }
   }

@@ -1,12 +1,16 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
 import 'package:conforthourse/controllers/demarcheur_controller.dart';
+import 'package:conforthourse/providers/user_login.dart';
+import 'package:conforthourse/screens/home.dart';
+import 'package:conforthourse/screens/security/register.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,12 +24,17 @@ class _LoginPagState extends State<LoginPage> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
-  Future<void> login(context, Map<String, String> data) async {
+  Future<bool> login(BuildContext context, Map<String, String> data) async {
     var result = await DemarcheurController.login(data);
-    print(result);
+    var email = data['email'] as String;
+
     if (result == ConstantsValues.CORRECT_PSD) {
       // LE MOT DE PASSE EST CORRECT
       print("LE MOT DE PASSE EST CORRECT");
+      context.read<UserLogin>().connect(email);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return HomePage();
+      }));
     } else if (result == ConstantsValues.INCORRECT_PSD) {
       // LE MOT DE PASSE EST INCORRECT
       print("LE MOT DE PASSE EST INCORRECT");
@@ -33,6 +42,7 @@ class _LoginPagState extends State<LoginPage> {
       // L'UTILISATEUR N'EXISTE PAS DANS LA BASE DE DONNÉE
       print(" L'UTILISATEUR N'EXISTE PAS DANS LA BASE DE DONNÉE");
     }
+    return false;
   }
 
   @override
@@ -227,20 +237,31 @@ class _LoginPagState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SimpleTextWidget(
-                                  text: "Pas de compte ?",
-                                ),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: SimpleTextWidget(
-                                    text: "S'inscrire",
-                                    textColor: AppColors.secondColor,
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SimpleTextWidget(
+                                    text: "Pas de compte ?",
                                   ),
-                                )
-                              ],
+                                  TextButton(
+                                    onPressed: () {
+                                      // Acceder à la page d'inscription
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return RegisterPage();
+                                      }));
+                                    },
+                                    child: SimpleTextWidget(
+                                      text: "S'inscrire",
+                                      textColor: AppColors.secondColor,
+                                    ),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),

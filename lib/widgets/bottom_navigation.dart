@@ -1,12 +1,16 @@
 import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/screens/security/register.dart';
+import 'package:conforthourse/providers/user_login.dart';
+import 'package:conforthourse/screens/security/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   const BottomNavigationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var user = context.watch<UserLogin>().email;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       width: double.infinity,
@@ -39,9 +43,15 @@ class BottomNavigationWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const SignPage();
-              }));
+              if (user.isEmpty) {
+                // Rediriger vers l'interface de connexion
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const LoginPage();
+                }));
+              } else {
+                // Continuer vers les autres interfaces
+                print(user);
+              }
             },
             child: Icon(
               Icons.person_2_outlined,
