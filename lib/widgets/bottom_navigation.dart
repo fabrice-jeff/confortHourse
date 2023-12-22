@@ -1,6 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/providers/user_login.dart';
-import 'package:conforthourse/screens/security/login.dart';
+import 'package:conforthourse/screens/demarcheurs/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,15 +43,20 @@ class BottomNavigationWidget extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              if (user.isEmpty) {
-                // Rediriger vers l'interface de connexion
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LoginPage();
-                }));
-              } else {
-                // Continuer vers les autres interfaces
-                print(user);
-              }
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const DashboardPage();
+              }));
+              // if (user.isEmpty) {
+              //   // Rediriger vers l'interface de connexion
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //     return const LoginPage();
+              //   }));
+              // } else {
+              //   // Continuer vers les autres interfaces
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //     return const DashboardPage();
+              //   }));
+              // }
             },
             child: Icon(
               Icons.person_2_outlined,
