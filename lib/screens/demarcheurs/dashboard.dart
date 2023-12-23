@@ -1,12 +1,16 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/constants.dart';
 import 'package:conforthourse/screens/demarcheurs/user_page.dart';
 import 'package:conforthourse/widgets/big_text.dart';
+import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +27,8 @@ class DashboardPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              UserPage(
-                headerTitle: "DASHBOARD",
-              ),
+              HeaderSectionWidget(text: "DASHBOARD"),
+              UserPage(page: ConstantsValues.DASHBOARD),
               SizedBox(
                 height: 20,
               ),
@@ -67,49 +70,51 @@ class DashboardPage extends StatelessWidget {
               // Tableau
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    border: TableBorder.all(
-                      color: Colors.grey,
-                      width: 0.5,
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10)),
+                      border: TableBorder.all(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: BigTextWidget(
+                            text: "Chambres",
+                          ),
+                        ),
+                        DataColumn(
+                          label: BigTextWidget(
+                            text: "Catégorie",
+                          ),
+                        ),
+                        DataColumn(
+                          label: BigTextWidget(text: "Prix"),
+                        ),
+                        DataColumn(
+                          label: BigTextWidget(text: "Type"),
+                        ),
+                      ],
+                      rows: const <DataRow>[
+                        DataRow(cells: const <DataCell>[
+                          DataCell(
+                            Text("Bonjour"),
+                          ),
+                          DataCell(
+                            Text("Bonjour"),
+                          ),
+                          DataCell(
+                            Text("Bonjour"),
+                          ),
+                          DataCell(
+                            Text("Bonjour"),
+                          ),
+                        ]),
+                      ],
                     ),
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: BigTextWidget(
-                          text: "Chambres",
-                        ),
-                      ),
-                      DataColumn(
-                        label: BigTextWidget(
-                          text: "Catégorie",
-                        ),
-                      ),
-                      DataColumn(
-                        label: BigTextWidget(text: "Prix"),
-                      ),
-                      DataColumn(
-                        label: BigTextWidget(text: "Type"),
-                      ),
-                    ],
-                    rows: const <DataRow>[
-                      DataRow(cells: const <DataCell>[
-                        DataCell(
-                          Text("Bonjour"),
-                        ),
-                        DataCell(
-                          Text("Bonjour"),
-                        ),
-                        DataCell(
-                          Text("Bonjour"),
-                        ),
-                        DataCell(
-                          Text("Bonjour"),
-                        ),
-                      ]),
-                    ],
                   ),
                 ),
               ),

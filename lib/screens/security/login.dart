@@ -2,13 +2,12 @@ import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
 import 'package:conforthourse/controllers/demarcheur_controller.dart';
 import 'package:conforthourse/providers/user_login.dart';
-import 'package:conforthourse/screens/home.dart';
+import 'package:conforthourse/screens/demarcheurs/dashboard.dart';
 import 'package:conforthourse/screens/security/register.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +32,7 @@ class _LoginPagState extends State<LoginPage> {
       print("LE MOT DE PASSE EST CORRECT");
       context.read<UserLogin>().connect(email);
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return HomePage();
+        return DashboardPage();
       }));
     } else if (result == ConstantsValues.INCORRECT_PSD) {
       // LE MOT DE PASSE EST INCORRECT
@@ -217,7 +216,7 @@ class _LoginPagState extends State<LoginPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
-                                      CupertinoIcons.arrow_right_to_line_alt,
+                                      Icons.login,
                                       color: Colors.white,
                                       size: 18,
                                     ),

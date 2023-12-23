@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class AppColors {
   static Color secondColor = Color(0xFFC82333);
@@ -6,4 +6,5 @@ class AppColors {
   static Color backgroundColor = Color(0xFFEAF7F4);
   static Color whiteColor = Color(0xFFFFFFFF);
   static Color textColor = Color(0xFF282626);
+  static Color backgroundColor2 = Colors.grey.withOpacity(0.4);
 }
