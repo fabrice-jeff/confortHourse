@@ -2,9 +2,10 @@ import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/providers/user_login.dart';
 import 'package:conforthourse/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   return runApp(MyApp());
 }
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => UserLogin()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
         debugShowCheckedModeBanner: false,
         home: HomePage(),

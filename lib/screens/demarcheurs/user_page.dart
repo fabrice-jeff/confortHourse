@@ -1,5 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/providers/user_login.dart';
 import 'package:conforthourse/screens/demarcheurs/add_annonce.dart';
 import 'package:conforthourse/screens/demarcheurs/annonces.dart';
@@ -25,25 +26,28 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10),
       alignment: Alignment.center,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(Dimensions.radius10),
       ),
       child: Column(
         children: [
           SizedBox(
-            height: 20,
+            height: Dimensions.height10,
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            width: 100,
-            height: 100,
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.width10, vertical: Dimensions.height10),
+            width: Dimensions.width10 * 10,
+            height: Dimensions.height10 * 10,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(Dimensions.screenWidth),
               image: DecorationImage(
                 image: AssetImage('images/user.webp'),
                 fit: BoxFit.cover,
@@ -51,11 +55,11 @@ class UserPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: Dimensions.height10 * 2,
           ),
           BigTextWidget(
             text: "AGBO Fabrice",
-            sizeText: 30,
+            sizeText: Dimensions.fontsize30,
             fontWeight: FontWeight.w700,
             height: 0,
           ),
@@ -64,14 +68,13 @@ class UserPage extends StatelessWidget {
           ),
           SimpleTextWidget(
             text: "agbjeff@gmail.com",
-            height: 0,
           ),
           SizedBox(
-            height: 20,
+            height: Dimensions.height10 * 2,
           ),
           Divider(),
           SizedBox(
-            height: 20,
+            height: Dimensions.height10 * 2,
           ),
           InkWell(
             onTap: () {
@@ -81,14 +84,14 @@ class UserPage extends StatelessWidget {
               }));
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.DASHBOARD)
                     ? AppColors.secondColor
                     : Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.radius10),
               ),
               child: Row(
                 children: [
@@ -99,7 +102,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Tableau de bord",
@@ -119,14 +122,14 @@ class UserPage extends StatelessWidget {
               }));
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.PROFIL_USER)
                     ? AppColors.secondColor
                     : Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.radius10),
               ),
               child: Row(
                 children: [
@@ -137,7 +140,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Mon profile",
@@ -157,14 +160,14 @@ class UserPage extends StatelessWidget {
               }));
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.ANNONCES)
                     ? AppColors.secondColor
                     : Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.width10),
               ),
               child: Row(
                 children: [
@@ -175,7 +178,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Mes annonces",
@@ -195,14 +198,14 @@ class UserPage extends StatelessWidget {
               }));
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.ADD_ANNONCE)
                     ? AppColors.secondColor
                     : Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.radius10),
               ),
               child: Row(
                 children: [
@@ -213,7 +216,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Publier une annonce",
@@ -233,14 +236,14 @@ class UserPage extends StatelessWidget {
               }));
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.PARAMETRES)
                     ? AppColors.secondColor
                     : Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(Dimensions.radius10),
               ),
               child: Row(
                 children: [
@@ -251,7 +254,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Paramètre de profile",
@@ -269,9 +272,9 @@ class UserPage extends StatelessWidget {
               logout(context);
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
-              height: 50,
+              height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
                 color: (page == ConstantsValues.DECONNEXION)
                     ? AppColors.secondColor
@@ -287,7 +290,7 @@ class UserPage extends StatelessWidget {
                         : AppColors.secondColor,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: Dimensions.width10,
                   ),
                   SimpleTextWidget(
                     text: "Déconnexion",

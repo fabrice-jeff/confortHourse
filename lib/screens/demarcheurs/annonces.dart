@@ -1,5 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/screens/demarcheurs/user_page.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
@@ -13,7 +14,8 @@ class AnnoncesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget _infoUser({required String libelle, required String value}) {
       return Container(
-        margin: EdgeInsets.symmetric(horizontal: 7, vertical: 6),
+        margin: EdgeInsets.symmetric(
+            horizontal: Dimensions.width10, vertical: Dimensions.height10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -21,12 +23,12 @@ class AnnoncesPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: BigTextWidget(
                 text: libelle,
-                sizeText: 15,
+                sizeText: Dimensions.fontsize15,
                 textAlign: TextAlign.start,
               ),
             ),
             SizedBox(
-              width: 5,
+              width: Dimensions.width10,
             ),
             Expanded(
               child: Container(
@@ -34,7 +36,7 @@ class AnnoncesPage extends StatelessWidget {
                 child: SimpleTextWidget(
                   textAlign: TextAlign.start,
                   text: value,
-                  sizeText: 14,
+                  sizeText: Dimensions.fontsize15,
                 ),
               ),
             )
@@ -59,29 +61,35 @@ class AnnoncesPage extends StatelessWidget {
               HeaderSectionWidget(text: "MES ANNONCES"),
               UserPage(page: ConstantsValues.ANNONCES),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
+              Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: Dimensions.width10 * 1.5),
+                alignment: Alignment.topLeft,
+                child: BigTextWidget(
+                  text: "Mes annonces",
+                  sizeText: Dimensions.fontsize20,
+                ),
+              ),
+
+              // Tableau
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    borderRadius: BorderRadius.circular(Dimensions.radius10)),
+                margin: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: BigTextWidget(
-                        text: "Mes annonces",
-                        sizeText: 20,
-                      ),
-                    ),
-
-                    Divider(),
                     SizedBox(
-                      height: 10,
+                      height: Dimensions.height10,
                     ),
                     // Tableau de données
                     Container(
@@ -90,7 +98,8 @@ class AnnoncesPage extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: DataTable(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius10),
                             ),
                             border: TableBorder.all(
                               color: Colors.grey,
@@ -135,7 +144,7 @@ class AnnoncesPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: Dimensions.height10 * 2,
                     ),
                   ],
                 ),

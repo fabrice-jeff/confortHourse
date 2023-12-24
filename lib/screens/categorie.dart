@@ -1,6 +1,7 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/controllers/categorie_controller.dart';
 import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/models/categorie.dart';
 import 'package:conforthourse/screens/location_by_categorie.dart';
 import 'package:conforthourse/widgets/big_text.dart';
@@ -32,7 +33,7 @@ class CategoriePage extends StatelessWidget {
             children: [
               HeaderSectionWidget(text: "CATÉGORIES"),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               FutureBuilder<List<Categorie>>(
                 future: _categories,
@@ -53,11 +54,10 @@ class CategoriePage extends StatelessWidget {
                       primary: false,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+                        crossAxisSpacing: Dimensions.width10,
+                        mainAxisSpacing: Dimensions.height10,
                         mainAxisExtent: 215,
                       ),
                       itemCount: snapshot.data!.length,
@@ -83,7 +83,10 @@ class CategoriePage extends StatelessWidget {
                           ),
                         );
                       },
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.symmetric(
+                        vertical: Dimensions.height10 * 2,
+                        horizontal: Dimensions.width10 * 2,
+                      ),
                     ),
                   );
                 },

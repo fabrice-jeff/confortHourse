@@ -1,4 +1,5 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
@@ -12,8 +13,8 @@ class AproposPage extends StatelessWidget {
 
   Widget _listCheck({required String text}) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.only(top: Dimensions.height10),
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
       child: Row(
         children: [
           Icon(
@@ -21,7 +22,7 @@ class AproposPage extends StatelessWidget {
             color: AppColors.secondColor,
           ),
           SizedBox(
-            width: 10,
+            width: Dimensions.width10,
           ),
           Expanded(
             child: SimpleTextWidget(
@@ -51,7 +52,9 @@ class AproposPage extends StatelessWidget {
             children: [
               HeaderSectionWidget(text: "A PROPOS"),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
                 height: 350,
                 child: Stack(
                   children: [
@@ -62,7 +65,7 @@ class AproposPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppColors.secondColor,
                           borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
+                            bottomLeft: Radius.circular(Dimensions.radius30),
                           ),
                         ),
                       ),
@@ -121,7 +124,6 @@ class AproposPage extends StatelessWidget {
                                   textColor: Colors.white,
                                   sizeText: 13,
                                   textAlign: TextAlign.left,
-                                  fontFamily: 'K2D, sans-serif',
                                 ),
                               ),
                             )
@@ -183,11 +185,11 @@ class AproposPage extends StatelessWidget {
                   text:
                       "Engagement envers la qualité, le confort et la tranquillité d'esprit de nos clients."),
               SizedBox(
-                height: 30,
+                height: Dimensions.height10 * 2,
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.5,
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
                   onPressed: () {},

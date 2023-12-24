@@ -1,7 +1,8 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/providers/user_login.dart';
+import 'package:conforthourse/screens/demarcheurs/add_annonce.dart';
 import 'package:conforthourse/screens/demarcheurs/dashboard.dart';
-import 'package:conforthourse/screens/security/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,56 +14,64 @@ class BottomNavigationWidget extends StatelessWidget {
     var user = context.watch<UserLogin>().email;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
       width: double.infinity,
-      height: 60,
+      height: Dimensions.height10 * 6,
       decoration: BoxDecoration(
         color: AppColors.backgroundColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(Dimensions.radius30),
+          topRight: Radius.circular(Dimensions.radius30),
         ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const AddAnnoncePage();
+              }));
+            },
             child: Icon(
               Icons.search,
               color: AppColors.secondColor,
-              size: 30,
-            ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Icon(
-              Icons.add,
-              color: AppColors.secondColor,
-              size: 30,
+              size: Dimensions.small,
             ),
           ),
           InkWell(
             onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) {
-              //   return const DashboardPage();
-              // }));
-              if (user.isEmpty) {
-                // Rediriger vers l'interface de connexion
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LoginPage();
-                }));
-              } else {
-                // Continuer vers les autres interfaces
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const DashboardPage();
-                }));
-              }
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const AddAnnoncePage();
+              }));
+            },
+            child: Icon(
+              Icons.add,
+              color: AppColors.secondColor,
+              size: Dimensions.small,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const DashboardPage();
+              }));
+              // if (user.isEmpty) {
+              //   // Rediriger vers l'interface de connexion
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //     return const LoginPage();
+              //   }));
+              // } else {
+              //   // Continuer vers les autres interfaces
+              //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //     return const DashboardPage();
+              //   }));
+              // }
             },
             child: Icon(
               Icons.person_2_outlined,
               color: AppColors.secondColor,
-              size: 30,
+              size: Dimensions.small,
             ),
           ),
         ],

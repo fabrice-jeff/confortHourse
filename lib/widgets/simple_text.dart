@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 class SimpleTextWidget extends StatelessWidget {
   final String text;
   final Color textColor;
-  final double sizeText;
+  final double? sizeText;
   final FontWeight fontWeight;
   final double height;
   final TextAlign textAlign;
-
   SimpleTextWidget({
     super.key,
     required this.text,
     this.textColor = const Color(0xFF282626),
-    this.sizeText = 16,
+    this.sizeText,
     this.fontWeight = FontWeight.w300,
     this.height = 1.7,
     this.textAlign = TextAlign.left,

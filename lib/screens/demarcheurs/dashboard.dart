@@ -1,5 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/screens/demarcheurs/user_page.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
@@ -30,7 +31,7 @@ class DashboardPage extends StatelessWidget {
               HeaderSectionWidget(text: "DASHBOARD"),
               UserPage(page: ConstantsValues.DASHBOARD),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10,
               ),
               statistiqueUser(
                   context: context,
@@ -40,7 +41,7 @@ class DashboardPage extends StatelessWidget {
                   icon: Icons.home_outlined,
                   text: "Total Publication"),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               statistiqueUser(
                   context: context,
@@ -50,7 +51,7 @@ class DashboardPage extends StatelessWidget {
                   icon: Icons.home_outlined,
                   text: "Chambres louées"),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               statistiqueUser(
                   context: context,
@@ -60,66 +61,96 @@ class DashboardPage extends StatelessWidget {
                   icon: CupertinoIcons.money_dollar_circle_fill,
                   text: "Prix Chambres louées"),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding:
+                    EdgeInsets.symmetric(horizontal: Dimensions.width10 * 1.5),
                 alignment: Alignment.topLeft,
-                child: BigTextWidget(text: "Récemment publié"),
+                child: BigTextWidget(
+                  text: "Annonces récemment publiées",
+                  sizeText: Dimensions.fontsize20,
+                ),
               ),
+
               // Tableau
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Scrollbar(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      border: TableBorder.all(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                      columns: const <DataColumn>[
-                        DataColumn(
-                          label: BigTextWidget(
-                            text: "Chambres",
-                          ),
-                        ),
-                        DataColumn(
-                          label: BigTextWidget(
-                            text: "Catégorie",
-                          ),
-                        ),
-                        DataColumn(
-                          label: BigTextWidget(text: "Prix"),
-                        ),
-                        DataColumn(
-                          label: BigTextWidget(text: "Type"),
-                        ),
-                      ],
-                      rows: const <DataRow>[
-                        DataRow(cells: const <DataCell>[
-                          DataCell(
-                            Text("Bonjour"),
-                          ),
-                          DataCell(
-                            Text("Bonjour"),
-                          ),
-                          DataCell(
-                            Text("Bonjour"),
-                          ),
-                          DataCell(
-                            Text("Bonjour"),
-                          ),
-                        ]),
-                      ],
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(Dimensions.radius10)),
+                margin: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: Dimensions.height10,
                     ),
-                  ),
+                    // Tableau de données
+                    Container(
+                      child: Scrollbar(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius10),
+                            ),
+                            border: TableBorder.all(
+                              color: Colors.grey,
+                              width: 0.5,
+                            ),
+                            columns: const <DataColumn>[
+                              DataColumn(
+                                label: BigTextWidget(
+                                  text: "Chambres",
+                                ),
+                              ),
+                              DataColumn(
+                                label: BigTextWidget(
+                                  text: "Catégorie",
+                                ),
+                              ),
+                              DataColumn(
+                                label: BigTextWidget(text: "Prix"),
+                              ),
+                              DataColumn(
+                                label: BigTextWidget(text: "Type"),
+                              ),
+                            ],
+                            rows: const <DataRow>[
+                              DataRow(cells: const <DataCell>[
+                                DataCell(
+                                  Text("Bonjour"),
+                                ),
+                                DataCell(
+                                  Text("Bonjour"),
+                                ),
+                                DataCell(
+                                  Text("Bonjour"),
+                                ),
+                                DataCell(
+                                  Text("Bonjour"),
+                                ),
+                              ]),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10 * 2,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
             ],
           ),
@@ -137,19 +168,21 @@ class DashboardPage extends StatelessWidget {
     required String text,
   }) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      height: 150,
+      margin: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10 * 2, vertical: Dimensions.height10),
+      height: Dimensions.height10 * 11,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
             color: primaryColor,
-            width: 6,
+            width: Dimensions.height10 / 2,
           ),
         ),
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(Dimensions.radius10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,7 +196,7 @@ class DashboardPage extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: BigTextWidget(
                     text: nombre.toString(),
-                    sizeText: 50,
+                    sizeText: Dimensions.fontsize20 * 2,
                     textColor: primaryColor,
                   ),
                 ),
@@ -172,7 +205,7 @@ class DashboardPage extends StatelessWidget {
                   child: SimpleTextWidget(
                     textAlign: TextAlign.start,
                     text: text,
-                    sizeText: 15,
+                    sizeText: Dimensions.fontsize15,
                     textColor: primaryColor,
                   ),
                 ),
@@ -180,15 +213,17 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           Container(
-            width: 60,
-            height: 60,
+            width: Dimensions.height10 * 6,
+            height: Dimensions.height10 * 6,
             child: Icon(
               Icons.home_outlined,
               color: Colors.white,
-              size: 40,
+              size: Dimensions.small,
             ),
             decoration: BoxDecoration(
-                color: primaryColor, borderRadius: BorderRadius.circular(30)),
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(Dimensions.screenWidth),
+            ),
           ),
         ],
       ),

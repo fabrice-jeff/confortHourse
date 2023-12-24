@@ -1,4 +1,5 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/screens/a_propos.dart';
 import 'package:conforthourse/screens/categorie.dart';
 import 'package:conforthourse/screens/contact.dart';
@@ -23,12 +24,13 @@ class MenuPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.only(top: 30),
+          margin: EdgeInsets.only(top: Dimensions.height10 * 3),
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 6),
+                margin:
+                    EdgeInsets.symmetric(vertical: Dimensions.height10 * 0.5),
                 child: ListTile(
                   leading: Icon(Icons.home_outlined),
                   title: const BigTextWidget(
@@ -44,7 +46,8 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 6),
+                margin:
+                    EdgeInsets.symmetric(vertical: Dimensions.height10 * 0.5),
                 child: ListTile(
                   leading: Icon(CupertinoIcons.conversation_bubble),
                   title: const BigTextWidget(
@@ -60,7 +63,8 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 6),
+                margin:
+                    EdgeInsets.symmetric(vertical: Dimensions.height10 * 0.5),
                 child: ListTile(
                   leading: Icon(Icons.south_america_outlined),
                   title: const BigTextWidget(
@@ -78,7 +82,8 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 6),
+                margin:
+                    EdgeInsets.symmetric(vertical: Dimensions.height10 * 0.5),
                 child: ListTile(
                   leading: Icon(CupertinoIcons.list_bullet),
                   title: const BigTextWidget(
@@ -93,15 +98,6 @@ class MenuPage extends StatelessWidget {
                   },
                 ),
               ),
-              // ListTile(
-              //   title: const BigTextWidget(
-              //     text: "Colocation",
-              //     textAlign: TextAlign.left,
-              //   ),
-              //   onTap: () {
-              //     Navigator.pop(context);
-              //   },
-              // ),
             ],
           ),
         ),

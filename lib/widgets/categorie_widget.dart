@@ -1,4 +1,5 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/models/categorie.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:flutter/material.dart';
@@ -13,42 +14,42 @@ class CategorieWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(Dimensions.height10),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(Dimensions.radius10),
       ),
       child: Column(
         children: [
           Icon(
             Icons.location_history,
             color: AppColors.secondColor,
-            size: 50,
+            size: Dimensions.large,
           ),
           SizedBox(
-            height: 5,
+            height: Dimensions.height10,
           ),
           BigTextWidget(
             text: categorie.titre,
-            sizeText: 16,
+            sizeText: Dimensions.fontsize16,
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 5,
+            height: Dimensions.height10,
           ),
           Expanded(
             child: Center(
               child: Container(
-                height: 50,
-                width: 50,
+                height: Dimensions.height10 * 4.5,
+                width: Dimensions.width10 * 4.5,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: AppColors.backgroundColor,
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(Dimensions.radius10),
                 ),
                 child: BigTextWidget(
                   text: categorie.nombreLocation.toString(),
-                  sizeText: 15,
+                  sizeText: Dimensions.fontsize15,
                 ),
               ),
             ),

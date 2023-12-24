@@ -1,6 +1,7 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/controllers/categorie_controller.dart';
 import 'package:conforthourse/controllers/location_controller.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/models/categorie.dart';
 import 'package:conforthourse/models/location.dart';
 import 'package:conforthourse/providers/user_login.dart';
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     locations = LocationController.all();
     categories = CategorieController.all();
@@ -38,13 +38,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var user = context.watch<UserLogin>().email;
-    print(user);
+    print(MediaQuery.of(context).size.height);
+    print(MediaQuery.of(context).size.width);
+
     return Scaffold(
       appBar: AppBar(
         shadowColor: AppColors.backgroundColor,
         elevation: 4.5,
         title: BigTextWidget(
           text: "ConforthOurse",
+          sizeText: Dimensions.fontsize20,
           fontWeight: FontWeight.w400,
         ),
         actions: [
@@ -60,7 +63,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             },
-            icon: Icon(Icons.menu),
+            icon: Icon(
+              Icons.menu,
+              size: Dimensions.small,
+            ),
           )
         ],
       ),
@@ -69,7 +75,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: Dimensions.height10,
               ),
               // Title
               TitleSectionWidget(
@@ -77,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 secondText: "Choisissez Votre Catégorie",
               ),
               SizedBox(
-                height: 10,
+                height: Dimensions.height10,
               ),
               FutureBuilder<List<Categorie>>(
                 future: categories,
@@ -93,11 +99,10 @@ class _HomePageState extends State<HomePage> {
                       primary: false,
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+                        crossAxisSpacing: Dimensions.height10,
+                        mainAxisSpacing: Dimensions.width10,
                         mainAxisExtent: 215,
                       ),
                       itemCount: snapshot.data!.length,
@@ -123,20 +128,22 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.width10,
+                          vertical: Dimensions.height10),
                     ),
                   );
                 },
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10,
               ),
               TitleSectionWidget(
                 firstText: "DÉCOUVREZ NOS LOCATIONS IMMOBILIÈRE",
                 secondText: "Plongez Dans Le Confort",
               ),
               SizedBox(
-                height: 10,
+                height: Dimensions.height10,
               ),
               Container(
                 child: FutureBuilder<List<Location>>(
@@ -162,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10,
               ),
               // VideoApp(),
               TitleSectionWidget(
@@ -170,8 +177,8 @@ class _HomePageState extends State<HomePage> {
                 secondText: "Pourquoi Nous choisir",
               ),
               Container(
-                height: 400 * 3.3,
                 child: ListView.builder(
+                  shrinkWrap: true,
                   itemCount: 3,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (BuildContext, position) {
@@ -179,129 +186,40 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
               Container(
+                padding: EdgeInsets.only(
+                  left: Dimensions.width10,
+                  right: Dimensions.width10,
+                  top: Dimensions.height10,
+                  bottom: Dimensions.height10 * 4,
+                ),
                 alignment: Alignment.center,
-                height: 850,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color(0xFF022956),
                 ),
                 child: Column(
-                  children: <Widget>[
+                  children: [
                     Container(
-                      margin: EdgeInsets.only(top: 30, bottom: 20),
                       child: TitleSectionWidget(
                         firstText: "TEMOIGNAGES",
                         secondText: "Ce Que Nos Clients Disent",
                         colorSecondText: Colors.white,
                       ),
                     ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
                     Container(
-                      height: 350,
+                      height: Dimensions.heightTemoignage,
                       child: const ListTemoignage(),
                     )
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Container(
-              //   alignment: Alignment.topLeft,
-              //   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              //   child: BigTextWidget(
-              //     text: "ConforthOurse",
-              //     textAlign: TextAlign.left,
-              //   ),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
-              //   child: SimpleTextWidget(
-              //     text:
-              //         "ConforthOuse est une destination ultime pour trouer la location immobilière idéale. Notre plateforme offre un large choix de chambres de qualité, un processus facile et sécurisé, ainsi qu'un service client exeptionnel pour répondre à tous vos besoins.",
-              //     textAlign: TextAlign.justify,
-              //     fontWeight: FontWeight.w300,
-              //   ),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              //   child: Row(
-              //     children: [
-              //       Container(
-              //         margin: EdgeInsets.only(right: 10),
-              //         padding: const EdgeInsets.all(5),
-              //         height: 30,
-              //         width: 30,
-              //         decoration: BoxDecoration(
-              //           color: AppColors.secondColor,
-              //           borderRadius: BorderRadius.circular(10),
-              //         ),
-              //         child: const Icon(
-              //           Icons.call_outlined,
-              //           color: Colors.white,
-              //           size: 20,
-              //         ),
-              //       ),
-              //       SimpleTextWidget(
-              //         text: "+229 98 74 14 37",
-              //         fontWeight: FontWeight.w300,
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-              //   child: Row(
-              //     children: [
-              //       Container(
-              //         margin: const EdgeInsets.only(right: 10),
-              //         padding: const EdgeInsets.all(5),
-              //         height: 30,
-              //         width: 30,
-              //         decoration: BoxDecoration(
-              //           color: AppColors.secondColor,
-              //           borderRadius: BorderRadius.circular(10),
-              //         ),
-              //         child: const Icon(
-              //           Icons.location_on_outlined,
-              //           color: Colors.white,
-              //           size: 20,
-              //         ),
-              //       ),
-              //       SimpleTextWidget(
-              //         text: "Cotonou, Bénin",
-              //         fontWeight: FontWeight.w300,
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(
-              //       top: 20, left: 10, right: 10, bottom: 20),
-              //   child: Row(
-              //     children: [
-              //       Container(
-              //         margin: const EdgeInsets.only(right: 10),
-              //         padding: const EdgeInsets.all(5),
-              //         height: 30,
-              //         width: 30,
-              //         decoration: BoxDecoration(
-              //           color: AppColors.secondColor,
-              //           borderRadius: BorderRadius.circular(10),
-              //         ),
-              //         child: const Icon(
-              //           Icons.mail_outlined,
-              //           color: Colors.white,
-              //           size: 20,
-              //         ),
-              //       ),
-              //       SimpleTextWidget(
-              //         text: "contact@affectlac.com",
-              //         fontWeight: FontWeight.w300,
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),
@@ -313,38 +231,39 @@ class _HomePageState extends State<HomePage> {
   Widget _listReasons(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      padding: const EdgeInsets.all(10),
-      height: 400,
+      margin: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10 * 1.5),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10 * 1.5),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(Dimensions.radius10),
       ),
       child: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: Dimensions.height10 * 2),
             child: Icon(
               Icons.location_city,
               color: AppColors.secondColor,
-              size: 80,
+              size: Dimensions.large,
             ),
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           BigTextWidget(
             text: "Large sélection de chambres",
-            sizeText: 20,
+            sizeText: Dimensions.fontsize20,
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           SimpleTextWidget(
             text:
                 "Découvrez une vaste sélection de chambres à louer, soigneusement publiées par nos agents immobiliers partenaires, pour trouver celle qui correspond parfaitement à vos besoins.",
             textAlign: TextAlign.center,
-            sizeText: 16,
+            sizeText: Dimensions.fontsize15,
           ),
         ],
       ),

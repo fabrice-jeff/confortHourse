@@ -1,5 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/screens/demarcheurs/user_page.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
@@ -13,7 +14,7 @@ class ProfilPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget _infoUser({required String libelle, required String value}) {
       return Container(
-        margin: EdgeInsets.symmetric(horizontal: 7, vertical: 6),
+        margin: EdgeInsets.symmetric(vertical: Dimensions.height10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -21,7 +22,7 @@ class ProfilPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: BigTextWidget(
                 text: libelle,
-                sizeText: 15,
+                sizeText: Dimensions.fontsize16,
                 textAlign: TextAlign.start,
               ),
             ),
@@ -34,7 +35,7 @@ class ProfilPage extends StatelessWidget {
                 child: SimpleTextWidget(
                   textAlign: TextAlign.start,
                   text: value,
-                  sizeText: 14,
+                  sizeText: Dimensions.fontsize15,
                 ),
               ),
             )
@@ -59,14 +60,18 @@ class ProfilPage extends StatelessWidget {
               HeaderSectionWidget(text: "PROFILE"),
               UserPage(page: ConstantsValues.PROFIL_USER),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    borderRadius: BorderRadius.circular(Dimensions.radius10)),
+                margin: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10 * 2,
+                    vertical: Dimensions.height10),
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -75,22 +80,22 @@ class ProfilPage extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: BigTextWidget(
                         text: "Profile",
-                        sizeText: 20,
+                        sizeText: Dimensions.fontsize20,
                       ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
                     ),
                     Align(
                       alignment: Alignment.topLeft,
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 5,
-                          ),
-                          height: 47,
-                          width: MediaQuery.of(context).size.width * 0.65,
+                          height: Dimensions.height10 * 5,
                           decoration: BoxDecoration(
                             color: AppColors.secondColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius10),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -100,10 +105,11 @@ class ProfilPage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               SizedBox(
-                                width: 5,
+                                width: Dimensions.width10,
                               ),
                               SimpleTextWidget(
                                 text: "Ajouter une annonce",
+                                sizeText: Dimensions.fontsize15,
                                 textColor: Colors.white,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -112,6 +118,7 @@ class ProfilPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(height: Dimensions.height10),
                     Divider(),
                     _infoUser(libelle: "Nom complet:", value: "AGBO Fabrice"),
                     _infoUser(libelle: "Email:", value: "agbjeff@gmail.com"),
@@ -121,7 +128,8 @@ class ProfilPage extends StatelessWidget {
                     _infoUser(libelle: "Location actif:", value: "0"),
                     _infoUser(libelle: "Location loués :", value: "0"),
                     _infoUser(libelle: "Création du compte:", value: ""),
-                    _infoUser(libelle: "Description:", value: ""),
+                    _infoUser(
+                        libelle: "Description:", value: "Agent immobilier"),
                   ],
                 ),
               ),
