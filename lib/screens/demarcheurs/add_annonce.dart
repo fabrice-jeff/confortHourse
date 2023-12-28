@@ -5,10 +5,8 @@ import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/label_form.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:images_picker/images_picker.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class AddAnnoncePage extends StatefulWidget {
@@ -382,49 +380,49 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
                       height: 20,
                     ),
                     // Choisir des images
-                    InkWell(
-                      onTap: () async {
-                        List<Media>? res = await ImagesPicker.pick(
-                          count: 3,
-                          pickType: PickType.all,
-                          language: Language.System,
-                          maxTime: 30,
-                          // maxSize: 500,
-                          cropOpt: CropOption(
-                            // aspectRatio: CropAspectRatio.wh16x9,
-                            cropType: CropType.circle,
-                          ),
-                        );
-                      },
-                      child: DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: Radius.circular(12),
-                        color: AppColors.backgroundColor2,
-                        dashPattern: [6, 3, 2, 3],
-                        strokeWidth: 2,
-                        child: Container(
-                          height: 140,
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                CupertinoIcons.photo,
-                                color: AppColors.textColor,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              SimpleTextWidget(
-                                text: "Sélectionner vos photos",
-                                textColor: AppColors.textColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () async {
+                    //     List<Media>? res = await ImagesPicker.pick(
+                    //       count: 3,
+                    //       pickType: PickType.all,
+                    //       language: Language.System,
+                    //       maxTime: 30,
+                    //       // maxSize: 500,
+                    //       cropOpt: CropOption(
+                    //         // aspectRatio: CropAspectRatio.wh16x9,
+                    //         cropType: CropType.circle,
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: DottedBorder(
+                    //     borderType: BorderType.RRect,
+                    //     radius: Radius.circular(12),
+                    //     color: AppColors.backgroundColor2,
+                    //     dashPattern: [6, 3, 2, 3],
+                    //     strokeWidth: 2,
+                    //     child: Container(
+                    //       height: 140,
+                    //       alignment: Alignment.center,
+                    //       width: double.infinity,
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Icon(
+                    //             CupertinoIcons.photo,
+                    //             color: AppColors.textColor,
+                    //           ),
+                    //           SizedBox(
+                    //             width: 5,
+                    //           ),
+                    //           SimpleTextWidget(
+                    //             text: "Sélectionner vos photos",
+                    //             textColor: AppColors.textColor,
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 30,
                     ),
