@@ -1,3 +1,4 @@
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 
@@ -7,10 +8,10 @@ class HeaderSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 100),
+      margin: EdgeInsets.only(bottom: Dimensions.height10 * 4),
       alignment: Alignment.center,
       width: double.infinity,
-      height: 340,
+      height: Dimensions.heightHeader,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('images/breadcrumb.jpg'),
@@ -27,14 +28,12 @@ class HeaderSectionWidget extends StatelessWidget {
           ),
           Positioned(
             child: Container(
-              padding: EdgeInsets.all(5),
               alignment: Alignment.center,
               child: BigTextWidget(
                 text: text,
-                height: 1.2,
                 textColor: Colors.white,
                 fontWeight: FontWeight.bold,
-                sizeText: 35,
+                sizeText: Dimensions.fontsize30,
               ),
             ),
           ),

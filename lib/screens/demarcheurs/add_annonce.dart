@@ -1,13 +1,14 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/constants.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/screens/demarcheurs/user_page.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/label_form.dart';
+import 'package:conforthourse/widgets/select_fields.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:select_form_field/select_form_field.dart';
 
 class AddAnnoncePage extends StatefulWidget {
   const AddAnnoncePage({super.key});
@@ -17,33 +18,12 @@ class AddAnnoncePage extends StatefulWidget {
 }
 
 class _AddAnnoncePageState extends State<AddAnnoncePage> {
-  final List<Map<String, dynamic>> _pays = [
-    {
-      'value': 'Benin',
-      'label': 'Benin',
-    },
-    {
-      'value': 'Madagascar',
-      'label': 'Madagascar',
-    },
-    {
-      'value': 'Congo',
-      'label': 'Congo',
-    },
-    {
-      'value': 'Lituanie',
-      'label': 'Lituanie',
-    },
-    {
-      'value': 'Senegal',
-      'label': 'Bénin',
-    },
-    {
-      'value': 'Togo',
-      'label': 'Togo',
-    },
+  final List<String> paysItems = [
+    'Benin',
+    'Mali',
+    'Nigeria',
+    'Niger',
   ];
-  String _paysChoise = "Benin";
 
   Path customPath = Path()
     ..moveTo(20, 20)
@@ -101,14 +81,19 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
               HeaderSectionWidget(text: "AJOUTER UNE ANNONCE"),
               UserPage(page: ConstantsValues.ADD_ANNONCE),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(Dimensions.radius10),
+                ),
+                margin: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                    vertical: Dimensions.height10),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10 * 2,
+                    vertical: Dimensions.height10 * 2),
                 width: double.infinity,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -118,18 +103,18 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
                       child: BigTextWidget(
                         text: "Ajouter une annonce",
                         textAlign: TextAlign.start,
-                        sizeText: 22,
+                        sizeText: Dimensions.fontsize20,
                       ),
                     ),
                     Divider(),
                     SizedBox(
-                      height: 10,
+                      height: Dimensions.height10,
                     ),
                     Container(
                       alignment: Alignment.topLeft,
                       child: BigTextWidget(
                         text: "Informations basiques",
-                        sizeText: 17,
+                        sizeText: Dimensions.fontsize16,
                       ),
                     ),
                     // Titre
@@ -142,7 +127,8 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       height: 50,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius10),
                         border: Border.all(width: 0.4, color: Colors.grey),
                       ),
                       child: Row(
@@ -165,98 +151,23 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
                       height: 30,
                     ),
                     // Type de la location
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: LabelFormWidget(label: "Type"),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.4, color: Colors.grey),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.globe,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: SelectFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Choisissez un type",
-                              ),
-                              type: SelectFormFieldType.dialog,
-                              initialValue: 'circle',
-                              items: _pays,
-                              onChanged: (val) => _paysChoise = val,
-                              onSaved: (val) => print(val),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
+                    //Pays
+                    SelectFieldsWidget(
+                      hintText: "Votre pays",
+                      icon: CupertinoIcons.globe,
+                      label: "Pays",
+                      items: paysItems,
                     ),
                     SizedBox(
                       height: 30,
                     ),
 
                     //Catégorie de la location
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: LabelFormWidget(label: "Catégorie"),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.4, color: Colors.grey),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.globe,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: SelectFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Choisissez une catégorie",
-                              ),
-                              type: SelectFormFieldType.dialog,
-                              initialValue: 'circle',
-                              items: _pays,
-                              onChanged: (val) => _paysChoise = val,
-                              onSaved: (val) => print(val),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
+                    SelectFieldsWidget(
+                      hintText: "Votre pays",
+                      icon: CupertinoIcons.globe,
+                      label: "Pays",
+                      items: paysItems,
                     ),
                     SizedBox(
                       height: 30,
@@ -322,49 +233,11 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
                       height: 30,
                     ),
                     //Localisation
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const LabelFormWidget(label: "Localisation"),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.4, color: Colors.grey),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.globe,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: SelectFormField(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Choisissez une catégorie",
-                              ),
-                              type: SelectFormFieldType.dialog,
-                              initialValue: 'circle',
-                              items: _pays,
-                              onChanged: (val) => _paysChoise = val,
-                              onSaved: (val) => print(val),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down_outlined,
-                            color: Colors.grey,
-                          ),
-                        ],
-                      ),
+                    SelectFieldsWidget(
+                      hintText: "Votre pays",
+                      icon: CupertinoIcons.globe,
+                      label: "Pays",
+                      items: paysItems,
                     ),
                     SizedBox(
                       height: 30,

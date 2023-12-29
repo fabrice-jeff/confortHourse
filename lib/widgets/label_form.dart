@@ -1,4 +1,5 @@
 import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +19,11 @@ class LabelFormWidget extends StatelessWidget {
         Container(
           child: SimpleTextWidget(
             text: label,
-            sizeText: 13,
+            sizeText: Dimensions.fontsize13,
           ),
         ),
         SizedBox(
-          width: 5,
+          width: Dimensions.width10 / 2,
         ),
         if (important)
           SimpleTextWidget(

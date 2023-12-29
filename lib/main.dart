@@ -1,6 +1,6 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/providers/user_login.dart';
-import 'package:conforthourse/screens/home.dart';
+import 'package:conforthourse/screens/demarcheurs/add_annonce.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: AddAnnoncePage(),
       ),
     );
   }

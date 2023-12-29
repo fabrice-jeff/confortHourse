@@ -1,15 +1,16 @@
 import 'package:conforthourse/colors.dart';
 import 'package:conforthourse/controllers/demarcheur_controller.dart';
+import 'package:conforthourse/dimensions.dart';
 import 'package:conforthourse/models/demarcheur.dart';
 import 'package:conforthourse/screens/security/login.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/bottom_navigation.dart';
 import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/label_form.dart';
+import 'package:conforthourse/widgets/select_fields.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
+import 'package:conforthourse/widgets/text_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:select_form_field/select_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -19,46 +20,13 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final List<Map<String, dynamic>> _pays = [
-    {
-      'value': 'Benin',
-      'label': 'Benin',
-    },
-    {
-      'value': 'Madagascar',
-      'label': 'Madagascar',
-    },
-    {
-      'value': 'Congo',
-      'label': 'Congo',
-    },
-    {
-      'value': 'Lituanie',
-      'label': 'Lituanie',
-    },
-    {
-      'value': 'Senegal',
-      'label': 'Bénin',
-    },
-    {
-      'value': 'Togo',
-      'label': 'Togo',
-    },
+  final List<String> paysItems = [
+    'Benin',
+    'Mali',
+    'Nigeria',
+    'Niger',
   ];
-  final List<Map<String, dynamic>> _sexe = [
-    {
-      'value': 'Homme',
-      'label': 'Homme',
-    },
-    {
-      'value': 'Femme',
-      'label': 'Femme',
-    },
-    {
-      'value': 'Autre',
-      'label': 'Autre',
-    },
-  ];
+  final List<String> gendersItems = ['Homme', 'Femme', 'Autre'];
   final _key = GlobalKey<FormState>();
   TextEditingController _nom = TextEditingController();
   TextEditingController _prenoms = TextEditingController();
@@ -114,10 +82,10 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               HeaderSectionWidget(text: "INSCRIPTION"),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(Dimensions.radius10),
                 ),
                 width: double.infinity,
                 child: Stack(
@@ -126,474 +94,142 @@ class _RegisterPageState extends State<RegisterPage> {
                       key: _key,
                       child: Container(
                         width: double.infinity,
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        padding: EdgeInsets.only(
-                            left: 10, right: 10, top: 20, bottom: 20),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width10,
+                            vertical: Dimensions.height10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width10,
+                            vertical: Dimensions.height10 * 2),
                         child: Column(
                           children: [
                             SimpleTextWidget(
                               text: 'ConfortHourse',
-                              sizeText: 13,
+                              sizeText: Dimensions.fontsize13,
                             ),
                             SizedBox(
-                              height: 10,
+                              height: Dimensions.height10,
                             ),
                             SimpleTextWidget(
+                                textAlign: TextAlign.center,
                                 text:
                                     'Rejoignez notre communauté en vous inscrivant dès  maintenant !'),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            //Nom
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: const LabelFormWidget(label: "Nom"),
+                            //Nom de la personne
+                            TextFieldsWidget(
+                              hintText: "Votre nom",
+                              textInputType: TextInputType.name,
+                              icon: Icons.person_outline,
+                              label: "Nom",
+                              controller: _nom,
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.person_outline,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.name,
-                                      decoration: const InputDecoration(
-                                        hintText: "Votre nom",
-                                        border: InputBorder.none,
-                                      ),
-                                      controller: _nom,
-                                    ),
-                                  )
-                                ],
-                              ),
+
+                            SizedBox(
+                              height: Dimensions.height10 * 2,
+                            ),
+                            //Prénoms de la personne
+                            TextFieldsWidget(
+                              hintText: "Vos prénoms",
+                              textInputType: TextInputType.name,
+                              icon: Icons.person_outline,
+                              label: "Prénoms",
+                              controller: _prenoms,
                             ),
                             SizedBox(
-                              height: 30,
-                            ),
-                            //Prénoms
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: LabelFormWidget(label: "Prénoms"),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.person_outline,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.name,
-                                      controller: _prenoms,
-                                      decoration: const InputDecoration(
-                                        hintText: "Vos prénoms",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
                             //Pays
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: LabelFormWidget(label: "Pays"),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.globe,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: SelectFormField(
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: "Choisissez un pays",
-                                      ),
-                                      type: SelectFormFieldType.dialog,
-                                      initialValue: 'circle',
-                                      items: _pays,
-                                      onChanged: (val) => _paysChoise = val,
-                                      onSaved: (val) => print(val),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_drop_down_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
+                            SelectFieldsWidget(
+                              hintText: "Votre pays",
+                              icon: CupertinoIcons.globe,
+                              label: "Pays",
+                              items: paysItems,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
                             //Ville
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: LabelFormWidget(label: "Ville"),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_city,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _ville,
-                                      keyboardType: TextInputType.name,
-                                      decoration: const InputDecoration(
-                                        hintText: "Votre ville",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
+                            TextFieldsWidget(
+                              hintText: "Votre ville",
+                              textInputType: TextInputType.name,
+                              icon: Icons.location_city_outlined,
+                              label: "Ville",
+                              controller: _ville,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
                             //Sexe
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: LabelFormWidget(label: "Sexe"),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.nature_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: SelectFormField(
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: "Choisissez un sexe",
-                                      ),
-                                      type: SelectFormFieldType.dialog,
-                                      initialValue: 'circle',
-                                      items: _sexe,
-                                      onChanged: (val) => _genre = val,
-                                      onSaved: (val) => print(val),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Icon(
-                                    Icons.arrow_drop_down_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
+                            SelectFieldsWidget(
+                              hintText: "Votre sexe",
+                              icon: Icons.nature_outlined,
+                              label: "Sexe",
+                              items: gendersItems,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child:
-                                  LabelFormWidget(label: "Numéro de téléphone"),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.phone_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _numeroTelephone,
-                                      decoration: const InputDecoration(
-                                        hintText: "Votre numéro de téléphone",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            //Numéro de téléphone
+                            TextFieldsWidget(
+                              hintText: "Votre numéro de téléphone",
+                              textInputType: TextInputType.name,
+                              icon: Icons.phone_outlined,
+                              label: "Numéro de téléphone",
+                              controller: _numeroTelephone,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: LabelFormWidget(
-                                  label: "Numéro Whatsapp",
-                                )),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.phone_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _numeroWhatsapp,
-                                      decoration: const InputDecoration(
-                                        hintText: "Votre numéro whatsapp",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            // Numéro Whatsapp
+
+                            TextFieldsWidget(
+                              hintText: "Votre numéro Whatsapp",
+                              textInputType: TextInputType.name,
+                              icon: Icons.phone_outlined,
+                              label: "Numéro Whatsapp",
+                              controller: _numeroWhatsapp,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: LabelFormWidget(
-                                  label: "Adresse email",
-                                )),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.email_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _email,
-                                      decoration: const InputDecoration(
-                                        hintText: "Votre adresse email",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+
+                            //Adresse email
+                            TextFieldsWidget(
+                              hintText: "Votre adresse Email",
+                              textInputType: TextInputType.name,
+                              icon: Icons.email_outlined,
+                              label: "Adresse Email",
+                              controller: _email,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: LabelFormWidget(
-                                  label: 'Mot de passe',
-                                )),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.lock_outline,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _psd,
-                                      obscureText: obscureTextPassword,
-                                      decoration: const InputDecoration(
-                                        hintText: "**********",
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        obscureTextPassword =
-                                            !obscureTextPassword;
-                                      });
-                                    },
-                                    icon: const Icon(
-                                      Icons.visibility,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            // Mot de passe
+                            TextFieldsWidget(
+                              obscureText: true,
+                              label: "Mot de passe",
+                              hintText: "*********",
+                              icon: Icons.lock_outline,
+                              textInputType: TextInputType.visiblePassword,
+                              controller: _psd,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: LabelFormWidget(
-                                  label: "Confirmation du mot de passe",
-                                )),
-                            Container(
-                              alignment: Alignment.center,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                    Border.all(width: 0.4, color: Colors.grey),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.lock_outline,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _confirmPsd,
-                                      obscureText: obscureTextConfirmPassword,
-                                      decoration: const InputDecoration(
-                                        hintText: "**********",
-                                        border: InputBorder.none,
-                                      ),
-                                      validator: (value) {
-                                        if (value != _psd.value.text) {
-                                          return "Les mots de passe ne sont pas identique";
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        obscureTextConfirmPassword =
-                                            !obscureTextConfirmPassword;
-                                      });
-                                    },
-                                    icon: const Icon(
-                                      Icons.visibility,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            // Confirmation Mot de passe
+                            TextFieldsWidget(
+                              obscureText: true,
+                              label: "Confirmation du mot de passe",
+                              hintText: "*********",
+                              icon: Icons.lock_outline,
+                              textInputType: TextInputType.visiblePassword,
+                              controller: _confirmPsd,
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10 * 2,
                             ),
+
                             InkWell(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
@@ -616,23 +252,21 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: Container(
                                 alignment: Alignment.center,
                                 width: double.infinity,
-                                height: 50,
-                                margin: const EdgeInsets.only(bottom: 5),
+                                height: Dimensions.height10 * 5,
                                 decoration: BoxDecoration(
                                   color: AppColors.secondColor,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius10),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      CupertinoIcons.paperplane,
-                                      color: Colors.white,
-                                      size: 18,
-                                    ),
+                                    Icon(CupertinoIcons.paperplane,
+                                        color: Colors.white,
+                                        size: Dimensions.height10 * 2),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                        left: 5,
+                                        left: Dimensions.width10 / 2,
                                       ),
                                       child: SimpleTextWidget(
                                         text: "S'inscrire",
@@ -647,18 +281,30 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: Dimensions.height10,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SimpleTextWidget(
                                   text: "Vous avez un compte ?",
+                                  height: 0,
                                 ),
-                                TextButton(
-                                  onPressed: () {},
+                                SizedBox(
+                                  height: Dimensions.height10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return LoginPage();
+                                      }),
+                                    );
+                                  },
                                   child: SimpleTextWidget(
                                     text: "Se connecter",
+                                    height: 0,
                                     textColor: AppColors.secondColor,
                                   ),
                                 )
@@ -669,21 +315,25 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     Positioned(
-                      top: 20,
-                      bottom: 20,
+                      top: Dimensions.height10 * 2,
+                      bottom: Dimensions.height10 * 2,
                       left: 0,
                       child: Container(
                         height: double.infinity,
-                        width: 3,
+                        width: Dimensions.height10 / 5,
                         decoration: BoxDecoration(
                           color: AppColors.secondColor,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius10),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(
+                height: Dimensions.height10 * 3,
+              )
             ],
           ),
         ),
