@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:conforthourse/models/location.dart';
+import 'package:conforthourse/data/models/location.dart';
 import 'package:http/http.dart' as http;
 
 class LocationController {

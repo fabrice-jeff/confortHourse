@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:conforthourse/models/categorie.dart';
+import 'package:conforthourse/data/models/categorie.dart';
 import 'package:http/http.dart' as http;
 
 class CategorieController {

@@ -1,7 +1,7 @@
-import 'package:conforthourse/colors.dart';
+import 'package:conforthourse/utils/colors.dart';
 import 'package:conforthourse/controllers/location_controller.dart';
-import 'package:conforthourse/models/location.dart';
-import 'package:conforthourse/screens/details_location.dart';
+import 'package:conforthourse/data/models/location.dart';
+import 'package:conforthourse/views/details_location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class LocationWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: AssetImage(
-                        "images/${location.photo}",
+                        "images/03.jpg",
                       ),
                       fit: BoxFit.cover),
                 ),

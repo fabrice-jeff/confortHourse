@@ -1,9 +1,8 @@
-import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/providers/user_login.dart';
-import 'package:conforthourse/screens/demarcheurs/add_annonce.dart';
+import 'package:conforthourse/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
+import 'routes/pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,15 +12,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UserLogin()),
-      ],
-      child: GetMaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
-        debugShowCheckedModeBanner: false,
-        home: AddAnnoncePage(),
-      ),
+    return GetMaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppPage.INITIAL,
+      getPages: AppPage.routes,
+      // home: HomeScreen(),
     );
   }
 }

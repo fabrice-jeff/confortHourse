@@ -1,18 +1,14 @@
-import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/dimensions.dart';
-import 'package:conforthourse/providers/user_login.dart';
-import 'package:conforthourse/screens/demarcheurs/add_annonce.dart';
-import 'package:conforthourse/screens/demarcheurs/dashboard.dart';
+import 'package:conforthourse/utils/colors.dart';
+import 'package:conforthourse/utils/dimensions.dart';
+import 'package:conforthourse/views/demarcheurs/add_annonce.dart';
+import 'package:conforthourse/views/demarcheurs/dashboard.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   const BottomNavigationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var user = context.watch<UserLogin>().email;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
       width: double.infinity,

@@ -1,95 +1,85 @@
-import 'package:conforthourse/screens/a_propos.dart';
+import 'package:conforthourse/utils/colors.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+
+import '../routes/routes.dart';
+import '../utils/constants.dart';
+
+List<Map<String, dynamic>> menuItemList = [
+  {"name": "A propos", 'route': Routes.aPropos},
+  {'name': "Contact", "route": Routes.contact},
+  {'name': 'Catégories', "route": Routes.categories},
+  {'name': "Connexion", "route": Routes.login},
+  {'name': "Inscription", "route": Routes.register},
+];
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
+    return Column(
       children: [
         Container(
-          height: 100,
-          decoration: BoxDecoration(
-            color: Color(0xFFC82333),
-          ),
-          child: Container(
-            padding: EdgeInsets.only(top: 10, left: 10),
+          alignment: Alignment.center,
+          height: 200,
+          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.all(5),
+          child: Center(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  alignment: Alignment.topLeft,
                   child: BigTextWidget(
-                    text: 'ConfortHourse',
-                    textColor: Colors.white,
-                    textAlign: TextAlign.left,
+                    text: 'ConfortHourse'.toUpperCase(),
+                    sizeText: 25,
                   ),
                 ),
-                Expanded(
+                Container(
                   child: SimpleTextWidget(
                     text:
                         'Votre destination ultime pour trouver la location immobilière idéale',
-                    textColor: Colors.white,
+                    textAlign: TextAlign.center,
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
-        ListTile(
-          title: const BigTextWidget(
-            text: 'Accueil',
-            textAlign: TextAlign.left,
+        Divider(),
+        Container(
+          child: Column(
+            children: [
+              for (int i = 0; i < menuItemList.length; i++)
+                ListTile(
+                  onTap: () {
+                    Get.offAllNamed(menuItemList[i]['route']);
+                  },
+                  title: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: _menuItem(libelle: menuItemList[i]['name']),
+                  ),
+                  trailing: SvgPicture.asset(
+                    ConstantsValues.forwardArrowIcon,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+            ],
           ),
-          onTap: () {
-            Navigator.pushNamed(context, '/');
-          },
-        ),
-        ListTile(
-          title: const BigTextWidget(
-            text: 'A propos',
-            textAlign: TextAlign.left,
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AproposPage(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: const BigTextWidget(
-            text: "Catégories",
-            textAlign: TextAlign.left,
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, '/categorie');
-          },
-        ),
-        ListTile(
-          title: const BigTextWidget(
-            text: "Colocation",
-            textAlign: TextAlign.left,
-          ),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          title: const BigTextWidget(
-            text: "Contact",
-            textAlign: TextAlign.left,
-          ),
-          onTap: () {
-            Navigator.pushNamed(context, "/contact");
-          },
         ),
       ],
+    );
+  }
+
+  Widget _menuItem({required String libelle}) {
+    return BigTextWidget(
+      text: libelle,
+      textAlign: TextAlign.left,
+      sizeText: 20,
     );
   }
 }

@@ -1,0 +1,188 @@
+import 'package:conforthourse/utils/colors.dart';
+import 'package:conforthourse/utils/dimensions.dart';
+import 'package:conforthourse/widgets/big_text.dart';
+import 'package:conforthourse/modules/home/views/categorie_widget.dart';
+import 'package:conforthourse/widgets/list_temoignage.dart';
+import 'package:conforthourse/widgets/simple_text.dart';
+import 'package:conforthourse/widgets/title_section.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../views/location_by_categorie.dart';
+import '../../../widgets/location_widget.dart';
+import '../controllers/home_controller.dart';
+
+class HomeView extends GetView<HomeController> {
+  const HomeView();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              // Title
+              TitleSectionWidget(
+                firstText: "CATÉGORIES",
+                secondText: "Choisissez Votre Catégorie",
+              ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              Container(
+                width: double.infinity,
+                child: GridView.builder(
+                  primary: false,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: Dimensions.height10,
+                    mainAxisSpacing: Dimensions.width10,
+                    mainAxisExtent: 215,
+                  ),
+                  itemCount: controller.categories.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Get.to(LocationByCategoriePage(
+                          categorie: "Chambres familiale",
+                          locations: controller.locations,
+                        ));
+                      },
+                      child: CategorieWidget(
+                        categorie: controller.categories[index],
+                      ),
+                    );
+                  },
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Dimensions.width10,
+                      vertical: Dimensions.height10),
+                ),
+              ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              TitleSectionWidget(
+                firstText: "DÉCOUVREZ NOS LOCATIONS IMMOBILIÈRE",
+                secondText: "Plongez Dans Le Confort",
+              ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              Container(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: controller.locations.length,
+                  itemBuilder: (BuildContext context, i) {
+                    return LocationWidget(
+                      location: controller.locations[i],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              // VideoApp(),
+              TitleSectionWidget(
+                firstText: "CONFORTHOUSE",
+                secondText: "Pourquoi Nous choisir",
+              ),
+              Container(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext, position) {
+                    return _listReasons(context);
+                  },
+                ),
+              ),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: Dimensions.width10,
+                  right: Dimensions.width10,
+                  top: Dimensions.height10,
+                  bottom: Dimensions.height10 * 4,
+                ),
+                alignment: Alignment.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xFF022956),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      child: TitleSectionWidget(
+                        firstText: "TEMOIGNAGES",
+                        secondText: "Ce Que Nos Clients Disent",
+                        colorSecondText: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      height: Dimensions.heightTemoignage,
+                      child: const ListTemoignage(),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _listReasons(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10 * 1.5),
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimensions.width10, vertical: Dimensions.height10 * 1.5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(Dimensions.radius10),
+      ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(top: Dimensions.height10 * 2),
+            child: Icon(
+              Icons.location_city,
+              color: AppColors.secondColor,
+              size: Dimensions.large,
+            ),
+          ),
+          SizedBox(
+            height: Dimensions.height10,
+          ),
+          BigTextWidget(
+            text: "Large sélection de chambres",
+            sizeText: Dimensions.fontsize20,
+          ),
+          SizedBox(
+            height: Dimensions.height10,
+          ),
+          SimpleTextWidget(
+            text:
+                "Découvrez une vaste sélection de chambres à louer, soigneusement publiées par nos agents immobiliers partenaires, pour trouver celle qui correspond parfaitement à vos besoins.",
+            textAlign: TextAlign.center,
+            sizeText: Dimensions.fontsize15,
+          ),
+        ],
+      ),
+    );
+  }
+}

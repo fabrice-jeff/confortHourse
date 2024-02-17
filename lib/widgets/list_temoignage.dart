@@ -1,5 +1,5 @@
-import 'package:conforthourse/colors.dart';
-import 'package:conforthourse/dimensions.dart';
+import 'package:conforthourse/utils/colors.dart';
+import 'package:conforthourse/utils/dimensions.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
