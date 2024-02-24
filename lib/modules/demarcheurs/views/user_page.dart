@@ -1,24 +1,22 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/constants.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/views/demarcheurs/add_annonce.dart';
-import 'package:conforthourse/views/demarcheurs/annonces.dart';
-import 'package:conforthourse/views/demarcheurs/dashboard.dart';
-import 'package:conforthourse/views/demarcheurs/parametre_profil.dart';
-import 'package:conforthourse/views/demarcheurs/profil.dart';
-import 'package:conforthourse/modules/home/views/home_view.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../data/models/demarcheur.dart';
+import '../../../routes/routes.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/simple_text.dart';
+import 'annonces.dart';
+import 'dashboard.dart';
+import 'parametre_profil.dart';
+import 'profil_view.dart';
 
 class UserPage extends StatelessWidget {
+  final Demarcheur? demarcheur;
   final String page;
-  const UserPage({super.key, required this.page});
-  void logout(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const HomeView();
-    }));
-  }
+  const UserPage({super.key, required this.page, this.demarcheur});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +53,9 @@ class UserPage extends StatelessWidget {
             height: Dimensions.height10 * 2,
           ),
           BigTextWidget(
-            text: "AGBO Fabrice",
+            text: (demarcheur == null)
+                ? ""
+                : demarcheur!.nom + " " + demarcheur!.prenoms,
             sizeText: Dimensions.fontsize30,
             fontWeight: FontWeight.w700,
             height: 0,
@@ -64,7 +64,7 @@ class UserPage extends StatelessWidget {
             height: 5,
           ),
           SimpleTextWidget(
-            text: "agbjeff@gmail.com",
+            text: (demarcheur == null) ? "" : demarcheur!.email,
           ),
           SizedBox(
             height: Dimensions.height10 * 2,
@@ -115,7 +115,7 @@ class UserPage extends StatelessWidget {
             onTap: () {
               // L'interface PROFIL
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfilPage();
+                return ProfilView();
               }));
             },
             child: Container(
@@ -190,9 +190,7 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface AJOUTER UNE ANNONCE
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const AddAnnoncePage();
-              }));
+              Get.toNamed(Routes.demarcheurAddAnnonce);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -266,7 +264,6 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface DECONNEXION
-              logout(context);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),

@@ -1,10 +1,9 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/controllers/location_controller.dart';
-import 'package:conforthourse/data/models/location.dart';
-import 'package:conforthourse/views/details_location.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+
+import '../data/models/location.dart';
+import '../utils/colors.dart';
+import 'big_text.dart';
+import 'simple_text.dart';
 
 class LocationWidget extends StatelessWidget {
   final Location location;
@@ -156,17 +155,17 @@ class LocationWidget extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       //Récupération de la location avec un  id particulier
-                      var autreLocation = LocationController.findByCategorie(
-                          location.code, location.idCategorie);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return DetailsLocation(
-                                location: location, locations: autreLocation);
-                          },
-                        ),
-                      );
+                      // var autreLocation = LocationController.findByCategorie(
+                      //     location.code, location.idCategorie);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return DetailsLocation(
+                      //           location: location, locations: autreLocation);
+                      //     },
+                      //   ),
+                      // );
                     },
                     child: SimpleTextWidget(
                       text: 'Détails',

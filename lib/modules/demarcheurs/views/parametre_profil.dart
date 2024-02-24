@@ -1,11 +1,12 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/constants.dart';
-import 'package:conforthourse/views/demarcheurs/user_page.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/button_add_annonce.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/label_form.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/button_add_annonce.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/label_form.dart';
+import 'user_page.dart';
 
 class ParametreProfilPage extends StatefulWidget {
   const ParametreProfilPage({super.key});

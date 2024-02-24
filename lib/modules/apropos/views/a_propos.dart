@@ -1,15 +1,16 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/bottom_navigation.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
-class AproposPage extends StatelessWidget {
-  const AproposPage({super.key});
+import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/simple_text.dart';
+
+class AproposView extends GetView {
+  const AproposView({super.key});
 
   Widget _listCheck({required String text}) {
     return Container(
@@ -503,7 +504,6 @@ class AproposPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationWidget(),
     );
   }
 

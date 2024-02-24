@@ -1,8 +1,9 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/data/models/categorie.dart';
-import 'package:conforthourse/widgets/big_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../../data/models/categorie.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
 
 class CategorieWidget extends StatelessWidget {
   final Categorie categorie;

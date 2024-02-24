@@ -1,18 +1,34 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ContactPage extends StatefulWidget {
-  const ContactPage({super.key});
+import '../../../utils/colors.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/simple_text.dart';
 
+class ContactView extends GetView {
+  const ContactView();
   @override
-  State<ContactPage> createState() => _ContactPageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: ContactForm(),
+        ),
+      ),
+    );
+  }
 }
 
-class _ContactPageState extends State<ContactPage> {
+class ContactForm extends StatefulWidget {
+  const ContactForm({super.key});
+
+  @override
+  State<ContactForm> createState() => _ContactFormState();
+}
+
+class _ContactFormState extends State<ContactForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nom = TextEditingController();
   final TextEditingController _email = TextEditingController();

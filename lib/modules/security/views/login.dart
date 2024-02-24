@@ -1,13 +1,12 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/bottom_navigation.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
-import 'package:conforthourse/widgets/text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/simple_text.dart';
+import '../../../widgets/text_fields.dart';
 import '../controllers/security_controller.dart';
 import 'register.dart';
 
@@ -15,10 +14,13 @@ class LoginView extends GetView<SecurityController> {
   const LoginView();
   @override
   Widget build(BuildContext context) {
+    Get.put(SecurityController());
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: LoginForm(),
+          child: LoginForm(
+            controller: controller,
+          ),
         ),
       ),
     );
@@ -26,7 +28,8 @@ class LoginView extends GetView<SecurityController> {
 }
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  final SecurityController controller;
+  const LoginForm({super.key, required this.controller});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -41,6 +44,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
         title: BigTextWidget(
@@ -116,7 +120,7 @@ class _LoginFormState extends State<LoginForm> {
                                     'email': _email.value.text,
                                     'password': _password.value.text
                                   };
-                                  // login(context, data);
+                                  widget.controller.login(data);
                                 }
                               },
                               child: Container(

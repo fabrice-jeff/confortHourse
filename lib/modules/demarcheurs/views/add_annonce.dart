@@ -1,23 +1,46 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/constants.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/views/demarcheurs/user_page.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/label_form.dart';
-import 'package:conforthourse/widgets/select_fields.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AddAnnoncePage extends StatefulWidget {
-  const AddAnnoncePage({super.key});
+import '../../../data/models/demarcheur.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/label_form.dart';
+import '../../../widgets/select_fields.dart';
+import '../../../widgets/simple_text.dart';
+import '../controllers/demarcheur_controller.dart';
+import 'user_page.dart';
 
+class AddAnnonceView extends GetView<DemarcheurController> {
+  const AddAnnonceView();
   @override
-  State<AddAnnoncePage> createState() => _AddAnnoncePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: (ConstantsValues.demarcheurControllerInit)
+              ? AddAnnonceForm(
+                  demarcheur: controller.demarcheur,
+                )
+              : AddAnnonceForm(),
+        ),
+      ),
+    );
+  }
 }
 
-class _AddAnnoncePageState extends State<AddAnnoncePage> {
+class AddAnnonceForm extends StatefulWidget {
+  final Demarcheur? demarcheur;
+  const AddAnnonceForm({super.key, this.demarcheur});
+
+  @override
+  State<AddAnnonceForm> createState() => _AddAnnonceFormState();
+}
+
+class _AddAnnonceFormState extends State<AddAnnonceForm> {
   final List<String> paysItems = [
     'Benin',
     'Mali',
@@ -66,20 +89,15 @@ class _AddAnnoncePageState extends State<AddAnnoncePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.backgroundColor,
-        backgroundColor: AppColors.backgroundColor,
-        title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               HeaderSectionWidget(text: "AJOUTER UNE ANNONCE"),
-              UserPage(page: ConstantsValues.ADD_ANNONCE),
+              UserPage(
+                page: ConstantsValues.ADD_ANNONCE,
+                demarcheur: widget.demarcheur,
+              ),
               SizedBox(
                 height: Dimensions.height10 * 2,
               ),

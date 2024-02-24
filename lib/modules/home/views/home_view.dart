@@ -1,16 +1,16 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/modules/home/views/categorie_widget.dart';
-import 'package:conforthourse/widgets/list_temoignage.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
-import 'package:conforthourse/widgets/title_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
 import '../../../views/location_by_categorie.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/list_temoignage.dart';
 import '../../../widgets/location_widget.dart';
+import '../../../widgets/simple_text.dart';
+import '../../../widgets/title_section.dart';
 import '../controllers/home_controller.dart';
+import 'categorie_widget.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView();

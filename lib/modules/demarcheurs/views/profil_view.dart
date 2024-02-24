@@ -1,17 +1,39 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/constants.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/views/demarcheurs/user_page.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class ProfilPage extends StatelessWidget {
-  const ProfilPage({super.key});
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/simple_text.dart';
+import '../controllers/demarcheur_controller.dart';
+import 'user_page.dart';
+
+class ProfilView extends GetView<DemarcheurController> {
+  const ProfilView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String nom = (ConstantsValues.demarcheurControllerInit)
+        ? controller.demarcheur!.nom + " " + controller.demarcheur!.prenoms
+        : "";
+    String email = (ConstantsValues.demarcheurControllerInit)
+        ? controller.demarcheur!.email
+        : "";
+    String telephone = (ConstantsValues.demarcheurControllerInit)
+        ? controller.demarcheur!.telephone
+        : "";
+    String whatsapp = (ConstantsValues.demarcheurControllerInit)
+        ? controller.demarcheur!.whatsapp
+        : "";
+    String description = (ConstantsValues.demarcheurControllerInit)
+        ? controller.demarcheur!.description
+        : "";
+    String createdAtAcccompte =
+        DateFormat("dd/MM/yyyy").format(controller.demarcheur!.createdAt);
+
     Widget _infoUser({required String libelle, required String value}) {
       return Container(
         margin: EdgeInsets.symmetric(vertical: Dimensions.height10),
@@ -120,16 +142,17 @@ class ProfilPage extends StatelessWidget {
                     ),
                     SizedBox(height: Dimensions.height10),
                     Divider(),
-                    _infoUser(libelle: "Nom complet:", value: "AGBO Fabrice"),
-                    _infoUser(libelle: "Email:", value: "agbjeff@gmail.com"),
-                    _infoUser(libelle: "Téléphone:", value: "+22997535808"),
-                    _infoUser(libelle: "Whatsapp:", value: "+22997535808"),
+                    _infoUser(libelle: "Nom complet:", value: nom),
+                    _infoUser(libelle: "Email:", value: email),
+                    _infoUser(libelle: "Téléphone:", value: telephone),
+                    _infoUser(libelle: "Whatsapp:", value: whatsapp),
                     _infoUser(libelle: "Total de location :", value: "0"),
                     _infoUser(libelle: "Location actif:", value: "0"),
                     _infoUser(libelle: "Location loués :", value: "0"),
-                    _infoUser(libelle: "Création du compte:", value: ""),
                     _infoUser(
-                        libelle: "Description:", value: "Agent immobilier"),
+                        libelle: "Création du compte:",
+                        value: createdAtAcccompte),
+                    _infoUser(libelle: "Description:", value: description),
                   ],
                 ),
               ),

@@ -1,3 +1,5 @@
+import '../../services/datetime_format.dart';
+
 class Location {
   final int id;
   final String code;
@@ -40,6 +42,6 @@ class Location {
         status: (json['status'] == 1) ? true : false,
         louer: (json['louer'] == 1) ? true : false,
         idCategorie: json['id_categorie'],
-        date_publication: json['save_date'],
+        date_publication: dateTimeFormat(json['save_date']),
       );
 }

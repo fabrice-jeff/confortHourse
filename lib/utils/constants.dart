@@ -13,4 +13,5 @@ class ConstantsValues {
   static String DECONNEXION = "deconnexion";
 
   static const forwardArrowIcon = 'vectors/forward_arrow.svg';
+  static bool demarcheurControllerInit = false;
 }

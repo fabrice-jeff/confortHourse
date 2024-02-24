@@ -1,19 +1,17 @@
-import 'package:conforthourse/modules/security/views/login.dart';
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/controllers/demarcheur_controller.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/data/models/demarcheur.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/bottom_navigation.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/select_fields.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
-import 'package:conforthourse/widgets/text_fields.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/demarcheur.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/select_fields.dart';
+import '../../../widgets/simple_text.dart';
+import '../../../widgets/text_fields.dart';
 import '../controllers/security_controller.dart';
+import 'login.dart';
 
 class RegisterView extends GetView<SecurityController> {
   @override
@@ -233,20 +231,20 @@ class _RegisterFormState extends State<RegisterForm> {
                             InkWell(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
-                                  // Création d'un objet de marcheur
-                                  var demarcheur = Demarcheur(
-                                    nom: _nom.value.text,
-                                    prenoms: _prenoms.value.text,
-                                    ville: _ville.value.text,
-                                    pays: _paysChoise,
-                                    sexe: _genre,
-                                    telephone: _numeroTelephone.value.text,
-                                    email: _email.value.text,
-                                    whatsapp: _numeroWhatsapp.value.text,
-                                    password: _psd.value.text,
-                                  );
-                                  //Faire l'enregistrement  du demarcheur dans la base de donnée
-                                  // register(context, demarcheur);
+                                  // // Création d'un objet de marcheur
+                                  // var demarcheur = Demarcheur(
+                                  //   nom: _nom.value.text,
+                                  //   prenoms: _prenoms.value.text,
+                                  //   ville: _ville.value.text,
+                                  //   pays: _paysChoise,
+                                  //   sexe: _genre,
+                                  //   telephone: _numeroTelephone.value.text,
+                                  //   email: _email.value.text,
+                                  //   whatsapp: _numeroWhatsapp.value.text,
+                                  //   password: _psd.value.text,
+                                  // );
+                                  // //Faire l'enregistrement  du demarcheur dans la base de donnée
+                                  // // register(context, demarcheur);
                                 }
                               },
                               child: Container(

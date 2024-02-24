@@ -1,12 +1,13 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/utils/constants.dart';
-import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/views/demarcheurs/user_page.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/simple_text.dart';
+import 'user_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({

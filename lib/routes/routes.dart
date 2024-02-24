@@ -8,4 +8,8 @@ class Routes {
   static const contact = "/contact";
   static const categories = "/categorie";
   static const login = "/login";
+  static const colocation = "/colocation";
+  static const faqs = '/faqs';
+  static const demarcheurDashboard = "/demarcheur_dashboard";
+  static const demarcheurAddAnnonce = "/demarcheur_add_annonce";
 }

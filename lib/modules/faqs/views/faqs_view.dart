@@ -1,17 +1,17 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/bottom_navigation.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/question_faqs.dart';
 import 'package:flutter/material.dart';
 
-class FaqsPage extends StatefulWidget {
-  const FaqsPage({super.key});
+import '../../../utils/colors.dart';
+import '../../../widgets/header_section.dart';
+import '../../../widgets/question_faqs.dart';
+
+class FaqsView extends StatefulWidget {
+  const FaqsView({super.key});
 
   @override
-  State<FaqsPage> createState() => _FaqsPageState();
+  State<FaqsView> createState() => _FaqsViewState();
 }
 
-class _FaqsPageState extends State<FaqsPage> {
+class _FaqsViewState extends State<FaqsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,6 @@ class _FaqsPageState extends State<FaqsPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavigationWidget(),
     );
   }
 }

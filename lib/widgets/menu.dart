@@ -9,8 +9,10 @@ import '../routes/routes.dart';
 import '../utils/constants.dart';
 
 List<Map<String, dynamic>> menuItemList = [
+  {"name": "Faq's", 'route': Routes.faqs},
   {"name": "A propos", 'route': Routes.aPropos},
   {'name': "Contact", "route": Routes.contact},
+  // {'name': 'Colocation', "route": Routes.colocation},
   {'name': 'Catégories', "route": Routes.categories},
   {'name': "Connexion", "route": Routes.login},
   {'name': "Inscription", "route": Routes.register},
@@ -57,7 +59,12 @@ class MenuWidget extends StatelessWidget {
               for (int i = 0; i < menuItemList.length; i++)
                 ListTile(
                   onTap: () {
-                    Get.offAllNamed(menuItemList[i]['route']);
+                    if (menuItemList[i]['route'] == Routes.login ||
+                        menuItemList[i]['route'] == Routes.register) {
+                      Get.offAllNamed(menuItemList[i]['route']);
+                    } else {
+                      Get.toNamed(menuItemList[i]['route']);
+                    }
                   },
                   title: Container(
                     margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
