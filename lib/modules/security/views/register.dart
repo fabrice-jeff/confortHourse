@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';

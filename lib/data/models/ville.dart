@@ -1,6 +1,4 @@
-import 'package:conforthourse/data/models/user.dart';
-import 'package:conforthourse/services/datetime_format.dart';
-
+import '../../services/datetime_format.dart';
 import 'pays.dart';
 
 class Ville {

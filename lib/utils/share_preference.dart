@@ -17,7 +17,6 @@ class SharePreferences {
     Demarcheur? acteur;
     if (acteurJson != null) {
       acteur = Demarcheur.fromJson(jsonDecode(acteurJson));
-      print(acteur);
     }
     return acteur;
   }

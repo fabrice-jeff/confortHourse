@@ -6,8 +6,7 @@ import '../modules/base/views/base_view.dart';
 import '../modules/categories/bindings/categorie_binding.dart';
 import '../modules/categories/views/categorie_view.dart';
 import '../modules/contacts/views/contact.dart';
-import '../modules/demarcheurs/bindings/demarcheur_binding.dart';
-import '../modules/demarcheurs/views/add_annonce.dart';
+
 import '../modules/faqs/views/faqs_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -25,12 +24,7 @@ class AppPage {
       page: () => const BaseView(),
       binding: BaseBinding(),
     ),
-    // ADD ANNONCE
-    GetPage(
-      name: Routes.demarcheurAddAnnonce,
-      page: () => const AddAnnonceView(),
-      binding: DemarcheurBinding(),
-    ),
+
     // HOME
     GetPage(
       name: Routes.home,
@@ -43,12 +37,7 @@ class AppPage {
       page: () => const LoginView(),
       binding: SecurityBinding(),
     ),
-    // REGISTER
-    GetPage(
-      name: Routes.login,
-      page: () => const LoginView(),
-      binding: SecurityBinding(),
-    ),
+
     // A propos
     GetPage(
       name: Routes.aPropos,

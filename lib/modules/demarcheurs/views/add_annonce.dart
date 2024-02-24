@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/demarcheur.dart';
+import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
-import '../../../utils/constants.dart';
+
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
@@ -12,20 +13,18 @@ import '../../../widgets/label_form.dart';
 import '../../../widgets/select_fields.dart';
 import '../../../widgets/simple_text.dart';
 import '../controllers/demarcheur_controller.dart';
-import 'user_page.dart';
 
 class AddAnnonceView extends GetView<DemarcheurController> {
   const AddAnnonceView();
   @override
   Widget build(BuildContext context) {
+    Get.put(DemarcheurController);
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: (ConstantsValues.demarcheurControllerInit)
-              ? AddAnnonceForm(
-                  demarcheur: controller.demarcheur,
-                )
-              : AddAnnonceForm(),
+          child: AddAnnonceForm(
+            demarcheur: controller.demarcheur,
+          ),
         ),
       ),
     );
@@ -97,10 +96,10 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
           child: Column(
             children: [
               HeaderSectionWidget(text: "AJOUTER UNE ANNONCE"),
-              UserPage(
-                page: ConstantsValues.ADD_ANNONCE,
-                demarcheur: widget.demarcheur,
-              ),
+              // UserPage(
+              //   page: ConstantsValues.ADD_ANNONCE,
+              //   demarcheur: widget.demarcheur,
+              // ),
               SizedBox(
                 height: Dimensions.height10 * 2,
               ),
@@ -383,4 +382,10 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
       ),
     );
   }
+}
+
+redirectToLogin() {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    Get.toNamed(Routes.login);
+  });
 }

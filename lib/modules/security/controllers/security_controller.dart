@@ -16,7 +16,6 @@ class SecurityController extends GetxController {
   List<String> paysArray = [];
   List<Ville> villeObjet = [];
   List<String> villeArray = [];
-
   final DemarcheurRepository demarcheurRepository =
       DemarcheurRepository(api: Api.baseUrl);
 
@@ -71,13 +70,12 @@ class SecurityController extends GetxController {
       result['datas']['ville']['pays'] = result['datas']['pays'];
       result['datas']['demarcheur']['ville'] = result['datas']['ville'];
       result['datas']['demarcheur']['user'] = result['datas']['user'];
-      print(result['datas']['demarcheur']['ville']);
       SharePreferences.prefs
           .setString('acteur', jsonEncode(result['datas']['demarcheur']));
       ConstantsValues.demarcheurControllerInit = true;
 
-      Get.offAndToNamed(
-        Routes.demarcheurAddAnnonce,
+      Get.toNamed(
+        Routes.base,
       );
     } else {
       Get.offAll(() => LoginView());
