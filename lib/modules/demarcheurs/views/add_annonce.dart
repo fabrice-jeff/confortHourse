@@ -47,6 +47,9 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
     'Nigeria',
     'Niger',
   ];
+  void handleSelectValue(String? selectedValue) {
+    print(selectedValue);
+  }
 
   Path customPath = Path()
     ..moveTo(20, 20)
@@ -175,6 +178,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                       icon: CupertinoIcons.globe,
                       label: "Pays",
                       items: paysItems,
+                      onValueChanged: handleSelectValue,
                     ),
                     SizedBox(
                       height: 30,
@@ -186,6 +190,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                       icon: CupertinoIcons.globe,
                       label: "Pays",
                       items: paysItems,
+                      onValueChanged: handleSelectValue,
                     ),
                     SizedBox(
                       height: 30,
@@ -256,6 +261,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                       icon: CupertinoIcons.globe,
                       label: "Pays",
                       items: paysItems,
+                      onValueChanged: handleSelectValue,
                     ),
                     SizedBox(
                       height: 30,

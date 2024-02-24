@@ -6,6 +6,45 @@ import '../api/api.dart';
 class DemarcheurRepository {
   final String api;
   DemarcheurRepository({required this.api});
+  // Get pays
+  Future<Map<String, dynamic>?> getPays() async {
+    final endpoint = Api.pays;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.get(
+      url,
+      headers: {},
+    );
+    Map<String, dynamic>? result;
+    try {
+      result = jsonDecode(response.body);
+      return result;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
+
+  // Get Ville By pays
+  Future<Map<String, dynamic>?> getVilleByPays(
+      Map<String, dynamic> data) async {
+    final endpoint = Api.villeByPays;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {},
+    );
+    Map<String, dynamic>? result;
+    print(response.body);
+
+    try {
+      result = jsonDecode(response.body);
+      return result;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
 
   //Login
   Future<Map<String, dynamic>?> login(data) async {
@@ -19,6 +58,26 @@ class DemarcheurRepository {
     Map<String, dynamic> results;
     try {
       results = jsonDecode(response.body);
+      return results;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
+
+  //Register
+  Future<Map<String, dynamic>?> register(data) async {
+    final endpoint = Api.register;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {},
+    );
+    Map<String, dynamic>? results;
+    try {
+      results = jsonDecode(response.body);
+      print(results);
       return results;
     } catch (e) {
       print('erreur');

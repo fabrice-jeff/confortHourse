@@ -16,10 +16,14 @@ import 'login.dart';
 class RegisterView extends GetView<SecurityController> {
   @override
   Widget build(BuildContext context) {
+    Get.put(SecurityController());
+
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: RegisterForm(),
+          child: RegisterForm(
+            controller: controller,
+          ),
         ),
       ),
     );
@@ -27,40 +31,51 @@ class RegisterView extends GetView<SecurityController> {
 }
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+  final SecurityController controller;
+  const RegisterForm({super.key, required this.controller});
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final List<String> paysItems = [
-    'Benin',
-    'Mali',
-    'Nigeria',
-    'Niger',
-  ];
   final List<String> gendersItems = ['Homme', 'Femme', 'Autre'];
   final _key = GlobalKey<FormState>();
   TextEditingController _nom = TextEditingController();
   TextEditingController _prenoms = TextEditingController();
-  String _paysChoise = "Benin";
-  TextEditingController _ville = TextEditingController();
-  String _genre = "Homme";
+  String? _paysChoise;
+  String? _villeChoise;
+  String? _genre;
   TextEditingController _numeroTelephone = TextEditingController();
   TextEditingController _numeroWhatsapp = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _psd = TextEditingController();
   TextEditingController _confirmPsd = TextEditingController();
-  late bool obscureTextPassword;
-  late bool obscureTextConfirmPassword;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    obscureTextPassword = true;
-    obscureTextConfirmPassword = true;
+  void handleSelectValuePays(String? selectedValue) {
+    late String codePays;
+    for (var pays in widget.controller.paysObjets) {
+      if (selectedValue == pays.libelle) {
+        codePays = pays.code;
+        break;
+      }
+    }
+    //Selectionner les villes en function du pays récuperé
+    widget.controller.getVilleByPays({
+      'code_pays': codePays,
+    });
+    _paysChoise = selectedValue;
+    print(_paysChoise);
+  }
+
+  void handleSelectValueVille(String? selectedValue) {
+    _villeChoise = selectedValue;
+    print(_villeChoise);
+  }
+
+  void handleSelectValueSexe(String? selectedValue) {
+    _genre = selectedValue;
+    print(_genre);
   }
 
   @override
@@ -142,18 +157,19 @@ class _RegisterFormState extends State<RegisterForm> {
                               hintText: "Votre pays",
                               icon: CupertinoIcons.globe,
                               label: "Pays",
-                              items: paysItems,
+                              items: widget.controller.paysArray,
+                              onValueChanged: handleSelectValuePays,
                             ),
                             SizedBox(
                               height: Dimensions.height10 * 2,
                             ),
                             //Ville
-                            TextFieldsWidget(
+                            SelectFieldsWidget(
                               hintText: "Votre ville",
-                              textInputType: TextInputType.name,
-                              icon: Icons.location_city_outlined,
+                              icon: CupertinoIcons.globe,
                               label: "Ville",
-                              controller: _ville,
+                              items: widget.controller.villeArray,
+                              onValueChanged: handleSelectValueVille,
                             ),
                             SizedBox(
                               height: Dimensions.height10 * 2,
@@ -164,6 +180,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               icon: Icons.nature_outlined,
                               label: "Sexe",
                               items: gendersItems,
+                              onValueChanged: handleSelectValueSexe,
                             ),
                             SizedBox(
                               height: Dimensions.height10 * 2,
@@ -231,20 +248,19 @@ class _RegisterFormState extends State<RegisterForm> {
                             InkWell(
                               onTap: () {
                                 if (_key.currentState!.validate()) {
-                                  // // Création d'un objet de marcheur
-                                  // var demarcheur = Demarcheur(
-                                  //   nom: _nom.value.text,
-                                  //   prenoms: _prenoms.value.text,
-                                  //   ville: _ville.value.text,
-                                  //   pays: _paysChoise,
-                                  //   sexe: _genre,
-                                  //   telephone: _numeroTelephone.value.text,
-                                  //   email: _email.value.text,
-                                  //   whatsapp: _numeroWhatsapp.value.text,
-                                  //   password: _psd.value.text,
-                                  // );
-                                  // //Faire l'enregistrement  du demarcheur dans la base de donnée
-                                  // // register(context, demarcheur);
+                                  Map<String, dynamic> data = {
+                                    'nom': _nom.text,
+                                    'prenoms': _prenoms.text,
+                                    'email': _email.text,
+                                    'telephone': _numeroTelephone.text,
+                                    'sexe': _genre,
+                                    'description': 'une descriprion',
+                                    'whatsapp': _numeroWhatsapp.text,
+                                    'ville': _villeChoise,
+                                    'password': _psd.text
+                                  };
+                                  print(data);
+                                  widget.controller.register(data);
                                 }
                               },
                               child: Container(

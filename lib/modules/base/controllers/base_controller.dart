@@ -2,7 +2,6 @@ import 'package:conforthourse/modules/demarcheurs/controllers/demarcheur_control
 import 'package:get/get.dart';
 
 import '../../../data/models/demarcheur.dart';
-import '../../../utils/constants.dart';
 import '../../../utils/share_preference.dart';
 
 class BaseController extends GetxController {

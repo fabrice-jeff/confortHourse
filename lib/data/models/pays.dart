@@ -1,5 +1,4 @@
 import '../../services/datetime_format.dart';
-import 'user.dart';
 
 class Pays {
   final int id;

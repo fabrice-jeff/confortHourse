@@ -11,12 +11,14 @@ class SelectFieldsWidget extends StatelessWidget {
   final IconData icon;
   final String label;
   final List<String> items;
+  final void Function(String?) onValueChanged;
   const SelectFieldsWidget({
     super.key,
     required this.hintText,
     required this.icon,
     required this.label,
     required this.items,
+    required this.onValueChanged,
   });
 
   @override
@@ -33,7 +35,7 @@ class SelectFieldsWidget extends StatelessWidget {
             isExpanded: true,
             decoration: InputDecoration(
               contentPadding:
-                  EdgeInsets.symmetric(vertical: Dimensions.height10 * 1.5),
+                  EdgeInsets.symmetric(vertical: Dimensions.height10),
               enabledBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(color: AppColors.textColor.withOpacity(0.4)),
@@ -64,7 +66,9 @@ class SelectFieldsWidget extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (value) {},
+            onChanged: (value) {
+              onValueChanged(value);
+            },
             onSaved: (value) {
               selectedValue = value.toString();
             },
