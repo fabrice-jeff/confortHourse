@@ -1,27 +1,24 @@
 import '../../services/datetime_format.dart';
 
-class Categorie {
+class TypeType {
   final int id;
   final String code;
   final String libelle;
-  final String? icon;
   final bool deleted;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  Categorie({
+  TypeType({
     required this.id,
     required this.code,
     required this.libelle,
-    this.icon,
     required this.deleted,
     required this.createdAt,
     required this.updatedAt,
   });
-  factory Categorie.fromJson(Map<String, dynamic> json) => Categorie(
+  factory TypeType.fromJson(Map<String, dynamic> json) => TypeType(
       id: json['id'],
       code: json['code'],
-      icon: json['icon'],
       libelle: json['libelle'],
       deleted: (json['deleted'] == 0) ? false : true,
       createdAt: dateTimeFormat(json['created_at']),

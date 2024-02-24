@@ -8,14 +8,14 @@ String? selectedValue;
 
 class SelectFieldsWidget extends StatelessWidget {
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final String label;
   final List<String> items;
   final void Function(String?) onValueChanged;
   const SelectFieldsWidget({
     super.key,
     required this.hintText,
-    required this.icon,
+    this.icon,
     required this.label,
     required this.items,
     required this.onValueChanged,
@@ -43,7 +43,7 @@ class SelectFieldsWidget extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.secondColor),
                   borderRadius: BorderRadius.circular(Dimensions.radius10)),
-              prefixIcon: Icon(icon),
+              prefixIcon: (icon == null) ? null : Icon(icon),
             ),
             hint: Text(
               hintText,

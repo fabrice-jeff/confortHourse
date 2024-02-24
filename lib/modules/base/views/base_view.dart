@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../widgets/big_text.dart';
 import '../../../widgets/menu.dart';
-import '../../demarcheurs/views/add_annonce.dart';
+import '../../demarcheurs/views/demarcheur_view.dart';
 import '../../home/views/home_view.dart';
 import '../controllers/base_controller.dart';
 
@@ -35,7 +35,7 @@ class BaseView extends GetView<BaseController> {
             index: controller.currentIndex,
             children: [
               HomeView(),
-              AddAnnonceView(
+              DemarcheurView(
                 page: controller.page,
               ),
             ],

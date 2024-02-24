@@ -32,37 +32,37 @@ class HomeView extends GetView<HomeController> {
               SizedBox(
                 height: Dimensions.height10,
               ),
-              Container(
-                width: double.infinity,
-                child: GridView.builder(
-                  primary: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: Dimensions.height10,
-                    mainAxisSpacing: Dimensions.width10,
-                    mainAxisExtent: 215,
-                  ),
-                  itemCount: controller.categories.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.to(LocationByCategoriePage(
-                          categorie: "Chambres familiale",
-                          locations: controller.locations,
-                        ));
-                      },
-                      child: CategorieWidget(
-                        categorie: controller.categories[index],
-                      ),
-                    );
-                  },
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.width10,
-                      vertical: Dimensions.height10),
-                ),
-              ),
+              // Container(
+              //   width: double.infinity,
+              //   child: GridView.builder(
+              //     primary: false,
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2,
+              //       crossAxisSpacing: Dimensions.height10,
+              //       mainAxisSpacing: Dimensions.width10,
+              //       mainAxisExtent: 215,
+              //     ),
+              //     itemCount: controller.categories.length,
+              //     itemBuilder: (context, index) {
+              //       return InkWell(
+              //         onTap: () {
+              //           Get.to(LocationByCategoriePage(
+              //             categorie: "Chambres familiale",
+              //             locations: controller.locations,
+              //           ));
+              //         },
+              //         child: CategorieWidget(
+              //           categorie: controller.categories[index],
+              //         ),
+              //       );
+              //     },
+              //     padding: EdgeInsets.symmetric(
+              //         horizontal: Dimensions.width10,
+              //         vertical: Dimensions.height10),
+              //   ),
+              // ),
               SizedBox(
                 height: Dimensions.height10,
               ),
@@ -73,18 +73,18 @@ class HomeView extends GetView<HomeController> {
               SizedBox(
                 height: Dimensions.height10,
               ),
-              Container(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: controller.locations.length,
-                  itemBuilder: (BuildContext context, i) {
-                    return LocationWidget(
-                      location: controller.locations[i],
-                    );
-                  },
-                ),
-              ),
+              // Container(
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemCount: controller.locations.length,
+              //     itemBuilder: (BuildContext context, i) {
+              //       return LocationWidget(
+              //         location: controller.locations[i],
+              //       );
+              //     },
+              //   ),
+              // ),
               SizedBox(
                 height: Dimensions.height10,
               ),

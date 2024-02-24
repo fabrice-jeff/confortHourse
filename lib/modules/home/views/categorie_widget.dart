@@ -7,7 +7,7 @@ import '../../../widgets/big_text.dart';
 
 class CategorieWidget extends StatelessWidget {
   final Categorie categorie;
-  CategorieWidget({
+  const CategorieWidget({
     super.key,
     required this.categorie,
   });
@@ -31,7 +31,7 @@ class CategorieWidget extends StatelessWidget {
             height: Dimensions.height10,
           ),
           BigTextWidget(
-            text: categorie.titre,
+            text: "Bonjour",
             sizeText: Dimensions.fontsize16,
             textAlign: TextAlign.center,
           ),
@@ -49,7 +49,7 @@ class CategorieWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius10),
                 ),
                 child: BigTextWidget(
-                  text: categorie.nombreLocation.toString(),
+                  text: "23",
                   sizeText: Dimensions.fontsize15,
                 ),
               ),

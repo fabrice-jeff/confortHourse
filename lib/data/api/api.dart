@@ -5,4 +5,8 @@ class Api {
   static const register = "/demarcheurs/register";
   static const pays = "/pays/all";
   static const villeByPays = "/villes/all_by_pays";
+  static const typeAnnonce = "/type_type/type_annonce";
+  static const categories = "/categories/all";
+  static const villes = "/villes/all";
+  static const addAnnonce = "/annonces/add";
 }

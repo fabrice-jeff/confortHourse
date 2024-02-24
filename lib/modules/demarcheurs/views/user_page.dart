@@ -76,7 +76,7 @@ class UserPage extends GetView<BaseController> {
           ),
           InkWell(
             onTap: () {
-              // L'interface DASHBOARD
+              //DASHBOARD
               controller.changePage(ConstantsValues.DASHBOARD);
             },
             child: Container(
@@ -256,7 +256,8 @@ class UserPage extends GetView<BaseController> {
           ),
           InkWell(
             onTap: () {
-              // L'interface DECONNEXION
+              // Deconnexion de l'utilisateur connecté
+              controller.logout();
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),

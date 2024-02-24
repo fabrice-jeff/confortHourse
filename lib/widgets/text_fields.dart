@@ -8,7 +8,7 @@ class TextFieldsWidget extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType textInputType;
   final bool obscureText;
-  final IconData icon;
+  final IconData? icon;
   final String label;
   final bool suffixIcon;
   const TextFieldsWidget({
@@ -16,7 +16,7 @@ class TextFieldsWidget extends StatelessWidget {
     required this.hintText,
     required this.textInputType,
     this.obscureText = false,
-    required this.icon,
+    this.icon = null,
     required this.label,
     required this.controller,
     this.suffixIcon = false,
@@ -38,9 +38,12 @@ class TextFieldsWidget extends StatelessWidget {
             obscureText: obscureText,
             keyboardType: textInputType,
             decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: Dimensions.height10 * 1.5),
-              prefixIcon: Icon(icon),
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: Dimensions.height10 * 1.5,
+                  horizontal: (icon == null)
+                      ? Dimensions.height10
+                      : Dimensions.height10 / 10),
+              prefixIcon: (icon == null) ? null : Icon(icon),
               suffixIcon: (suffixIcon)
                   ? const Icon(Icons.arrow_drop_down_outlined)
                   : null,

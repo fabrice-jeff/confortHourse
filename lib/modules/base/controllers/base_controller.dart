@@ -32,4 +32,12 @@ class BaseController extends GetxController {
     page = value;
     update();
   }
+
+  logout() {
+    demarcheur = null;
+    SharePreferences.prefs.remove('acteur');
+    SharePreferences.prefs.clear();
+    currentIndex = 0;
+    update();
+  }
 }

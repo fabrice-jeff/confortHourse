@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import '../modules/apropos/views/a_propos.dart';
 import '../modules/base/bindings/base_binding.dart';
 import '../modules/base/views/base_view.dart';
-import '../modules/categories/bindings/categorie_binding.dart';
-import '../modules/categories/views/categorie_view.dart';
 import '../modules/contacts/views/contact.dart';
-
 import '../modules/faqs/views/faqs_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -48,13 +45,6 @@ class AppPage {
     GetPage(
       name: Routes.contact,
       page: () => const ContactView(),
-    ),
-
-    // CATEGORIES
-    GetPage(
-      name: Routes.categories,
-      page: () => const CategorieView(),
-      binding: CategorieBinding(),
     ),
 
     // FAQ'S
