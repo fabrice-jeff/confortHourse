@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/demarcheur.dart';
-import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/simple_text.dart';
-import 'annonces.dart';
-import 'dashboard.dart';
-import 'parametre_profil.dart';
-import 'profil_view.dart';
+import '../../base/controllers/base_controller.dart';
 
-class UserPage extends StatelessWidget {
-  final Demarcheur? demarcheur;
+class UserPage extends GetView<BaseController> {
   final String page;
-  const UserPage({super.key, required this.page, this.demarcheur});
+  const UserPage({
+    super.key,
+    required this.page,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +50,11 @@ class UserPage extends StatelessWidget {
             height: Dimensions.height10 * 2,
           ),
           BigTextWidget(
-            text: (demarcheur == null)
+            text: (controller.demarcheur == null)
                 ? ""
-                : demarcheur!.nom + " " + demarcheur!.prenoms,
+                : controller.demarcheur!.nom +
+                    " " +
+                    controller.demarcheur!.prenoms,
             sizeText: Dimensions.fontsize30,
             fontWeight: FontWeight.w700,
             height: 0,
@@ -64,7 +63,9 @@ class UserPage extends StatelessWidget {
             height: 5,
           ),
           SimpleTextWidget(
-            text: (demarcheur == null) ? "" : demarcheur!.email,
+            text: (controller.demarcheur == null)
+                ? ""
+                : controller.demarcheur!.email,
           ),
           SizedBox(
             height: Dimensions.height10 * 2,
@@ -76,9 +77,7 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface DASHBOARD
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DashboardPage();
-              }));
+              controller.changePage(ConstantsValues.DASHBOARD);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -113,10 +112,8 @@ class UserPage extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              // L'interface PROFIL
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfilView();
-              }));
+              // Changer la page dans le base Controller
+              controller.changePage(ConstantsValues.PROFIL_USER);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -152,9 +149,7 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface MES ANNONCES
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const AnnoncesPage();
-              }));
+              controller.changePage(ConstantsValues.ANNONCES);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -190,7 +185,7 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface AJOUTER UNE ANNONCE
-              Get.toNamed(Routes.demarcheurAddAnnonce);
+              controller.changePage(ConstantsValues.ADD_ANNONCE);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -226,9 +221,7 @@ class UserPage extends StatelessWidget {
           InkWell(
             onTap: () {
               // L'interface PARAMATRE DE PROFIL
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const ParametreProfilPage();
-              }));
+              controller.changePage(ConstantsValues.PARAMETRES);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),

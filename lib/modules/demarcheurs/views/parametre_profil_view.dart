@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../widgets/big_text.dart';
@@ -8,25 +9,18 @@ import '../../../widgets/header_section.dart';
 import '../../../widgets/label_form.dart';
 import 'user_page.dart';
 
-class ParametreProfilPage extends StatefulWidget {
-  const ParametreProfilPage({super.key});
+class ParametreProfilView extends StatefulWidget {
+  final Demarcheur? demarcheur;
+  const ParametreProfilView({super.key, this.demarcheur});
 
   @override
-  State<ParametreProfilPage> createState() => _ParametreProfilPageState();
+  State<ParametreProfilView> createState() => _ParametreProfilViewState();
 }
 
-class _ParametreProfilPageState extends State<ParametreProfilPage> {
+class _ParametreProfilViewState extends State<ParametreProfilView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.backgroundColor,
-        backgroundColor: AppColors.backgroundColor,
-        title: const BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

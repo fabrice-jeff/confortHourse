@@ -1,3 +1,4 @@
+import 'package:conforthourse/utils/constants.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/demarcheur.dart';
@@ -6,11 +7,13 @@ import '../../../utils/share_preference.dart';
 
 class BaseController extends GetxController {
   int currentIndex = 0;
+  Demarcheur? demarcheur;
+  String page = ConstantsValues.ADD_ANNONCE;
 
   /// change the selected screen index
   changeScreen(int selectedIndex) {
     if (selectedIndex == 1) {
-      Demarcheur? demarcheur = SharePreferences.getActeur();
+      demarcheur = SharePreferences.getActeur();
       // Verifier si l'utilisateur est connecté
       print(demarcheur);
       if (demarcheur != null) {
@@ -22,6 +25,11 @@ class BaseController extends GetxController {
     } else {
       currentIndex = selectedIndex;
     }
+    update();
+  }
+
+  changePage(String value) {
+    page = value;
     update();
   }
 }

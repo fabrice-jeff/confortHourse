@@ -41,6 +41,5 @@ class ButtonAddAnnonceWidget extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

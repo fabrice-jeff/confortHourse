@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
-import '../controllers/demarcheur_controller.dart';
 import 'user_page.dart';
 
-class ProfilView extends GetView<DemarcheurController> {
-  const ProfilView({super.key});
+class ProfilView extends StatelessWidget {
+  final Demarcheur? demarcheur;
+  const ProfilView({super.key, this.demarcheur});
 
   @override
   Widget build(BuildContext context) {
-    String nom = (ConstantsValues.demarcheurControllerInit)
-        ? controller.demarcheur!.nom + " " + controller.demarcheur!.prenoms
-        : "";
-    String email = (ConstantsValues.demarcheurControllerInit)
-        ? controller.demarcheur!.email
-        : "";
-    String telephone = (ConstantsValues.demarcheurControllerInit)
-        ? controller.demarcheur!.telephone
-        : "";
-    String whatsapp = (ConstantsValues.demarcheurControllerInit)
-        ? controller.demarcheur!.whatsapp
-        : "";
-    String description = (ConstantsValues.demarcheurControllerInit)
-        ? controller.demarcheur!.description
-        : "";
-    String createdAtAcccompte =
-        DateFormat("dd/MM/yyyy").format(controller.demarcheur!.createdAt);
+    String nom =
+        (demarcheur != null) ? demarcheur!.nom + " " + demarcheur!.prenoms : "";
+    String email = (demarcheur != null) ? demarcheur!.email : "";
+    String telephone = (demarcheur != null) ? demarcheur!.telephone : "";
+    String whatsapp = (demarcheur != null) ? demarcheur!.whatsapp : "";
+    String description = (demarcheur != null) ? demarcheur!.description : "";
+    String createdAtAcccompte = (demarcheur != null)
+        ? ""
+        : DateFormat("dd/MM/yyyy").format(demarcheur!.createdAt);
 
     Widget _infoUser({required String libelle, required String value}) {
       return Container(
@@ -67,14 +59,6 @@ class ProfilView extends GetView<DemarcheurController> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.backgroundColor,
-        backgroundColor: AppColors.backgroundColor,
-        title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

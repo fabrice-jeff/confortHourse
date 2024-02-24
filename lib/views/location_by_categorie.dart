@@ -3,7 +3,6 @@ import 'package:conforthourse/data/models/location.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
 import 'package:conforthourse/widgets/location_widget.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:flutter_pagination/widgets/button_styles.dart';

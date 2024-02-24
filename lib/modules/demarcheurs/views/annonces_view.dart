@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/colors.dart';
+import '../../../data/models/demarcheur.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
@@ -8,8 +8,9 @@ import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
 import 'user_page.dart';
 
-class AnnoncesPage extends StatelessWidget {
-  const AnnoncesPage({super.key});
+class AnnoncesView extends StatelessWidget {
+  final Demarcheur? demarcheur;
+  const AnnoncesView({super.key, this.demarcheur});
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +48,6 @@ class AnnoncesPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.backgroundColor,
-        backgroundColor: AppColors.backgroundColor,
-        title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

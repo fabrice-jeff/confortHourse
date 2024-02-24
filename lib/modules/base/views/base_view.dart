@@ -35,7 +35,9 @@ class BaseView extends GetView<BaseController> {
             index: controller.currentIndex,
             children: [
               HomeView(),
-              AddAnnonceView(),
+              AddAnnonceView(
+                page: controller.page,
+              ),
             ],
           ),
         ),

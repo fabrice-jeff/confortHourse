@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/colors.dart';
+import '../../../data/models/demarcheur.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
@@ -9,22 +9,16 @@ import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
 import 'user_page.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({
+class DashboardView extends StatelessWidget {
+  final Demarcheur? demarcheur;
+  const DashboardView({
     super.key,
+    this.demarcheur,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: AppColors.backgroundColor,
-        backgroundColor: AppColors.backgroundColor,
-        title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
-        ),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

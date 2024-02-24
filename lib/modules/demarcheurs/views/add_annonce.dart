@@ -5,29 +5,59 @@ import 'package:get/get.dart';
 import '../../../data/models/demarcheur.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
-
+import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/label_form.dart';
 import '../../../widgets/select_fields.dart';
 import '../../../widgets/simple_text.dart';
+import '../../base/controllers/base_controller.dart';
 import '../controllers/demarcheur_controller.dart';
+import 'annonces_view.dart';
+import 'dashboard.dart';
+import 'parametre_profil_view.dart';
+import 'profil_view.dart';
+import 'user_page.dart';
 
-class AddAnnonceView extends GetView<DemarcheurController> {
-  const AddAnnonceView();
+class AddAnnonceView extends GetView<BaseController> {
+  final String? page;
+  const AddAnnonceView({
+    super.key,
+    this.page,
+  });
   @override
   Widget build(BuildContext context) {
     Get.put(DemarcheurController);
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: AddAnnonceForm(
-            demarcheur: controller.demarcheur,
-          ),
-        ),
+        child: Container(child: _buildWidget(controller.demarcheur)),
       ),
     );
+  }
+
+  Widget _buildWidget(Demarcheur? demarcheur) {
+    print(demarcheur);
+
+    if (page == ConstantsValues.DASHBOARD) {
+      return DashboardView(
+        demarcheur: demarcheur,
+      );
+    } else if (page == ConstantsValues.PROFIL_USER) {
+      return ProfilView(
+        demarcheur: demarcheur,
+      );
+    } else if (page == ConstantsValues.ANNONCES) {
+      return AnnoncesView(
+        demarcheur: demarcheur,
+      );
+    } else if (page == ConstantsValues.PARAMETRES) {
+      return ParametreProfilView(
+        demarcheur: demarcheur,
+      );
+    } else {
+      return AddAnnonceForm(demarcheur: demarcheur);
+    }
   }
 }
 
@@ -96,10 +126,9 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
           child: Column(
             children: [
               HeaderSectionWidget(text: "AJOUTER UNE ANNONCE"),
-              // UserPage(
-              //   page: ConstantsValues.ADD_ANNONCE,
-              //   demarcheur: widget.demarcheur,
-              // ),
+              UserPage(
+                page: ConstantsValues.ADD_ANNONCE,
+              ),
               SizedBox(
                 height: Dimensions.height10 * 2,
               ),

@@ -73,7 +73,6 @@ class SecurityController extends GetxController {
       SharePreferences.prefs
           .setString('acteur', jsonEncode(result['datas']['demarcheur']));
       ConstantsValues.demarcheurControllerInit = true;
-
       Get.toNamed(
         Routes.base,
       );
