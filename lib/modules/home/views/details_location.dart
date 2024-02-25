@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../data/models/annonce.dart';
-import '../utils/colors.dart';
-import '../widgets/big_text.dart';
-import '../widgets/header_section.dart';
-import '../widgets/location_widget.dart';
-import '../widgets/simple_text.dart';
-import '../widgets/title_section.dart';
+import '../../../data/api/api.dart';
+import '../../../utils/colors.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+
+import '../../../widgets/simple_text.dart';
+import '../../../widgets/title_section.dart';
+import 'location_by_categorie.dart';
+import 'location_widget.dart';
 
 class DetailsLocation extends StatelessWidget {
-  final Annonce location;
-  final Future<List<Annonce>> locations;
+  final Map<String, dynamic> location;
+  final List<Map<String, dynamic>> otherAnnonces;
+  final List<Map<String, dynamic>> annonces;
+
   const DetailsLocation(
-      {super.key, required this.location, required this.locations});
+      {super.key,
+      required this.location,
+      required this.otherAnnonces,
+      required this.annonces});
   Widget _options(IconData icon) {
     return Container(
       alignment: Alignment.center,
@@ -47,27 +55,26 @@ class DetailsLocation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               HeaderSectionWidget(text: 'DÉTAIL DE LA LOCATION'),
-              // Container(
-              //   margin: const EdgeInsets.symmetric(horizontal: 10),
-              //   width: double.infinity,
-              //   height: 200,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(10),
-              //     image: DecorationImage(
-              //       image: AssetImage(
-              //         "images/${location.photo}",
-              //       ),
-              //       fit: BoxFit.cover,
-              //     ),
-              //   ),
-              // ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        Api.baseUrl + "/" + location['fichiers'][0].path),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
-                child: BigTextWidget(text: location.ville.libelle),
+                child: BigTextWidget(text: location['annonce'].ville.libelle),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -80,7 +87,7 @@ class DetailsLocation extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.secondColor),
                   child: SimpleTextWidget(
-                    text: location.typeAnnonce.libelle,
+                    text: location['annonce'].typeAnnonce.libelle,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -93,7 +100,7 @@ class DetailsLocation extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
                 child: SimpleTextWidget(
-                  text: "${location.prix} FCFA",
+                  text: "${location['annonce'].prix} FCFA",
                   fontWeight: FontWeight.bold,
                   sizeText: 25,
                   textColor: AppColors.secondColor,
@@ -145,7 +152,8 @@ class DetailsLocation extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.topLeft,
-                      child: SimpleTextWidget(text: location.description),
+                      child: SimpleTextWidget(
+                          text: location['annonce'].description),
                     ),
                   ],
                 ),
@@ -327,40 +335,23 @@ class DetailsLocation extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              // FutureBuilder(
-              //   future: locations,
-              //   builder: (context, snapshot) {
-              //     if (!snapshot.hasData) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     }
-              //     return Container(
-              //       child: ListView.builder(
-              //         shrinkWrap: true,
-              //         physics: NeverScrollableScrollPhysics(),
-              //         itemCount: snapshot.data!.length,
-              //         itemBuilder: (BuildContext, position) {
-              //           var loc = snapshot.data![position];
-              //           return LocationWidget(
-              //             location: loc,
-              //           );
-              //         },
-              //       ),
-              //     );
-              //   },
-              // ),
+              Container(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: otherAnnonces.length,
+                  itemBuilder: (BuildContext context, int position) {
+                    var location = otherAnnonces[position];
+                    return LocationWidget(location: location);
+                  },
+                ),
+              ),
               InkWell(
                 onTap: () {
-                  // var _locations =
-                  //     LocationController.allByCategorie(location.idCategorie);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) {
-                  //     return LocationByCategoriePage(
-                  //         categorie: location.categorie, locations: _locations);
-                  //   }),
-                  // );
+                  Get.to(LocationByCategoriePage(
+                    categorie: location['annonce'].categorie.libelle,
+                    locations: annonces,
+                  ));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -370,7 +361,9 @@ class DetailsLocation extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 60),
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: BigTextWidget(
-                    text: "Voir PLus De Chambres Familiales",
+                    text: ("Voir plus de " +
+                            location['annonce'].categorie.libelle)
+                        .toUpperCase(),
                     textColor: const Color.fromARGB(255, 244, 212, 212),
                     sizeText: 16,
                   ),

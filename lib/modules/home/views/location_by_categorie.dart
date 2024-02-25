@@ -1,7 +1,7 @@
 import 'package:conforthourse/utils/colors.dart';
 import 'package:conforthourse/widgets/big_text.dart';
 import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/widgets/location_widget.dart';
+import 'package:conforthourse/modules/home/views/location_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:flutter_pagination/widgets/button_styles.dart';

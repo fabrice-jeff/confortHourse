@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../data/models/annonce.dart';
-import '../utils/colors.dart';
-import 'big_text.dart';
-import 'simple_text.dart';
+import '../../../data/api/api.dart';
+import '../../../utils/colors.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/simple_text.dart';
+import '../controllers/home_controller.dart';
+import 'details_location.dart';
 
-class LocationWidget extends StatelessWidget {
+class LocationWidget extends GetView<HomeController> {
   final Map<String, dynamic> location;
 
   LocationWidget({super.key, required this.location});
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       padding: const EdgeInsets.all(10),
@@ -30,8 +34,8 @@ class LocationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: NetworkImage("http://localhost:8000/" +
-                          location['fichiers'][0].path),
+                      image: NetworkImage(
+                          Api.baseUrl + "/" + location['fichiers'][0].path),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -152,19 +156,24 @@ class LocationWidget extends StatelessWidget {
                     ),
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      //Récupération de la location avec un  id particulier
-                      // var autreLocation = LocationController.findByCategorie(
-                      //     location.code, location.idCategorie);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return DetailsLocation(
-                      //           location: location, locations: autreLocation);
-                      //     },
-                      //   ),
-                      // );
+                    onPressed: () async {
+                      // Get other annonces
+                      Map<String, dynamic> data = {
+                        "categorie": location['annonce'].categorie.code,
+                        'annonce': location['annonce'].code
+                      };
+
+                      var otherAnnonces =
+                          await controller.getOtherAnnonceByCategorie(data);
+                      var annonces = await controller.getAnnonceByCategorie({
+                        "categorie": location['annonce'].categorie.code,
+                      });
+
+                      // Détails d'une annomce
+                      Get.to(DetailsLocation(
+                          location: location,
+                          otherAnnonces: otherAnnonces,
+                          annonces: annonces));
                     },
                     child: SimpleTextWidget(
                       text: 'Détails',

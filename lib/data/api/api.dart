@@ -10,4 +10,7 @@ class Api {
   static const villes = "/villes/all";
   static const addAnnonce = "/annonces/add";
   static const annonceByCategorie = "/annonces/annonces_by_categorie";
+  static const otherAnnonceByCategorie =
+      "/annonces/other_annonces_by_categorie";
+  static const annonceByLimite = '/annonces/annonces_by_limite';
 }

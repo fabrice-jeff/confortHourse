@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/dimensions.dart';
-import '../../../views/location_by_categorie.dart';
+import 'location_by_categorie.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/list_temoignage.dart';
-import '../../../widgets/location_widget.dart';
+import 'location_widget.dart';
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/title_section.dart';
 import '../controllers/home_controller.dart';
@@ -55,8 +55,6 @@ class HomeView extends GetView<HomeController> {
                               .getAnnonceByCategorie({
                             "categorie": controller.categoriesObjet[index].code
                           });
-                          print(annonces);
-
                           Get.to(LocationByCategoriePage(
                             categorie:
                                 controller.categoriesObjet[index].libelle,
@@ -83,18 +81,17 @@ class HomeView extends GetView<HomeController> {
                 SizedBox(
                   height: Dimensions.height10,
                 ),
-                // Container(
-                //   child: ListView.builder(
-                //     shrinkWrap: true,
-                //     physics: NeverScrollableScrollPhysics(),
-                //     itemCount: controller.locations.length,
-                //     itemBuilder: (BuildContext context, i) {
-                //       return LocationWidget(
-                //         location: controller.locations[i],
-                //       );
-                //     },
-                //   ),
-                // ),
+                Container(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: controller.annonceBylimite.length,
+                    itemBuilder: (BuildContext context, int position) {
+                      var location = controller.annonceBylimite[position];
+                      return LocationWidget(location: location);
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: Dimensions.height10,
                 ),
