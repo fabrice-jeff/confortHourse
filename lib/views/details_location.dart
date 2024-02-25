@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/models/location.dart';
+import '../data/models/annonce.dart';
 import '../utils/colors.dart';
 import '../widgets/big_text.dart';
 import '../widgets/header_section.dart';
@@ -9,8 +9,8 @@ import '../widgets/simple_text.dart';
 import '../widgets/title_section.dart';
 
 class DetailsLocation extends StatelessWidget {
-  final Location location;
-  final Future<List<Location>> locations;
+  final Annonce location;
+  final Future<List<Annonce>> locations;
   const DetailsLocation(
       {super.key, required this.location, required this.locations});
   Widget _options(IconData icon) {
@@ -47,27 +47,27 @@ class DetailsLocation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               HeaderSectionWidget(text: 'DÉTAIL DE LA LOCATION'),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "images/${location.photo}",
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.symmetric(horizontal: 10),
+              //   width: double.infinity,
+              //   height: 200,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     image: DecorationImage(
+              //       image: AssetImage(
+              //         "images/${location.photo}",
+              //       ),
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 10,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
-                child: BigTextWidget(text: location.localisation),
+                child: BigTextWidget(text: location.ville.libelle),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -80,7 +80,7 @@ class DetailsLocation extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.secondColor),
                   child: SimpleTextWidget(
-                    text: location.type,
+                    text: location.typeAnnonce.libelle,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -327,29 +327,29 @@ class DetailsLocation extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              FutureBuilder(
-                future: locations,
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return Container(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (BuildContext, position) {
-                        var loc = snapshot.data![position];
-                        return LocationWidget(
-                          location: loc,
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
+              // FutureBuilder(
+              //   future: locations,
+              //   builder: (context, snapshot) {
+              //     if (!snapshot.hasData) {
+              //       return Center(
+              //         child: CircularProgressIndicator(),
+              //       );
+              //     }
+              //     return Container(
+              //       child: ListView.builder(
+              //         shrinkWrap: true,
+              //         physics: NeverScrollableScrollPhysics(),
+              //         itemCount: snapshot.data!.length,
+              //         itemBuilder: (BuildContext, position) {
+              //           var loc = snapshot.data![position];
+              //           return LocationWidget(
+              //             location: loc,
+              //           );
+              //         },
+              //       ),
+              //     );
+              //   },
+              // ),
               InkWell(
                 onTap: () {
                   // var _locations =

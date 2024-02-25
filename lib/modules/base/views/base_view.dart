@@ -11,6 +11,7 @@ class BaseView extends GetView<BaseController> {
   const BaseView({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.put(BaseController());
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     return GetBuilder<BaseController>(
       builder: (_) => Scaffold(

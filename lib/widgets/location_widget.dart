@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../data/models/location.dart';
+import '../data/models/annonce.dart';
 import '../utils/colors.dart';
 import 'big_text.dart';
 import 'simple_text.dart';
 
 class LocationWidget extends StatelessWidget {
-  final Location location;
+  final Map<String, dynamic> location;
 
   LocationWidget({super.key, required this.location});
   @override
@@ -30,9 +30,8 @@ class LocationWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                      image: AssetImage(
-                        "images/03.jpg",
-                      ),
+                      image: NetworkImage("http://localhost:8000/" +
+                          location['fichiers'][0].path),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -50,7 +49,7 @@ class LocationWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: SimpleTextWidget(
-                    text: location.type,
+                    text: location['annonce'].typeAnnonce.libelle,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
                     sizeText: 16,
@@ -65,7 +64,7 @@ class LocationWidget extends StatelessWidget {
           Container(
             alignment: Alignment.topLeft,
             child: BigTextWidget(
-              text: location.localisation,
+              text: location['annonce'].ville.libelle,
               textAlign: TextAlign.left,
             ),
           ),
@@ -73,7 +72,7 @@ class LocationWidget extends StatelessWidget {
             height: 5,
           ),
           Expanded(
-            child: SimpleTextWidget(text: location.description),
+            child: SimpleTextWidget(text: location['annonce'].description),
           ),
           SizedBox(
             height: 10,
@@ -85,7 +84,7 @@ class LocationWidget extends StatelessWidget {
               ),
               Spacer(),
               BigTextWidget(
-                text: location.prix.toString() + "F / Mois",
+                text: location['annonce'].prix + "F / Mois",
                 textColor: AppColors.secondColor,
               ),
             ],

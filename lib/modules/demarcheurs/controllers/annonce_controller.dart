@@ -36,11 +36,9 @@ class AnnonceController extends GetxController {
     data['filename'] = generateRandomFileName('annonce');
     data['image'] = base64Encode(data['image'].readAsBytesSync());
     data['created_by'] = demarcheur!.user.code;
-    print(data);
     var result = await annonceRepository.addAnnonce(data);
-    print(result);
     if (result != null && result['success']) {
-      Get.toNamed(Routes.base);
+      Get.offAllNamed(Routes.base);
     }
   }
 
@@ -61,7 +59,8 @@ class AnnonceController extends GetxController {
     if (result != null && result['success']) {
       var data = result['datas'];
       for (var categorie in data) {
-        var objet = Categorie.fromJson(categorie);
+        categorie['categorie']['nombre_annonce'] = categorie['nombre_annonce'];
+        var objet = Categorie.fromJson(categorie['categorie']);
         categoriesArray.add(objet.libelle);
         categoriesObjet.add(objet);
       }
@@ -70,7 +69,6 @@ class AnnonceController extends GetxController {
 
   getLocalisation() async {
     var result = await annonceRepository.getLocalisation();
-    print(result);
     if (result != null && result['success']) {
       var data = result['datas'];
       for (var ville in data) {

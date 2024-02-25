@@ -9,4 +9,5 @@ class Api {
   static const categories = "/categories/all";
   static const villes = "/villes/all";
   static const addAnnonce = "/annonces/add";
+  static const annonceByCategorie = "/annonces/annonces_by_categorie";
 }

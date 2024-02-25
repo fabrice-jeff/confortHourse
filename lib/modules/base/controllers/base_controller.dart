@@ -15,7 +15,6 @@ class BaseController extends GetxController {
     if (selectedIndex == 1) {
       demarcheur = SharePreferences.getActeur();
       // Verifier si l'utilisateur est connecté
-      print(demarcheur);
       if (demarcheur != null) {
         // On initsialise le controller Demarcheur
         currentIndex = selectedIndex;

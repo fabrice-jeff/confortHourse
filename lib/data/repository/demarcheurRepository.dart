@@ -77,7 +77,7 @@ class DemarcheurRepository {
     Map<String, dynamic>? results;
     try {
       results = jsonDecode(response.body);
-      print(results);
+
       return results;
     } catch (e) {
       print('erreur');

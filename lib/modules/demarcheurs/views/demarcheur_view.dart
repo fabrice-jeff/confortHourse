@@ -28,8 +28,6 @@ class DemarcheurView extends GetView<BaseController> {
   }
 
   Widget _buildWidget(Demarcheur? demarcheur) {
-    print(demarcheur);
-
     if (page == ConstantsValues.DASHBOARD) {
       // Récupérer le total de publication
       // Récuperer le total de chambres loués
