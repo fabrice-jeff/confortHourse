@@ -10,8 +10,9 @@ class ConstantsValues {
   static String ANNONCES = "annonces";
   static String ADD_ANNONCE = "add_annonce";
   static String PARAMETRES = "parametres";
-  static String DECONNEXION = "deconnexion";
+  static String deconnexion = "deconnexion";
 
   static const forwardArrowIcon = 'vectors/forward_arrow.svg';
   static bool demarcheurControllerInit = false;
+  static String appName = "ConfortHouse";
 }

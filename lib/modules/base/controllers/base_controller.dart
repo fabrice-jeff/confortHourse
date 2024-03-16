@@ -17,6 +17,17 @@ class BaseController extends GetxController {
       // Verifier si l'utilisateur est connecté
       if (demarcheur != null) {
         // On initsialise le controller Demarcheur
+        page = ConstantsValues.ADD_ANNONCE;
+        currentIndex = selectedIndex;
+      } else {
+        Get.toNamed(Routes.login);
+      }
+    } else if (selectedIndex == 2) {
+      demarcheur = SharePreferences.getActeur();
+      // Verifier si l'utilisateur est connecté
+      if (demarcheur != null) {
+        // On initsialise le controller Demarcheur
+        page = ConstantsValues.PARAMETRES;
         currentIndex = selectedIndex;
       } else {
         Get.toNamed(Routes.login);

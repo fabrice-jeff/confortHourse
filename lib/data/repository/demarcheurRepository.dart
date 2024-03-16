@@ -84,4 +84,64 @@ class DemarcheurRepository {
       return null;
     }
   }
+
+  //Update Information
+  Future<Map<String, dynamic>?> updateInformation(data) async {
+    final endpoint = Api.updateInformation;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {},
+    );
+    Map<String, dynamic>? results;
+    try {
+      results = jsonDecode(response.body);
+
+      return results;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
+
+  //Update Password
+  Future<Map<String, dynamic>?> updatePassword(data) async {
+    final endpoint = Api.updatePassword;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {},
+    );
+    Map<String, dynamic>? results;
+    try {
+      results = jsonDecode(response.body);
+
+      return results;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
+
+  //Update Password
+  Future<Map<String, dynamic>?> deleteAccount(data) async {
+    final endpoint = Api.deleteAccount;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {},
+    );
+    Map<String, dynamic>? results;
+    try {
+      results = jsonDecode(response.body);
+
+      return results;
+    } catch (e) {
+      print('erreur');
+      return null;
+    }
+  }
 }

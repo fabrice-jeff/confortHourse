@@ -13,4 +13,7 @@ class Api {
   static const otherAnnonceByCategorie =
       "/annonces/other_annonces_by_categorie";
   static const annonceByLimite = '/annonces/annonces_by_limite';
+  static const updateInformation = '/demarcheurs/updated_informations';
+  static const updatePassword = '/demarcheurs/updated_password';
+  static const deleteAccount = '/demarcheurs/delete_account';
 }

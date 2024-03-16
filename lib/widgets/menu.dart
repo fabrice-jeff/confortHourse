@@ -9,11 +9,12 @@ import '../routes/routes.dart';
 import '../utils/constants.dart';
 
 List<Map<String, dynamic>> menuItemList = [
-  {"name": "Faq's", 'route': Routes.faqs},
+  {'name': 'Catégories', "route": Routes.categories},
   {"name": "A propos", 'route': Routes.aPropos},
   {'name': "Contact", "route": Routes.contact},
+  {"name": "Faq's", 'route': Routes.faqs},
+
   // {'name': 'Colocation', "route": Routes.colocation},
-  {'name': 'Catégories', "route": Routes.categories},
   {'name': "Connexion", "route": Routes.login},
   {'name': "Inscription", "route": Routes.register},
 ];
@@ -37,7 +38,7 @@ class MenuWidget extends StatelessWidget {
               children: [
                 Container(
                   child: BigTextWidget(
-                    text: 'ConfortHourse'.toUpperCase(),
+                    text: ConstantsValues.appName.toUpperCase(),
                     sizeText: 25,
                   ),
                 ),

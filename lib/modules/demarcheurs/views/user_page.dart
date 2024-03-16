@@ -264,7 +264,7 @@ class UserPage extends GetView<BaseController> {
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.DECONNEXION)
+                color: (page == ConstantsValues.deconnexion)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(10),
@@ -273,7 +273,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.logout_outlined,
-                    color: (page == ConstantsValues.DECONNEXION)
+                    color: (page == ConstantsValues.deconnexion)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -282,7 +282,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Déconnexion",
-                    textColor: (page == ConstantsValues.DECONNEXION)
+                    textColor: (page == ConstantsValues.deconnexion)
                         ? Colors.white
                         : AppColors.textColor,
                   ),

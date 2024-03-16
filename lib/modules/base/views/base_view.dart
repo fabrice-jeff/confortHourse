@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/constants.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/menu.dart';
 import '../../demarcheurs/views/demarcheur_view.dart';
@@ -24,18 +25,30 @@ class BaseView extends GetView<BaseController> {
             child: Container(
               alignment: Alignment.topCenter,
               child: BigTextWidget(
-                text: "ConfortHourse".toUpperCase(),
+                text: ConstantsValues.appName.toUpperCase(),
                 sizeText: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
+          actions: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(
+                Icons.search,
+                size: 25,
+              ),
+            ),
+          ],
         ),
         body: SafeArea(
           child: IndexedStack(
             index: controller.currentIndex,
             children: [
               HomeView(),
+              DemarcheurView(
+                page: controller.page,
+              ),
               DemarcheurView(
                 page: controller.page,
               ),
