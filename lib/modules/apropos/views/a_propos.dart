@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
@@ -43,7 +44,7 @@ class AproposView extends GetView {
         shadowColor: AppColors.backgroundColor,
         elevation: 4.5,
         title: BigTextWidget(
-          text: "ConforthOurse",
+          text: ConstantsValues.appName.toUpperCase(),
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -175,7 +176,6 @@ class AproposView extends GetView {
                   height: 1.5,
                 ),
               ),
-
               _listCheck(
                   text:
                       "Large choix de location répondant à vos besoins spécifiques."),
@@ -197,10 +197,15 @@ class AproposView extends GetView {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BigTextWidget(
-                        text: "Contact",
-                        fontWeight: FontWeight.w500,
-                        textColor: Colors.white,
+                      Expanded(
+                        child: BigTextWidget(
+                          text: "CONTACT",
+                          fontWeight: FontWeight.w500,
+                          textColor: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: Dimensions.width10,
                       ),
                       Icon(
                         CupertinoIcons.arrow_right,
@@ -251,7 +256,7 @@ class AproposView extends GetView {
                             width: double.maxFinite,
                             alignment: Alignment.topLeft,
                             child: SimpleTextWidget(
-                              text: "Appelez nous",
+                              text: "Appelez-nous",
                               textAlign: TextAlign.start,
                               textColor: AppColors.primaryColor,
                             ),
@@ -262,7 +267,7 @@ class AproposView extends GetView {
                             child: BigTextWidget(
                               text: "+229 98 74 14 37",
                               textAlign: TextAlign.start,
-                              sizeText: 26,
+                              sizeText: 25,
                               textColor: AppColors.secondColor,
                             ),
                           )
@@ -278,7 +283,7 @@ class AproposView extends GetView {
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 10),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 height: 500,
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor,
@@ -288,265 +293,113 @@ class AproposView extends GetView {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(
-                              Icons.home_outlined,
-                              size: 38,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                height: 50,
-                                alignment: Alignment.topLeft,
-                                child: BigTextWidget(
-                                  text: "1983",
-                                  sizeText: 45,
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              Container(
-                                height: 20,
-                                alignment: Alignment.topLeft,
-                                child: SimpleTextWidget(
-                                  text: "+Locations",
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    Expanded(
+                      child: statistiqueItem(
+                          context: context,
+                          number: "1983",
+                          titre: "Location",
+                          icon: Icons.home_outlined),
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(
-                              Icons.emoji_emotions_outlined,
-                              size: 38,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                height: 50,
-                                alignment: Alignment.topLeft,
-                                child: BigTextWidget(
-                                  text: "500",
-                                  sizeText: 45,
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              Container(
-                                height: 20,
-                                alignment: Alignment.topLeft,
-                                child: SimpleTextWidget(
-                                  text: "+Clients heureux",
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(
-                              Icons.supervised_user_circle_outlined,
-                              size: 38,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                height: 50,
-                                alignment: Alignment.topLeft,
-                                child: BigTextWidget(
-                                  text: "270",
-                                  sizeText: 45,
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              Container(
-                                height: 20,
-                                alignment: Alignment.topLeft,
-                                child: SimpleTextWidget(
-                                  text: "+Agents Experts",
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.17,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondColor,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Icon(
-                              Icons.celebration_outlined,
-                              size: 38,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                height: 50,
-                                alignment: Alignment.topLeft,
-                                child: BigTextWidget(
-                                  text: "50",
-                                  sizeText: 45,
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                              Container(
-                                height: 20,
-                                alignment: Alignment.topLeft,
-                                child: SimpleTextWidget(
-                                  text: "+Certificats",
-                                  height: 0,
-                                  textColor: Colors.white,
-                                  fontWeight: FontWeight.w400,
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    statistiqueItem(
+                        context: context,
+                        number: "500",
+                        titre: "Clients heureux",
+                        icon: Icons.emoji_emotions_outlined),
+                    statistiqueItem(
+                        context: context,
+                        number: "270",
+                        titre: "Agents Experts",
+                        icon: Icons.supervised_user_circle_outlined),
+                    statistiqueItem(
+                        context: context,
+                        number: "50",
+                        titre: "Certificats",
+                        icon: Icons.celebration_outlined),
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              // TitleSectionWidget(
-              //   firstText: "SERVICES",
-              //   secondText: "Nos services",
-              // ),
-              // Container(
-              //   height: 400 * 3.3,
-              //   child: ListView.builder(
-              //     itemCount: 3,
-              //     physics: NeverScrollableScrollPhysics(),
-              //     itemBuilder: (BuildContext, position) {
-              //       return _listReasons(context);
-              //     },
-              //   ),
-              // ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _listReasons(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      padding: const EdgeInsets.all(10),
-      height: 400,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(top: 20),
-            child: Icon(
-              Icons.location_city,
-              color: AppColors.secondColor,
-              size: 80,
+Widget statistiqueItem({
+  required BuildContext context,
+  required String number,
+  required String titre,
+  required IconData icon,
+}) {
+  return Container(
+    padding: EdgeInsets.symmetric(horizontal: 30),
+    alignment: Alignment.center,
+    height: MediaQuery.of(context).size.height * 0.17,
+    decoration: BoxDecoration(
+        // border: Border.all(color: Colors.white),
+        ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+            color: AppColors.secondColor,
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Icon(
+            icon,
+            size: 38,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(
+          width: Dimensions.width10 * 3,
+        ),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+                // color: AppColors.secondColor,
+                // border: Border.all(color: Colors.white),
+                // borderRadius: BorderRadius.circular(20),
+                ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: BigTextWidget(
+                    text: number,
+                    sizeText: 30,
+                    height: 0,
+                    textColor: Colors.white,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: SimpleTextWidget(
+                    text: "+${titre}",
+                    height: 0,
+                    textColor: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          BigTextWidget(
-            text: "Large sélection de chambres",
-            sizeText: 20,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SimpleTextWidget(
-            text:
-                "Découvrez une vaste sélection de chambres à louer, soigneusement publiées par nos agents immobiliers partenaires, pour trouver celle qui correspond parfaitement à vos besoins.",
-            textAlign: TextAlign.center,
-            sizeText: 16,
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
 
 class _Triangle extends CustomClipper<Path> {

@@ -1,3 +1,4 @@
+import 'package:conforthourse/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,7 @@ class _ContactFormState extends State<ContactForm> {
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
         title: BigTextWidget(
-          text: "ConforthOurse",
+          text: ConstantsValues.appName.toUpperCase(),
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -68,59 +69,6 @@ class _ContactFormState extends State<ContactForm> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.17,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.secondColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Icon(
-                                    Icons.location_on_outlined,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        alignment: Alignment.topLeft,
-                                        child: BigTextWidget(
-                                          text: "Localisation",
-                                          sizeText: 30,
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 20,
-                                        alignment: Alignment.topLeft,
-                                        child: SimpleTextWidget(
-                                          text: "Cotonou, Bénin",
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          fontWeight: FontWeight.w400,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.17,
                             child: Row(
@@ -467,3 +415,119 @@ class _ContactFormState extends State<ContactForm> {
     );
   }
 }
+
+Widget informationItem(
+    {required BuildContext context,
+    required String titre,
+    required IconData icon,
+    required String value}) {
+  return Container(
+    height: MediaQuery.of(context).size.height * 0.17,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(
+            color: AppColors.secondColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Icon(
+            icon,
+            size: 30,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 50,
+                alignment: Alignment.topLeft,
+                child: BigTextWidget(
+                  text: titre,
+                  sizeText: 30,
+                  height: 0,
+                  textColor: AppColors.textColor,
+                  textAlign: TextAlign.end,
+                ),
+              ),
+              Container(
+                height: 20,
+                alignment: Alignment.topLeft,
+                child: SimpleTextWidget(
+                  text: value,
+                  height: 0,
+                  textColor: AppColors.textColor,
+                  fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+
+
+// Container(
+//     height: MediaQuery.of(context).size.height * 0.17,
+//     child: Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Container(
+//           width: 70,
+//           height: 70,
+//           decoration: BoxDecoration(
+//             color: AppColors.secondColor,
+//             borderRadius: BorderRadius.circular(20),
+//           ),
+//           child: Icon(
+//             Icons.location_on_outlined,
+//             size: 30,
+//             color: Colors.white,
+//           ),
+//         ),
+//         SizedBox(
+//           width: 20,
+//         ),
+//         Expanded(
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               Container(
+//                 height: 50,
+//                 alignment: Alignment.topLeft,
+//                 child: BigTextWidget(
+//                   text: "Localisation",
+//                   sizeText: 30,
+//                   height: 0,
+//                   textColor: AppColors.textColor,
+//                   textAlign: TextAlign.end,
+//                 ),
+//               ),
+//               Container(
+//                 height: 20,
+//                 alignment: Alignment.topLeft,
+//                 child: SimpleTextWidget(
+//                   text: "Cotonou, Bénin",
+//                   height: 0,
+//                   textColor: AppColors.textColor,
+//                   fontWeight: FontWeight.w400,
+//                   textAlign: TextAlign.start,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         )
+//       ],
+//     ),
+//   );

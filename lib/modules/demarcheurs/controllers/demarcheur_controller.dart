@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
 import '../../../data/models/demarcheur.dart';
 import '../../../data/repository/demarcheurRepository.dart';
-import '../../../routes/routes.dart';
 import '../../../utils/share_preference.dart';
 import '../../base/controllers/base_controller.dart';
 

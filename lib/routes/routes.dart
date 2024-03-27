@@ -6,7 +6,7 @@ class Routes {
   static const home = "/home";
   static const aPropos = "/a_propos";
   static const contact = "/contact";
-  static const categories = "/categorie";
+  static const categories = "/categories";
   static const login = "/login";
   static const colocation = "/colocation";
   static const faqs = '/faqs';

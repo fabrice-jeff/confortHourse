@@ -96,22 +96,4 @@ class BaseView extends GetView<BaseController> {
       ),
     );
   }
-
-  // _mBottomNavItem({required String label, required String icon}) {
-  //   return BottomNavigationBarItem(
-  //     label: label,
-  //     icon: SvgPicture.asset(
-  //       icon,
-  //       color: Colors.black45,
-  //       width: 25,
-  //       height: 25,
-  //     ),
-  //     activeIcon: SvgPicture.asset(
-  //       icon,
-  //       color: AppColors.backgroundColor,
-  //       width: 25,
-  //       height: 25,
-  //     ),
-  //   );
-  // }
 }

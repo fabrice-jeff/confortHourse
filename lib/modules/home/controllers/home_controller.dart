@@ -36,7 +36,7 @@ class HomeController extends GetxController {
   // Get annonce by  limite
   getAnnonceByLimite() async {
     var result = await annonceRepository.getAnnonceByLimite({'nombre': "5"});
-    print(result);
+
     if (result != null && result['success']) {
       for (var element in result['datas']) {
         late Map<String, dynamic> annonce;
@@ -57,7 +57,6 @@ class HomeController extends GetxController {
         annonceBylimite.add(annonce);
       }
     }
-    print(annonceBylimite);
     update();
   }
 
