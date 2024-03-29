@@ -1,9 +1,10 @@
-import 'package:conforthourse/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
@@ -69,163 +70,36 @@ class _ContactFormState extends State<ContactForm> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.17,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.secondColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Icon(
-                                    Icons.phone_outlined,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        alignment: Alignment.topLeft,
-                                        child: BigTextWidget(
-                                          text: "Téléphone",
-                                          sizeText: 30,
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 20,
-                                        alignment: Alignment.topLeft,
-                                        child: SimpleTextWidget(
-                                          text: "+229 98 74 14 37",
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          fontWeight: FontWeight.w400,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                          Expanded(
+                            child: informationItem(
+                              context: context,
+                              titre: "Localisation",
+                              icon: Icons.location_on_outlined,
+                              value: "Cotonou, Bénin",
                             ),
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.17,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.secondColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Icon(
-                                    Icons.email_outlined,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        alignment: Alignment.topLeft,
-                                        child: BigTextWidget(
-                                          text: "Adresse email",
-                                          sizeText: 30,
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 20,
-                                        alignment: Alignment.topLeft,
-                                        child: SimpleTextWidget(
-                                          text: "contact@affectlac.com ",
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          fontWeight: FontWeight.w400,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                          Expanded(
+                            child: informationItem(
+                              context: context,
+                              titre: "Téléphone",
+                              icon: Icons.phone_outlined,
+                              value: "+229 98 74 14 37",
                             ),
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.17,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.secondColor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Icon(
-                                    Icons.punch_clock_sharp,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        alignment: Alignment.topLeft,
-                                        child: BigTextWidget(
-                                          text: "Ouverture",
-                                          sizeText: 35,
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          textAlign: TextAlign.end,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 20,
-                                        alignment: Alignment.topLeft,
-                                        child: SimpleTextWidget(
-                                          text: "7J/7 et 24H/24",
-                                          height: 0,
-                                          textColor: AppColors.textColor,
-                                          fontWeight: FontWeight.w400,
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                          Expanded(
+                            child: informationItem(
+                              context: context,
+                              titre: "Adresse email",
+                              icon: Icons.email_outlined,
+                              value: "contact@affectlac.com",
+                            ),
+                          ),
+                          Expanded(
+                            child: informationItem(
+                              context: context,
+                              titre: "Ouverture",
+                              icon: Icons.punch_clock_sharp,
+                              value: "7J/7 et 24H/24",
                             ),
                           ),
                         ],
@@ -422,112 +296,68 @@ Widget informationItem(
     required IconData icon,
     required String value}) {
   return Container(
+    padding: EdgeInsets.symmetric(horizontal: 30),
+    alignment: Alignment.center,
     height: MediaQuery.of(context).size.height * 0.17,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.white),
+    ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           width: 70,
           height: 70,
           decoration: BoxDecoration(
             color: AppColors.secondColor,
+            border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Icon(
             icon,
-            size: 30,
+            size: 38,
             color: Colors.white,
           ),
         ),
         SizedBox(
-          width: 20,
+          width: Dimensions.width10 * 3,
         ),
         Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                height: 50,
-                alignment: Alignment.topLeft,
-                child: BigTextWidget(
-                  text: titre,
-                  sizeText: 30,
-                  height: 0,
-                  textColor: AppColors.textColor,
-                  textAlign: TextAlign.end,
+          child: Container(
+            decoration: BoxDecoration(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: BigTextWidget(
+                    text: titre,
+                    sizeText: 22,
+                    height: 0,
+                    textColor: Colors.black,
+                    textAlign: TextAlign.start,
+                  ),
                 ),
-              ),
-              Container(
-                height: 20,
-                alignment: Alignment.topLeft,
-                child: SimpleTextWidget(
-                  text: value,
-                  height: 0,
-                  textColor: AppColors.textColor,
-                  fontWeight: FontWeight.w400,
-                  textAlign: TextAlign.start,
+                SizedBox(
+                  height: Dimensions.height10,
                 ),
-              ),
-            ],
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: SimpleTextWidget(
+                    text: value,
+                    height: 0,
+                    sizeText: 13,
+                    textColor: Colors.black,
+                    fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
+            ),
           ),
-        )
+        ),
       ],
     ),
   );
 }
-
-
-
-// Container(
-//     height: MediaQuery.of(context).size.height * 0.17,
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.center,
-//       children: [
-//         Container(
-//           width: 70,
-//           height: 70,
-//           decoration: BoxDecoration(
-//             color: AppColors.secondColor,
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//           child: Icon(
-//             Icons.location_on_outlined,
-//             size: 30,
-//             color: Colors.white,
-//           ),
-//         ),
-//         SizedBox(
-//           width: 20,
-//         ),
-//         Expanded(
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               Container(
-//                 height: 50,
-//                 alignment: Alignment.topLeft,
-//                 child: BigTextWidget(
-//                   text: "Localisation",
-//                   sizeText: 30,
-//                   height: 0,
-//                   textColor: AppColors.textColor,
-//                   textAlign: TextAlign.end,
-//                 ),
-//               ),
-//               Container(
-//                 height: 20,
-//                 alignment: Alignment.topLeft,
-//                 child: SimpleTextWidget(
-//                   text: "Cotonou, Bénin",
-//                   height: 0,
-//                   textColor: AppColors.textColor,
-//                   fontWeight: FontWeight.w400,
-//                   textAlign: TextAlign.start,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         )
-//       ],
-//     ),
-//   );

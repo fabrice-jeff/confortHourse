@@ -10,6 +10,7 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/security/bindings/security_binding.dart';
 import '../modules/security/views/login.dart';
+import '../modules/security/views/register.dart';
 import 'routes.dart';
 
 class AppPage {
@@ -33,6 +34,12 @@ class AppPage {
     GetPage(
       name: Routes.login,
       page: () => const LoginView(),
+      binding: SecurityBinding(),
+    ),
+    // Register
+    GetPage(
+      name: Routes.register,
+      page: () => const RegisterView(),
       binding: SecurityBinding(),
     ),
 

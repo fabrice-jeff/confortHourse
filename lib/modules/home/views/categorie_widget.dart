@@ -49,7 +49,7 @@ class CategorieWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius10),
                 ),
                 child: BigTextWidget(
-                  text: categorie.nombreAnnonce.toString(),
+                  text: "23",
                   sizeText: Dimensions.fontsize15,
                 ),
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/question_faqs.dart';
 
@@ -18,6 +20,10 @@ class _FaqsViewState extends State<FaqsView> {
       appBar: AppBar(
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
+        title: BigTextWidget(
+          text: ConstantsValues.appName.toUpperCase(),
+          fontWeight: FontWeight.w400,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,8 +34,8 @@ class _FaqsViewState extends State<FaqsView> {
                 height: 20,
               ),
               Container(
-                height: 400 * 6,
                 child: ListView.builder(
+                    shrinkWrap: true,
                     itemCount: 5,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {

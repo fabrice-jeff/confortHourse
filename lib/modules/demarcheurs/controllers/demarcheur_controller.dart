@@ -20,7 +20,7 @@ class DemarcheurController extends GetxController {
     Demarcheur? demarcheur = await SharePreferences.getActeur();
     bool response = false;
     if (demarcheur != null) {
-      data['demarcheur'] = demarcheur.code;
+      data['demarcheur'] = demarcheur.id;
       var result = await demarcheurRepository.updateInformation(data);
       if (result != null && result['success']) {
         result['datas']['ville']['pays'] = result['datas']['pays'];
@@ -39,7 +39,7 @@ class DemarcheurController extends GetxController {
     Demarcheur? demarcheur = await SharePreferences.getActeur();
     bool response = false;
     if (demarcheur != null) {
-      data['demarcheur'] = demarcheur.code;
+      data['demarcheur'] = demarcheur.id;
       var result = await demarcheurRepository.updatePassword(data);
       if (result != null && result['success']) {
         response = true;
@@ -53,7 +53,7 @@ class DemarcheurController extends GetxController {
     Demarcheur? demarcheur = await SharePreferences.getActeur();
     bool response = false;
     if (demarcheur != null) {
-      data['demarcheur'] = demarcheur.code;
+      data['demarcheur'] = demarcheur.id;
       var result = await demarcheurRepository.deleteAccount(data);
       if (result != null && result['success']) {
         response = true;

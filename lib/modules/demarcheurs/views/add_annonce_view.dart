@@ -62,7 +62,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
   void handleSelectCategorie(String? selectedValue) {
     for (var categorie in widget.controller.categoriesObjet) {
       if (selectedValue == categorie.libelle) {
-        _categorie = categorie.code;
+        _categorie = categorie.libelle;
         break;
       }
     }
@@ -71,16 +71,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
   void handleSelectType(String? selectedValue) {
     for (var type in widget.controller.typeObjet) {
       if (selectedValue == type.libelle) {
-        _type = type.code;
-        break;
-      }
-    }
-  }
-
-  void handleSelectLocalisation(String? selectedValue) {
-    for (var localisation in widget.controller.localisatioObjet) {
-      if (selectedValue == localisation.libelle) {
-        _localisation = localisation.code;
+        _type = type.codeReference;
         break;
       }
     }
@@ -204,11 +195,11 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                     ),
 
                     //Localisation
-                    SelectFieldsWidget(
-                      hintText: "Sélectionner une localisation",
-                      label: "Localisation",
-                      items: widget.controller.localisationArray,
-                      onValueChanged: handleSelectLocalisation,
+                    TextFieldsWidget(
+                      label: "Prix",
+                      hintText: "Entrer le prix",
+                      textInputType: TextInputType.name,
+                      controller: _prix,
                     ),
                     SizedBox(
                       height: Dimensions.height10 * 2,

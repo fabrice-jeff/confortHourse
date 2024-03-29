@@ -364,11 +364,7 @@ Widget statistiqueItem({
         ),
         Expanded(
           child: Container(
-            decoration: BoxDecoration(
-                // color: AppColors.secondColor,
-                // border: Border.all(color: Colors.white),
-                // borderRadius: BorderRadius.circular(20),
-                ),
+            decoration: BoxDecoration(),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
@@ -13,6 +14,7 @@ import '../controllers/security_controller.dart';
 import 'login.dart';
 
 class RegisterView extends GetView<SecurityController> {
+  const RegisterView();
   @override
   Widget build(BuildContext context) {
     Get.put(SecurityController());
@@ -43,7 +45,7 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController _nom = TextEditingController();
   TextEditingController _prenoms = TextEditingController();
   String? _paysChoise;
-  String? _villeChoise;
+  TextEditingController _ville = TextEditingController();
   String? _genre;
   TextEditingController _numeroTelephone = TextEditingController();
   TextEditingController _numeroWhatsapp = TextEditingController();
@@ -52,40 +54,23 @@ class _RegisterFormState extends State<RegisterForm> {
   TextEditingController _confirmPsd = TextEditingController();
 
   void handleSelectValuePays(String? selectedValue) {
-    late String codePays;
-    for (var pays in widget.controller.paysObjets) {
-      if (selectedValue == pays.libelle) {
-        codePays = pays.code;
-        break;
-      }
-    }
-    //Selectionner les villes en function du pays récuperé
-    widget.controller.getVilleByPays({
-      'code_pays': codePays,
-    });
     _paysChoise = selectedValue;
-    print(_paysChoise);
-  }
-
-  void handleSelectValueVille(String? selectedValue) {
-    _villeChoise = selectedValue;
-    print(_villeChoise);
   }
 
   void handleSelectValueSexe(String? selectedValue) {
     _genre = selectedValue;
-    print(_genre);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
         title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
+          text: ConstantsValues.appName.toUpperCase(),
+          fontWeight: FontWeight.bold,
         ),
       ),
       body: SafeArea(
@@ -163,13 +148,14 @@ class _RegisterFormState extends State<RegisterForm> {
                               height: Dimensions.height10 * 2,
                             ),
                             //Ville
-                            SelectFieldsWidget(
-                              hintText: "Votre ville",
-                              icon: CupertinoIcons.globe,
+                            TextFieldsWidget(
+                              hintText: "Votre Ville",
+                              textInputType: TextInputType.name,
+                              icon: Icons.castle_outlined,
                               label: "Ville",
-                              items: widget.controller.villeArray,
-                              onValueChanged: handleSelectValueVille,
+                              controller: _ville,
                             ),
+
                             SizedBox(
                               height: Dimensions.height10 * 2,
                             ),
@@ -253,12 +239,13 @@ class _RegisterFormState extends State<RegisterForm> {
                                     'email': _email.text,
                                     'telephone': _numeroTelephone.text,
                                     'sexe': _genre,
-                                    'description': 'une descriprion',
                                     'whatsapp': _numeroWhatsapp.text,
-                                    'ville': _villeChoise,
-                                    'password': _psd.text
+                                    'ville': _ville.text,
+                                    'password': _psd.text,
+                                    'pays': _paysChoise,
+                                    'password_confirmation': _confirmPsd.text
                                   };
-                                  print(data);
+
                                   widget.controller.register(data);
                                 }
                               },

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
 import '../../../data/models/pays.dart';
-import '../../../data/models/ville.dart';
 import '../../../data/repository/demarcheurRepository.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/constants.dart';
@@ -14,8 +13,6 @@ import '../views/login.dart';
 class SecurityController extends GetxController {
   List<Pays> paysObjets = [];
   List<String> paysArray = [];
-  List<Ville> villeObjet = [];
-  List<String> villeArray = [];
   final DemarcheurRepository demarcheurRepository =
       DemarcheurRepository(api: Api.baseUrl);
 
@@ -38,34 +35,20 @@ class SecurityController extends GetxController {
     update();
   }
 
-  getVilleByPays(Map<String, dynamic> data) async {
-    var result = await demarcheurRepository.getVilleByPays(data);
-    villeObjet = [];
-    villeArray = [];
-    if (result != null && result['success']) {
-      var data = result['datas']['villes'];
-      for (var ville in data) {
-        ville['pays'] = result['datas']['pays'];
-        var objet = Ville.fromJson(ville);
-        villeObjet.add(objet);
-        villeArray.add(objet.libelle);
-      }
-    }
-    update();
-  }
-
   //Register
   void register(Map<String, dynamic> data) async {
     final result = await demarcheurRepository.register(data);
     if (result != null && result['success']) {
       Get.offNamed(Routes.login);
+    } else {
+      print(result);
     }
   }
 
   //Login
   void login(Map<String, dynamic> data) async {
     final result = await demarcheurRepository.login(data);
-    // print(result['datas']);
+    print(result);
     if (result != null && result['success']) {
       result['datas']['ville']['pays'] = result['datas']['pays'];
       result['datas']['demarcheur']['ville'] = result['datas']['ville'];
@@ -73,9 +56,7 @@ class SecurityController extends GetxController {
       SharePreferences.prefs
           .setString('acteur', jsonEncode(result['datas']['demarcheur']));
       ConstantsValues.demarcheurControllerInit = true;
-      Get.toNamed(
-        Routes.base,
-      );
+      Get.offAndToNamed(Routes.base);
     } else {
       Get.offAll(() => LoginView());
     }

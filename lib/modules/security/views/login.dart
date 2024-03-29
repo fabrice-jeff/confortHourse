@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/text_fields.dart';
 import '../controllers/security_controller.dart';
-import 'register.dart';
 
 class LoginView extends GetView<SecurityController> {
   const LoginView();
@@ -37,8 +38,8 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _key = GlobalKey<FormState>();
-  TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
+  late TextEditingController _email = TextEditingController();
+  late TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,8 @@ class _LoginFormState extends State<LoginForm> {
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
         title: BigTextWidget(
-          text: "ConforthOurse",
-          fontWeight: FontWeight.w400,
+          text: ConstantsValues.appName.toUpperCase(),
+          fontWeight: FontWeight.bold,
         ),
       ),
       body: SafeArea(
@@ -117,7 +118,7 @@ class _LoginFormState extends State<LoginForm> {
                               onTap: () {
                                 if (_key.currentState!.validate()) {
                                   Map<String, String> data = {
-                                    'email': _email.value.text,
+                                    'username': _email.value.text,
                                     'password': _password.value.text
                                   };
                                   widget.controller.login(data);
@@ -172,12 +173,7 @@ class _LoginFormState extends State<LoginForm> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return RegisterView();
-                                      }),
-                                    );
+                                    Get.offAndToNamed(Routes.register);
                                   },
                                   child: SimpleTextWidget(
                                     text: "S'inscrire",

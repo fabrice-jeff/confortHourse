@@ -15,27 +15,6 @@ class DemarcheurRepository {
       headers: {},
     );
     Map<String, dynamic>? result;
-    try {
-      result = jsonDecode(response.body);
-      return result;
-    } catch (e) {
-      print('erreur');
-      return null;
-    }
-  }
-
-  // Get Ville By pays
-  Future<Map<String, dynamic>?> getVilleByPays(
-      Map<String, dynamic> data) async {
-    final endpoint = Api.villeByPays;
-    final url = Uri.parse(api + endpoint);
-    final response = await http.post(
-      url,
-      body: data,
-      headers: {},
-    );
-    Map<String, dynamic>? result;
-    print(response.body);
 
     try {
       result = jsonDecode(response.body);
@@ -77,7 +56,6 @@ class DemarcheurRepository {
     Map<String, dynamic>? results;
     try {
       results = jsonDecode(response.body);
-
       return results;
     } catch (e) {
       print('erreur');

@@ -52,7 +52,7 @@ class CategorieView extends GetView<HomeController> {
                           // Get annonce by categorie
                           var annonces = await controller
                               .getAnnonceByCategorie({
-                            "categorie": controller.categoriesObjet[index].code
+                            "categorie": controller.categoriesObjet[index].id
                           });
                           Get.to(LocationByCategoriePage(
                             categorie:
