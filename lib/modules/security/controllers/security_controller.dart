@@ -48,13 +48,12 @@ class SecurityController extends GetxController {
   //Login
   void login(Map<String, dynamic> data) async {
     final result = await demarcheurRepository.login(data);
-    print(result);
     if (result != null && result['success']) {
-      result['datas']['ville']['pays'] = result['datas']['pays'];
-      result['datas']['demarcheur']['ville'] = result['datas']['ville'];
-      result['datas']['demarcheur']['user'] = result['datas']['user'];
+      result['datas']['demarcheur']['pays'] = result['datas']['pays'];
       SharePreferences.prefs
           .setString('acteur', jsonEncode(result['datas']['demarcheur']));
+      SharePreferences.prefs
+          .setString('token', jsonEncode(result['datas']['token']));
       ConstantsValues.demarcheurControllerInit = true;
       Get.offAndToNamed(Routes.base);
     } else {

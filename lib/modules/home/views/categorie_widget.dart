@@ -28,7 +28,7 @@ class CategorieWidget extends StatelessWidget {
             size: Dimensions.large,
           ),
           SizedBox(
-            height: Dimensions.height10,
+            height: Dimensions.height10 / 2,
           ),
           BigTextWidget(
             text: categorie.libelle,
@@ -49,7 +49,7 @@ class CategorieWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius10),
                 ),
                 child: BigTextWidget(
-                  text: "23",
+                  text: categorie.nombreAnnonce.toString(),
                   sizeText: Dimensions.fontsize15,
                 ),
               ),

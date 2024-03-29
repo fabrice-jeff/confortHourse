@@ -25,9 +25,8 @@ class HomeController extends GetxController {
       var data = result['datas'];
       if (data != null) {
         for (var categorie in data) {
-          categorie['categorie']['nombre_annonce'] =
-              categorie['nombre_annonce'];
-          var objet = Categorie.fromJson(categorie['categorie']);
+          print(categorie);
+          var objet = Categorie.fromJson(categorie);
           categoriesObjet.add(objet);
         }
       }

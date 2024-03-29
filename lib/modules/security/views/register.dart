@@ -42,16 +42,30 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final List<String> gendersItems = ['Homme', 'Femme', 'Autre'];
   final _key = GlobalKey<FormState>();
-  TextEditingController _nom = TextEditingController();
-  TextEditingController _prenoms = TextEditingController();
+
+  late TextEditingController _nom;
+  late TextEditingController _prenoms;
+  late TextEditingController _ville;
+  late TextEditingController _numeroTelephone;
+  late TextEditingController _numeroWhatsapp;
+  late TextEditingController _email;
+  late TextEditingController _psd;
+  late TextEditingController _confirmPsd;
   String? _paysChoise;
-  TextEditingController _ville = TextEditingController();
   String? _genre;
-  TextEditingController _numeroTelephone = TextEditingController();
-  TextEditingController _numeroWhatsapp = TextEditingController();
-  TextEditingController _email = TextEditingController();
-  TextEditingController _psd = TextEditingController();
-  TextEditingController _confirmPsd = TextEditingController();
+
+  @override
+  void initState() {
+    _nom = TextEditingController();
+    _prenoms = TextEditingController();
+    _ville = TextEditingController();
+    _numeroTelephone = TextEditingController();
+    _numeroWhatsapp = TextEditingController();
+    _email = TextEditingController();
+    _psd = TextEditingController();
+    _confirmPsd = TextEditingController();
+    super.initState();
+  }
 
   void handleSelectValuePays(String? selectedValue) {
     _paysChoise = selectedValue;
@@ -100,7 +114,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         child: Column(
                           children: [
                             SimpleTextWidget(
-                              text: 'ConfortHourse',
+                              text: ConstantsValues.appName,
                               sizeText: Dimensions.fontsize13,
                             ),
                             SizedBox(
@@ -245,7 +259,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     'pays': _paysChoise,
                                     'password_confirmation': _confirmPsd.text
                                   };
-
+                                  print(data);
                                   widget.controller.register(data);
                                 }
                               },
