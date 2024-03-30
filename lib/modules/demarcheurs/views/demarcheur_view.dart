@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../data/models/demarcheur.dart';
 import '../../../utils/constants.dart';
 import '../../base/controllers/base_controller.dart';
+import '../controllers/annonce_controller.dart';
 import '../controllers/demarcheur_controller.dart';
 import 'add_annonce_view.dart';
 import 'annonces_view.dart';
@@ -20,6 +21,7 @@ class DemarcheurView extends GetView<BaseController> {
   @override
   Widget build(BuildContext context) {
     Get.put(DemarcheurController);
+    Get.put(AnnonceController());
     return Scaffold(
       body: SafeArea(
         child: Container(child: _buildWidget(controller.demarcheur)),

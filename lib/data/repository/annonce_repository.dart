@@ -30,6 +30,48 @@ class AnnonceRepository {
     }
   }
 
+  //Total publication By Demarcheur
+  Future<Map<String, dynamic>?> totalPublication() async {
+    String? token = await SharePreferences.prefs.getString('token');
+    const endpoint = Api.totalPublicationByDemarcheur;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
+    );
+
+    try {
+      Map<String, dynamic>? result;
+      result = jsonDecode(response.body);
+      return result;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  //Total publication By Demarcheur
+  Future<Map<String, dynamic>?> recentsPublication() async {
+    String? token = await SharePreferences.prefs.getString('token');
+    const endpoint = Api.recentsPublications;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.get(
+      url,
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
+    );
+
+    try {
+      Map<String, dynamic>? result;
+      result = jsonDecode(response.body);
+      return result;
+    } catch (e) {
+      return null;
+    }
+  }
+
   // Get annonceBy limite
   Future<Map<String, dynamic>?> getAnnonceByLimite(
       Map<String, dynamic> data) async {
@@ -46,24 +88,6 @@ class AnnonceRepository {
       return result;
     } catch (e) {
       print('erreufsdcrEEAZ5');
-      return null;
-    }
-  }
-
-  // Get villes
-  Future<Map<String, dynamic>?> getLocalisation() async {
-    final endpoint = Api.villes;
-    final url = Uri.parse(api + endpoint);
-    final response = await http.get(
-      url,
-      headers: {},
-    );
-    Map<String, dynamic>? result;
-    try {
-      result = jsonDecode(response.body);
-      return result;
-    } catch (e) {
-      print('erreur');
       return null;
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../data/models/demarcheur.dart';
 import '../../../utils/constants.dart';
@@ -7,9 +8,10 @@ import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
+import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends GetView<AnnonceController> {
   final Demarcheur? demarcheur;
   const DashboardView({
     super.key,
@@ -18,6 +20,7 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(AnnonceController());
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,7 +35,7 @@ class DashboardView extends StatelessWidget {
                   context: context,
                   primaryColor: const Color(0xFF6259CA),
                   backgroundColor: Color.fromRGBO(98, 89, 202, 0.2),
-                  nombre: 0,
+                  nombre: controller.totalPublicationByDemarcheur.toString(),
                   icon: Icons.home_outlined,
                   text: "Total Publication"),
               SizedBox(
@@ -42,7 +45,7 @@ class DashboardView extends StatelessWidget {
                   context: context,
                   primaryColor: Color(0xFF09AD95),
                   backgroundColor: Color.fromRGBO(0, 230, 130, 0.2),
-                  nombre: 0,
+                  nombre: controller.totalChambresLouees.toString(),
                   icon: Icons.home_outlined,
                   text: "Chambres louées"),
               SizedBox(
@@ -52,7 +55,7 @@ class DashboardView extends StatelessWidget {
                   context: context,
                   primaryColor: Color(0xFFFB6B25),
                   backgroundColor: Color.fromRGBO(251, 107, 37, 0.2),
-                  nombre: 0,
+                  nombre: controller.prixChambreLouees.toString(),
                   icon: CupertinoIcons.money_dollar_circle_fill,
                   text: "Prix Chambres louées"),
               SizedBox(
@@ -63,7 +66,7 @@ class DashboardView extends StatelessWidget {
                     EdgeInsets.symmetric(horizontal: Dimensions.width10 * 1.5),
                 alignment: Alignment.topLeft,
                 child: BigTextWidget(
-                  text: "Annonces récemment publiées",
+                  text: "Récemment publié",
                   sizeText: Dimensions.fontsize20,
                 ),
               ),
@@ -112,27 +115,35 @@ class DashboardView extends StatelessWidget {
                                 ),
                               ),
                               DataColumn(
-                                label: BigTextWidget(text: "Prix"),
+                                label: BigTextWidget(text: "Date"),
                               ),
                               DataColumn(
-                                label: BigTextWidget(text: "Type"),
+                                label: BigTextWidget(text: "Status"),
+                              ),
+                              DataColumn(
+                                label: BigTextWidget(text: "Prix"),
                               ),
                             ],
                             rows: const <DataRow>[
-                              DataRow(cells: const <DataCell>[
-                                DataCell(
-                                  Text("Bonjour"),
-                                ),
-                                DataCell(
-                                  Text("Bonjour"),
-                                ),
-                                DataCell(
-                                  Text("Bonjour"),
-                                ),
-                                DataCell(
-                                  Text("Bonjour"),
-                                ),
-                              ]),
+                              DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text("Bonjour"),
+                                  ),
+                                  DataCell(
+                                    Text("Bonjour"),
+                                  ),
+                                  DataCell(
+                                    Text("Bonjour"),
+                                  ),
+                                  DataCell(
+                                    Text("Bonjour"),
+                                  ),
+                                  DataCell(
+                                    Text("Bonjour"),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -158,7 +169,7 @@ class DashboardView extends StatelessWidget {
     required BuildContext context,
     required Color primaryColor,
     required Color backgroundColor,
-    required int nombre,
+    required String nombre,
     required IconData icon,
     required String text,
   }) {
@@ -187,12 +198,14 @@ class DashboardView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: BigTextWidget(
-                    text: nombre.toString(),
-                    sizeText: Dimensions.fontsize20 * 2,
-                    textColor: primaryColor,
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.topLeft,
+                    child: BigTextWidget(
+                      text: nombre.toString(),
+                      sizeText: Dimensions.fontsize20 * 2,
+                      textColor: primaryColor,
+                    ),
                   ),
                 ),
                 Container(
