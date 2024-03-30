@@ -21,7 +21,7 @@ class ProfilView extends StatelessWidget {
     String email = (demarcheur != null) ? demarcheur!.email : "";
     String telephone = (demarcheur != null) ? demarcheur!.telephone : "";
     String whatsapp = (demarcheur != null) ? demarcheur!.whatsapp : "";
-    String? description = (demarcheur != null) ? demarcheur!.description : "";
+    // String? description = (demarcheur != null) ? demarcheur!.description : "";
     String createdAtAcccompte = (demarcheur != null)
         ? ""
         : DateFormat("dd/MM/yyyy").format(demarcheur!.createdAt);

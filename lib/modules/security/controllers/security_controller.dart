@@ -8,7 +8,6 @@ import '../../../routes/routes.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/share_preference.dart';
 import '../../base/controllers/base_controller.dart';
-import '../views/login.dart';
 
 class SecurityController extends GetxController {
   final DemarcheurRepository demarcheurRepository =
