@@ -12,11 +12,17 @@ import '../../../widgets/button_add_annonce.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/label_form.dart';
 import '../../../widgets/text_fields.dart';
+import '../../base/controllers/base_controller.dart';
 import 'user_page.dart';
 
 class ParametreProfilView extends GetView<DemarcheurController> {
   final Demarcheur? demarcheur;
-  const ParametreProfilView({super.key, this.demarcheur});
+  final BaseController baseController;
+  const ParametreProfilView({
+    super.key,
+    this.demarcheur,
+    required this.baseController,
+  });
   @override
   Widget build(BuildContext context) {
     Get.put(DemarcheurController());
@@ -24,7 +30,8 @@ class ParametreProfilView extends GetView<DemarcheurController> {
       body: Container(
         child: ParametreProfilForm(
           demarcheur: demarcheur,
-          controller: controller,
+          demarcheurController: controller,
+          baseController: baseController,
         ),
       ),
     );
@@ -33,9 +40,14 @@ class ParametreProfilView extends GetView<DemarcheurController> {
 
 class ParametreProfilForm extends StatefulWidget {
   final Demarcheur? demarcheur;
-  final DemarcheurController controller;
+  final DemarcheurController demarcheurController;
+  final BaseController baseController;
+
   const ParametreProfilForm(
-      {super.key, this.demarcheur, required this.controller});
+      {super.key,
+      this.demarcheur,
+      required this.demarcheurController,
+      required this.baseController});
 
   @override
   State<ParametreProfilForm> createState() => _ParametreProfilFormState();
@@ -107,16 +119,17 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                           sizeText: 18,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: Dimensions.height10,
                       ),
-                      const ButtonAddAnnonceWidget(),
-                      const SizedBox(
-                        height: 10,
+                      ButtonAddAnnonceWidget(
+                          baseController: widget.baseController),
+                      SizedBox(
+                        height: Dimensions.height10,
                       ),
                       const Divider(),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: Dimensions.height10,
                       ),
                       // Nom
                       TextFieldsWidget(
@@ -205,8 +218,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                             'telephone': _telephone.text,
                             'description': _description.text,
                           };
-                          print(data);
-                          widget.controller.updateInformation(data);
+                          widget.demarcheurController.updateInformation(data);
                         },
                         child: Container(
                             padding: const EdgeInsets.all(10),
@@ -303,8 +315,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                             'password': _password.text,
                             'password_confirmation': _confirmPassword.text,
                           };
-                          print(data);
-                          widget.controller.updatePassWord(data);
+                          widget.demarcheurController.updatePassWord(data);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -366,8 +377,8 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                           Map<String, dynamic> data = {
                             'password': _passwordCompte.text
                           };
-                          var result =
-                              await widget.controller.deteleAcount(data);
+                          var result = await widget.demarcheurController
+                              .deteleAcount(data);
                           print(result);
                         },
                         child: Container(

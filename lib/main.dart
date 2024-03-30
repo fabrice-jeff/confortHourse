@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: AppColors.backgroundColor),
       debugShowCheckedModeBanner: false,
-      initialRoute: AppPage.INITIAL,
+      initialRoute: AppPage.initial,
       getPages: AppPage.routes,
       // home: HomeScreen(),
     );

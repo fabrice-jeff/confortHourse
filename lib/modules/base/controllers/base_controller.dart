@@ -1,14 +1,58 @@
-import 'package:conforthourse/utils/constants.dart';
 import 'package:get/get.dart';
 
+import '../../../data/api/api.dart';
+import '../../../data/models/categorie.dart';
 import '../../../data/models/demarcheur.dart';
+import '../../../data/models/pays.dart';
+import '../../../data/repository/base_repository.dart';
 import '../../../routes/routes.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/share_preference.dart';
 
 class BaseController extends GetxController {
   int currentIndex = 0;
   Demarcheur? demarcheur;
   String page = ConstantsValues.ADD_ANNONCE;
+  List<Categorie> categoriesObjet = [];
+  List<String> categoriesArray = [];
+  List<Pays> paysObjets = [];
+  List<String> paysArray = [];
+  final BaseRepository baseRepository = BaseRepository(api: Api.baseUrl);
+
+  @override
+  void onInit() {
+    getPays();
+    getCategories();
+    super.onInit();
+  }
+
+  // Get categorie
+  getCategories() async {
+    var result = await baseRepository.getCategories();
+    if (result != null && result['success']) {
+      var data = result['datas'];
+      if (data != null) {
+        for (var categorie in data) {
+          var objet = Categorie.fromJson(categorie);
+          categoriesObjet.add(objet);
+        }
+      }
+    }
+    update();
+  }
+
+  getPays() async {
+    var result = await baseRepository.getPays();
+    if (result != null && result['success']) {
+      var data = result['datas'];
+      for (var pays in data) {
+        var objet = Pays.fromJson(pays);
+        paysObjets.add(objet);
+        paysArray.add(objet.libelle);
+      }
+    }
+    update();
+  }
 
   /// change the selected screen index
   changeScreen(int selectedIndex) {
@@ -20,7 +64,9 @@ class BaseController extends GetxController {
         page = ConstantsValues.ADD_ANNONCE;
         currentIndex = selectedIndex;
       } else {
-        Get.toNamed(Routes.login);
+        BaseController baseController = Get.put(BaseController());
+        Get.toNamed(Routes.login,
+            arguments: {'baseController': baseController});
       }
     } else if (selectedIndex == 2) {
       demarcheur = SharePreferences.getActeur();
@@ -30,7 +76,9 @@ class BaseController extends GetxController {
         page = ConstantsValues.PARAMETRES;
         currentIndex = selectedIndex;
       } else {
-        Get.toNamed(Routes.login);
+        BaseController baseController = Get.put(BaseController());
+        Get.toNamed(Routes.login,
+            arguments: {'baseController': baseController});
       }
     } else {
       currentIndex = selectedIndex;
@@ -50,6 +98,4 @@ class BaseController extends GetxController {
     currentIndex = 0;
     update();
   }
-
-  changeCurrentIndex(int value) {}
 }

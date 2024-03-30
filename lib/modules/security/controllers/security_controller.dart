@@ -3,43 +3,23 @@ import 'dart:convert';
 import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
-import '../../../data/models/pays.dart';
-import '../../../data/repository/demarcheurRepository.dart';
+import '../../../data/repository/demarcheur_repository.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/share_preference.dart';
+import '../../base/controllers/base_controller.dart';
 import '../views/login.dart';
 
 class SecurityController extends GetxController {
-  List<Pays> paysObjets = [];
-  List<String> paysArray = [];
   final DemarcheurRepository demarcheurRepository =
       DemarcheurRepository(api: Api.baseUrl);
-
-  @override
-  void onInit() {
-    getPays();
-    super.onInit();
-  }
-
-  getPays() async {
-    var result = await demarcheurRepository.getPays();
-    if (result != null && result['success']) {
-      var data = result['datas'];
-      for (var pays in data) {
-        var objet = Pays.fromJson(pays);
-        paysObjets.add(objet);
-        paysArray.add(objet.libelle);
-      }
-    }
-    update();
-  }
 
   //Register
   void register(Map<String, dynamic> data) async {
     final result = await demarcheurRepository.register(data);
     if (result != null && result['success']) {
-      Get.offNamed(Routes.login);
+      BaseController baseController = Get.put(BaseController());
+      Get.offNamed(Routes.login, arguments: {'baseController': baseController});
     } else {
       print(result);
     }
@@ -54,6 +34,11 @@ class SecurityController extends GetxController {
           .setString('acteur', jsonEncode(result['datas']['demarcheur']));
       SharePreferences.prefs.setString('token', result['token']);
       ConstantsValues.demarcheurControllerInit = true;
+      // Changer la page une fois conneter
+
+      BaseController baseController = Get.put(BaseController());
+      baseController.currentIndex = 1;
+      baseController.changePage(ConstantsValues.ADD_ANNONCE);
       Get.offAndToNamed(Routes.base);
     } else {
       Get.offAll(() => LoginView());

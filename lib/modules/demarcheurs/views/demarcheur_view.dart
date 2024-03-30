@@ -52,6 +52,7 @@ class DemarcheurView extends GetView<BaseController> {
     } else if (page == ConstantsValues.PARAMETRES) {
       return ParametreProfilView(
         demarcheur: demarcheur,
+        baseController: controller,
       );
     } else {
       return AddAnnonceView(demarcheur: demarcheur);

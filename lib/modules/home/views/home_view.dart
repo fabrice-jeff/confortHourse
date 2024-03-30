@@ -1,3 +1,5 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
+import 'package:conforthourse/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +15,8 @@ import '../controllers/home_controller.dart';
 import 'categorie_widget.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView();
+  final BaseController? baseController;
+  const HomeView({super.key, this.baseController});
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -27,7 +30,7 @@ class HomeView extends GetView<HomeController> {
                   height: Dimensions.height10,
                 ),
                 // Title
-                TitleSectionWidget(
+                const TitleSectionWidget(
                   firstText: "CATÉGORIES",
                   secondText: "Choisissez Votre Catégorie",
                 ),
@@ -46,23 +49,24 @@ class HomeView extends GetView<HomeController> {
                       mainAxisSpacing: Dimensions.width10,
                       mainAxisExtent: 215,
                     ),
-                    itemCount: controller.categoriesObjet.length,
+                    itemCount: baseController!.categoriesObjet.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () async {
                           // Get annonce by categorie
                           var annonces = await controller
                               .getAnnonceByCategorie({
-                            "categorie": controller.categoriesObjet[index].id
+                            "categorie":
+                                baseController!.categoriesObjet[index].id
                           });
                           Get.to(LocationByCategoriePage(
                             categorie:
-                                controller.categoriesObjet[index].libelle,
+                                baseController!.categoriesObjet[index].libelle,
                             locations: annonces,
                           ));
                         },
                         child: CategorieWidget(
-                          categorie: controller.categoriesObjet[index],
+                          categorie: baseController!.categoriesObjet[index],
                         ),
                       );
                     },
@@ -74,7 +78,7 @@ class HomeView extends GetView<HomeController> {
                 SizedBox(
                   height: Dimensions.height10,
                 ),
-                TitleSectionWidget(
+                const TitleSectionWidget(
                   firstText: "DÉCOUVREZ NOS LOCATIONS IMMOBILIÈRE",
                   secondText: "Plongez Dans Le Confort",
                 ),
@@ -84,7 +88,7 @@ class HomeView extends GetView<HomeController> {
                 Container(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.annonceBylimite.length,
                     itemBuilder: (BuildContext context, int position) {
                       var location = controller.annonceBylimite[position];
@@ -97,14 +101,14 @@ class HomeView extends GetView<HomeController> {
                 ),
                 // VideoApp(),
                 TitleSectionWidget(
-                  firstText: "CONFORTHOUSE",
+                  firstText: ConstantsValues.appName.toUpperCase(),
                   secondText: "Pourquoi Nous choisir",
                 ),
                 Container(
                   child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: 3,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext, position) {
                       return _listReasons(context);
                     },

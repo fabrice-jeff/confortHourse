@@ -5,7 +5,7 @@ import '../../../data/api/api.dart';
 import '../../../data/models/categorie.dart';
 import '../../../data/models/demarcheur.dart';
 import '../../../data/models/type_annonce.dart';
-import '../../../data/repository/annonceRepository.dart';
+import '../../../data/repository/annonce_repository.dart';
 import '../../../routes/routes.dart';
 import '../../../services/generate_random_file_name.dart';
 import '../../../utils/share_preference.dart';
@@ -22,7 +22,6 @@ class AnnonceController extends GetxController {
   @override
   void onInit() {
     getTypeAnnonce();
-    getCategories();
     super.onInit();
   }
 
@@ -49,19 +48,5 @@ class AnnonceController extends GetxController {
         }
       }
     }
-  }
-
-  getCategories() async {
-    var result = await annonceRepository.getCategories();
-    if (result != null && result['success']) {
-      var data = result['datas'];
-      if (data != null) {
-        for (var categorie in data) {
-          var objet = Categorie.fromJson(categorie);
-          categoriesObjet.add(objet);
-        }
-      }
-    }
-    update();
   }
 }

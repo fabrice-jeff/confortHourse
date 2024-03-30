@@ -49,15 +49,23 @@ class AddAnnonceForm extends StatefulWidget {
 }
 
 class _AddAnnonceFormState extends State<AddAnnonceForm> {
-  TextEditingController _titre = TextEditingController();
+  late TextEditingController _titre;
+  late TextEditingController _prix;
+  late TextEditingController _description;
   String? _type;
   String? _categorie;
   String? _localisation;
-  TextEditingController _prix = TextEditingController();
-  TextEditingController _description = TextEditingController();
   File? _file;
   bool _fileSelected = false;
   String? _extension;
+
+  @override
+  void initState() {
+    _titre = TextEditingController();
+    _prix = TextEditingController();
+    _description = TextEditingController();
+    super.initState();
+  }
 
   void handleSelectCategorie(String? selectedValue) {
     for (var categorie in widget.controller.categoriesObjet) {
@@ -71,7 +79,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
   void handleSelectType(String? selectedValue) {
     for (var type in widget.controller.typeObjet) {
       if (selectedValue == type.libelle) {
-        _type = type.codeReference;
+        _type = type.libelle;
         break;
       }
     }

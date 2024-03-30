@@ -1,3 +1,4 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:get/get.dart';
 
 import '../modules/apropos/views/a_propos.dart';
@@ -15,7 +16,7 @@ import 'routes.dart';
 
 class AppPage {
   AppPage._();
-  static final INITIAL = Routes.base;
+  static const initial = Routes.base;
   static final routes = [
     // BASE
     GetPage(
@@ -33,13 +34,13 @@ class AppPage {
     // LOGIN
     GetPage(
       name: Routes.login,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: SecurityBinding(),
     ),
     // Register
     GetPage(
       name: Routes.register,
-      page: () => const RegisterView(),
+      page: () => RegisterView(),
       binding: SecurityBinding(),
     ),
 

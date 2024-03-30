@@ -1,3 +1,4 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,9 @@ import '../../../widgets/text_fields.dart';
 import '../controllers/security_controller.dart';
 
 class LoginView extends GetView<SecurityController> {
-  const LoginView();
+  final BaseController? baseController;
+  LoginView({super.key, BaseController? baseController})
+      : baseController = baseController ?? Get.arguments?['baseController'];
   @override
   Widget build(BuildContext context) {
     Get.put(SecurityController());
@@ -21,6 +24,7 @@ class LoginView extends GetView<SecurityController> {
         child: Container(
           child: LoginForm(
             controller: controller,
+            baseController: baseController,
           ),
         ),
       ),
@@ -30,7 +34,8 @@ class LoginView extends GetView<SecurityController> {
 
 class LoginForm extends StatefulWidget {
   final SecurityController controller;
-  const LoginForm({super.key, required this.controller});
+  final BaseController? baseController;
+  const LoginForm({super.key, required this.controller, this.baseController});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -43,6 +48,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
+    print(widget.baseController!.paysArray);
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();
@@ -180,7 +186,11 @@ class _LoginFormState extends State<LoginForm> {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    Get.offAndToNamed(Routes.register);
+                                    Get.offAndToNamed(Routes.register,
+                                        arguments: {
+                                          'baseController':
+                                              widget.baseController
+                                        });
                                   },
                                   child: SimpleTextWidget(
                                     text: "S'inscrire",

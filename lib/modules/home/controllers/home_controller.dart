@@ -2,36 +2,24 @@ import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
 import '../../../data/models/annonce.dart';
-import '../../../data/models/categorie.dart';
-import '../../../data/repository/annonceRepository.dart';
+
+import '../../../data/repository/annonce_repository.dart';
 
 class HomeController extends GetxController {
-  List<Categorie> categoriesObjet = [];
   List<Map<String, dynamic>> annonceBylimite = [];
   final AnnonceRepository annonceRepository =
       AnnonceRepository(api: Api.baseUrl);
 
   @override
   void onInit() {
-    getCategories();
     getAnnonceByLimite();
     super.onInit();
   }
 
-  // Get categorie
-  getCategories() async {
-    var result = await annonceRepository.getCategories();
-    if (result != null && result['success']) {
-      var data = result['datas'];
-      if (data != null) {
-        for (var categorie in data) {
-          print(categorie);
-          var objet = Categorie.fromJson(categorie);
-          categoriesObjet.add(objet);
-        }
-      }
-    }
-    update();
+  //Get Type Annonce
+  getTypeAnnonce() async {
+    var result = await annonceRepository.getTypeAnnonce();
+    print(result);
   }
 
   // Get annonce by  limite

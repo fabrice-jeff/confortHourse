@@ -28,7 +28,7 @@ class AnnonceRepository {
 
   // Get type annonnce
   Future<Map<String, dynamic>?> getTypeAnnonce() async {
-    final endpoint = Api.typeAnnonce;
+    const endpoint = Api.typeAnnonce;
     final url = Uri.parse(api + endpoint);
     final response = await http.get(
       url,
@@ -39,25 +39,7 @@ class AnnonceRepository {
       result = jsonDecode(response.body);
       return result;
     } catch (e) {
-      print('erreur');
-      return null;
-    }
-  }
-
-  // Get categorie
-  Future<Map<String, dynamic>?> getCategories() async {
-    final endpoint = Api.categories;
-    final url = Uri.parse(api + endpoint);
-    final response = await http.get(
-      url,
-      headers: {},
-    );
-    Map<String, dynamic>? result;
-    try {
-      result = jsonDecode(response.body);
-      return result;
-    } catch (e) {
-      print('erreur');
+      print('erreurjkhuholjhojhk');
       return null;
     }
   }
@@ -77,7 +59,7 @@ class AnnonceRepository {
       result = jsonDecode(response.body);
       return result;
     } catch (e) {
-      print('erreur');
+      print('erreufsdcrEEAZ5');
       return null;
     }
   }

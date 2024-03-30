@@ -1,3 +1,4 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,8 @@ import '../../home/views/categorie_widget.dart';
 import '../../home/views/location_by_categorie.dart';
 
 class CategorieView extends GetView<HomeController> {
-  const CategorieView();
+  final BaseController? baseController;
+  const CategorieView({super.key, this.baseController});
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -45,23 +47,24 @@ class CategorieView extends GetView<HomeController> {
                       mainAxisSpacing: Dimensions.width10,
                       mainAxisExtent: 215,
                     ),
-                    itemCount: controller.categoriesObjet.length,
+                    itemCount: baseController!.categoriesObjet.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () async {
                           // Get annonce by categorie
                           var annonces = await controller
                               .getAnnonceByCategorie({
-                            "categorie": controller.categoriesObjet[index].id
+                            "categorie":
+                                baseController!.categoriesObjet[index].id
                           });
                           Get.to(LocationByCategoriePage(
                             categorie:
-                                controller.categoriesObjet[index].libelle,
+                                baseController!.categoriesObjet[index].libelle,
                             locations: annonces,
                           ));
                         },
                         child: CategorieWidget(
-                          categorie: controller.categoriesObjet[index],
+                          categorie: baseController!.categoriesObjet[index],
                         ),
                       );
                     },

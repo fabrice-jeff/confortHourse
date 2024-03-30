@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
 import '../../../data/models/demarcheur.dart';
-import '../../../data/repository/demarcheurRepository.dart';
+import '../../../data/repository/demarcheur_repository.dart';
 import '../../../routes/routes.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/share_preference.dart';
+import '../../base/controllers/base_controller.dart';
 
 class DemarcheurController extends GetxController {
   Demarcheur? demarcheur = SharePreferences.getActeur();
@@ -20,6 +22,10 @@ class DemarcheurController extends GetxController {
         result['datas']['demarcheur']['pays_id'] = result['datas']['pays'];
         SharePreferences.prefs
             .setString('acteur', jsonEncode(result['datas']['demarcheur']));
+        // Changer la page une fois conneter
+        BaseController baseController = Get.put(BaseController());
+        baseController.currentIndex = 0;
+        baseController.changePage(ConstantsValues.ADD_ANNONCE);
         Get.offAndToNamed(Routes.base);
       }
     }
@@ -30,8 +36,12 @@ class DemarcheurController extends GetxController {
     var result = await demarcheurRepository.updatePassword(data);
     print(result);
     if (result != null && result['success']) {
-      //Retrouner vers la page d'accueil
-      print("Bonjour");
+      // Changer la page une fois conneter
+      BaseController baseController = Get.put(BaseController());
+      baseController.currentIndex = 0;
+      baseController.changePage(ConstantsValues.ADD_ANNONCE);
+      // Deconnexion
+      baseController.logout();
     }
   }
 

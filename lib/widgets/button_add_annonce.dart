@@ -1,16 +1,24 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
 import 'package:flutter/material.dart';
+import '../modules/base/controllers/base_controller.dart';
+import '../utils/colors.dart';
+import '../utils/constants.dart';
+import 'simple_text.dart';
 
 class ButtonAddAnnonceWidget extends StatelessWidget {
-  const ButtonAddAnnonceWidget({super.key});
+  final BaseController baseController;
+  const ButtonAddAnnonceWidget({
+    super.key,
+    required this.baseController,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          baseController.changePage(ConstantsValues.ADD_ANNONCE);
+        },
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 5,

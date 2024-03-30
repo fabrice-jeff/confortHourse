@@ -1,7 +1,9 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/intl_phone_field.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
@@ -14,16 +16,19 @@ import '../controllers/security_controller.dart';
 import 'login.dart';
 
 class RegisterView extends GetView<SecurityController> {
-  const RegisterView();
+  final BaseController? baseController;
+  RegisterView({super.key, BaseController? baseController})
+      : baseController = baseController ?? Get.arguments?['baseController'];
   @override
   Widget build(BuildContext context) {
     Get.put(SecurityController());
-
+    print(baseController!.paysArray);
     return Scaffold(
       body: SafeArea(
         child: Container(
           child: RegisterForm(
             controller: controller,
+            baseController: baseController,
           ),
         ),
       ),
@@ -33,7 +38,9 @@ class RegisterView extends GetView<SecurityController> {
 
 class RegisterForm extends StatefulWidget {
   final SecurityController controller;
-  const RegisterForm({super.key, required this.controller});
+  final BaseController? baseController;
+  const RegisterForm(
+      {super.key, required this.controller, this.baseController});
 
   @override
   State<RegisterForm> createState() => _RegisterFormState();
@@ -155,7 +162,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               hintText: "Votre pays",
                               icon: CupertinoIcons.globe,
                               label: "Pays",
-                              items: widget.controller.paysArray,
+                              items: widget.baseController!.paysArray,
                               onValueChanged: handleSelectValuePays,
                             ),
                             SizedBox(
@@ -185,11 +192,10 @@ class _RegisterFormState extends State<RegisterForm> {
                               height: Dimensions.height10 * 2,
                             ),
                             //Numéro de téléphone
-                            TextFieldsWidget(
-                              hintText: "Votre numéro de téléphone",
-                              textInputType: TextInputType.name,
-                              icon: Icons.phone_outlined,
+
+                            IntlPhoneFieldsComponent(
                               label: "Numéro de téléphone",
+                              hintText: "Votre numéro de téléphone",
                               controller: _numeroTelephone,
                             ),
                             SizedBox(
@@ -197,11 +203,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             ),
                             // Numéro Whatsapp
 
-                            TextFieldsWidget(
-                              hintText: "Votre numéro Whatsapp",
-                              textInputType: TextInputType.name,
-                              icon: Icons.phone_outlined,
+                            IntlPhoneFieldsComponent(
                               label: "Numéro Whatsapp",
+                              hintText: "Votre numéro Whatsapp",
                               controller: _numeroWhatsapp,
                             ),
                             SizedBox(

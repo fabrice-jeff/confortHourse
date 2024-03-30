@@ -46,7 +46,9 @@ class BaseView extends GetView<BaseController> {
           child: IndexedStack(
             index: controller.currentIndex,
             children: [
-              const HomeView(),
+              HomeView(
+                baseController: controller,
+              ),
               DemarcheurView(
                 page: controller.page,
               ),
