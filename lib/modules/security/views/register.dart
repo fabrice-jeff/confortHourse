@@ -259,7 +259,7 @@ class _RegisterFormState extends State<RegisterForm> {
                                     'pays': _paysChoise,
                                     'password_confirmation': _confirmPsd.text
                                   };
-                                  print(data);
+
                                   widget.controller.register(data);
                                 }
                               },

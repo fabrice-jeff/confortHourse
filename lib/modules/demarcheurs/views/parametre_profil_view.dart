@@ -2,10 +2,11 @@ import 'package:conforthourse/modules/demarcheurs/controllers/demarcheur_control
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/intl_phone_field.dart';
 import '../../../data/models/demarcheur.dart';
-import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/button_add_annonce.dart';
 import '../../../widgets/header_section.dart';
@@ -18,7 +19,7 @@ class ParametreProfilView extends GetView<DemarcheurController> {
   const ParametreProfilView({super.key, this.demarcheur});
   @override
   Widget build(BuildContext context) {
-    Get.put(DemarcheurController);
+    Get.put(DemarcheurController());
     return Scaffold(
       body: Container(
         child: ParametreProfilForm(
@@ -75,139 +76,238 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeaderSectionWidget(text: "PARAMETRES"),
-              UserPage(page: ConstantsValues.PARAMETRES),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const BigTextWidget(
-                        text: "Mise à jours des informations",
-                        textAlign: TextAlign.start,
-                        sizeText: 18,
+    return GetBuilder<DemarcheurController>(builder: (_) {
+      return Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                HeaderSectionWidget(text: "PARAMETRES"),
+                UserPage(page: ConstantsValues.PARAMETRES),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: const BigTextWidget(
+                          text: "Mise à jours des informations",
+                          textAlign: TextAlign.start,
+                          sizeText: 18,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const ButtonAddAnnonceWidget(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Divider(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    // Nom
-                    TextFieldsWidget(
-                      label: "Nom",
-                      hintText: "Entrer votre nom",
-                      textInputType: TextInputType.name,
-                      controller: _nom,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // Prénoms
-                    TextFieldsWidget(
-                      label: "Prénoms",
-                      hintText: "Entrer votre prénoms",
-                      textInputType: TextInputType.name,
-                      controller: _prenoms,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    // Numero whatsapp
-                    TextFieldsWidget(
-                      label: "Numéro Whatsapp",
-                      hintText: "Entrer un numéro",
-                      textInputType: TextInputType.name,
-                      controller: _whatsapp,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // Téléphone
-                    TextFieldsWidget(
-                      label: "Numéro Téléphone",
-                      hintText: "Entrer un numéro",
-                      textInputType: TextInputType.name,
-                      controller: _telephone,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-
-                    //Description
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const LabelFormWidget(label: "Description"),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 0.4, color: Colors.grey),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              minLines: 150,
-                              maxLines: null,
-                              controller: _description,
-                              keyboardType: TextInputType.multiline,
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Entrer une description"),
+                      const ButtonAddAnnonceWidget(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // Nom
+                      TextFieldsWidget(
+                        icon: Icons.person_outline,
+                        label: "Nom",
+                        hintText: "Entrer votre nom",
+                        textInputType: TextInputType.name,
+                        controller: _nom,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+
+                      // Prénoms
+                      TextFieldsWidget(
+                        icon: Icons.person_outline,
+                        label: "Prénoms",
+                        hintText: "Entrer votre prénoms",
+                        textInputType: TextInputType.name,
+                        controller: _prenoms,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+
+                      SizedBox(
+                        height: Dimensions.height10 * 2,
+                      ),
+                      IntlPhoneFieldsComponent(
+                        label: "Numéro WhatsApp",
+                        hintText: "Entrer un numéro",
+                        controller: _whatsapp,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10 * 2,
+                      ),
+                      // Téléphone
+                      IntlPhoneFieldsComponent(
+                        label: "Numéro Téléphone",
+                        hintText: "Entrer un numéro",
+                        controller: _telephone,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10 * 2,
+                      ),
+
+                      //Description
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: const LabelFormWidget(label: "Description"),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        height: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 0.4, color: Colors.grey),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                minLines: 150,
+                                maxLines: null,
+                                controller: _description,
+                                keyboardType: TextInputType.multiline,
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Entrer une description"),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // Mettre à jours les informations personnelles
+                          Map<String, dynamic> data = {
+                            'nom': _nom.text,
+                            'prenoms': _prenoms.text,
+                            'whatsapp': _whatsapp.text,
+                            'telephone': _telephone.text,
+                            'description': _description.text,
+                          };
+                          print(data);
+                          widget.controller.updateInformation(data);
+                        },
+                        child: Container(
+                            padding: const EdgeInsets.all(10),
+                            alignment: Alignment.center,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: AppColors.secondColor,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          )
-                        ],
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: BigTextWidget(
+                                    height: 0,
+                                    text: ("Mettre à jours les informations")
+                                        .toUpperCase(),
+                                    sizeText: 13,
+                                    textAlign: TextAlign.start,
+                                    textColor: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(
+                                  Icons.person_outline,
+                                  color: Colors.white,
+                                )
+                              ],
+                            )),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        // Mettre à jours les informations personnelles
-                        Map<String, dynamic> data = {
-                          'nom': _nom.text,
-                          'prenoms': _prenoms.text,
-                          'whatsapp': _whatsapp.text,
-                          'telephone': _telephone.text,
-                          'description': _description.text,
-                        };
-                        var result =
-                            await widget.controller.updateInformation(data);
-                        if (result) {
-                          Get.offAndToNamed(Routes.base);
-                        }
-                      },
-                      child: Container(
-                          padding: const EdgeInsets.all(10),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: BigTextWidget(
+                          text: "Changer votre mot de passe",
+                          textAlign: TextAlign.start,
+                          sizeText: 18,
+                        ),
+                      ),
+
+                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      // Nouveau mot de passe
+                      TextFieldsWidget(
+                        label: "Nouveau mot de passe",
+                        obscureText: true,
+                        hintText: "*******",
+                        icon: Icons.lock,
+                        textInputType: TextInputType.name,
+                        controller: _password,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // Confirmation du mot de passe
+                      TextFieldsWidget(
+                        label: "Confirmation du mot de passe",
+                        icon: Icons.lock,
+                        obscureText: true,
+                        hintText: "*******",
+                        textInputType: TextInputType.name,
+                        controller: _confirmPassword,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // Mise à jours du mot de passe
+                          Map<String, dynamic> data = {
+                            'password': _password.text,
+                            'password_confirmation': _confirmPassword.text,
+                          };
+                          print(data);
+                          widget.controller.updatePassWord(data);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           alignment: Alignment.center,
                           height: 45,
                           decoration: BoxDecoration(
@@ -215,12 +315,12 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: BigTextWidget(
                                   height: 0,
-                                  text: ("Mettre à jours les informations")
-                                      .toUpperCase(),
+                                  text: "Changer le mot de passe".toUpperCase(),
                                   sizeText: 13,
                                   textAlign: TextAlign.start,
                                   textColor: Colors.white,
@@ -230,170 +330,72 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                                 width: 5,
                               ),
                               Icon(
-                                Icons.person_outline,
+                                Icons.key_rounded,
                                 color: Colors.white,
                               )
                             ],
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10)),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                width: double.infinity,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: BigTextWidget(
-                        text: "Changer votre mot de passe",
-                        textAlign: TextAlign.start,
-                        sizeText: 18,
-                      ),
-                    ),
-
-                    const Divider(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    // Nouveau mot de passe
-                    TextFieldsWidget(
-                      label: "Nouveau mot de passe",
-                      obscureText: true,
-                      hintText: "*******",
-                      icon: Icons.lock,
-                      textInputType: TextInputType.name,
-                      controller: _password,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // Confirmation du mot de passe
-                    TextFieldsWidget(
-                      label: "Confirmation du mot de passe",
-                      icon: Icons.lock,
-                      obscureText: true,
-                      hintText: "*******",
-                      textInputType: TextInputType.name,
-                      controller: _confirmPassword,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        // Mise à jours du mot de passe
-                        Map<String, dynamic> data = {
-                          'password': _password.text,
-                          'passsword_confirmed': _confirmPassword.text,
-                        };
-                        var result =
-                            await widget.controller.updatePassWord(data);
-                        if (result) {
-                          Get.offAndToNamed(Routes.base);
-                        }
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        alignment: Alignment.center,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: AppColors.secondColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: BigTextWidget(
-                                height: 0,
-                                text: "Changer le mot de passe".toUpperCase(),
-                                sizeText: 13,
-                                textAlign: TextAlign.start,
-                                textColor: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.key_rounded,
-                              color: Colors.white,
-                            )
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const BigTextWidget(
-                        text: "Suppression de compte",
-                        textAlign: TextAlign.start,
-                        sizeText: 20,
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    // Nouveau mot de passe
-                    TextFieldsWidget(
-                      label: "Mot de passe",
-                      icon: Icons.lock,
-                      obscureText: true,
-                      hintText: "*******",
-                      textInputType: TextInputType.name,
-                      controller: _passwordCompte,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        // Suppression du compte utilisateur
-                        Map<String, dynamic> data = {
-                          'password': _passwordCompte.text
-                        };
-                        var result = await widget.controller.deteleAcount(data);
-                        print(result);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        alignment: Alignment.center,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: AppColors.secondColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: BigTextWidget(
-                          height: 0,
-                          text: "Confirmation de la suppression".toUpperCase(),
-                          sizeText: 13,
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: const BigTextWidget(
+                          text: "Suppression de compte",
                           textAlign: TextAlign.start,
-                          textColor: Colors.white,
+                          sizeText: 20,
                         ),
                       ),
-                    ),
-                  ],
+                      // Nouveau mot de passe
+                      TextFieldsWidget(
+                        label: "Mot de passe",
+                        icon: Icons.lock,
+                        obscureText: true,
+                        hintText: "*******",
+                        textInputType: TextInputType.name,
+                        controller: _passwordCompte,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          // Suppression du compte utilisateur
+                          Map<String, dynamic> data = {
+                            'password': _passwordCompte.text
+                          };
+                          var result =
+                              await widget.controller.deteleAcount(data);
+                          print(result);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          alignment: Alignment.center,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.secondColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: BigTextWidget(
+                            height: 0,
+                            text:
+                                "Confirmation de la suppression".toUpperCase(),
+                            sizeText: 13,
+                            textAlign: TextAlign.start,
+                            textColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -50,4 +50,6 @@ class BaseController extends GetxController {
     currentIndex = 0;
     update();
   }
+
+  changeCurrentIndex(int value) {}
 }

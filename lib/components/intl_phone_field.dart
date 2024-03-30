@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../utils/colors.dart';
-import 'label_form.dart';
+import '../utils/dimensions.dart';
+import '../widgets/label_form.dart';
 
-class TextFieldsWidget extends StatelessWidget {
+class IntlPhoneFieldsComponent extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
   final TextInputType textInputType;
-  final bool obscureText;
-  final IconData? icon;
-  final String label;
+  final TextEditingController controller;
   final Color enabledBorderColor;
-  final bool suffixIcon;
-  const TextFieldsWidget({
+  final String label;
+  const IntlPhoneFieldsComponent({
     super.key,
-    required this.hintText,
-    required this.textInputType,
-    this.obscureText = false,
-    this.icon = null,
     required this.label,
+    required this.hintText,
+    this.textInputType = TextInputType.name,
     required this.controller,
-    this.suffixIcon = false,
     this.enabledBorderColor = Colors.black38,
   });
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,17 +28,16 @@ class TextFieldsWidget extends StatelessWidget {
           child: LabelFormWidget(label: label),
         ),
         Container(
+          height: Dimensions.height10 * 5,
           width: double.infinity,
-          child: TextFormField(
+          child: IntlPhoneField(
+            initialCountryCode: "BJ",
             controller: controller,
-            keyboardType: textInputType,
-            obscureText: obscureText,
+            focusNode: FocusNode(),
             decoration: InputDecoration(
+              counter: null,
+              counterText: '',
               contentPadding: EdgeInsets.symmetric(vertical: 10),
-              prefixIcon: Icon(
-                icon,
-                color: AppColors.textColor,
-              ),
               hintText: hintText,
               hintStyle: TextStyle(color: AppColors.textColor),
               enabledBorder: OutlineInputBorder(
@@ -59,6 +53,14 @@ class TextFieldsWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
+            languageCode: "fr",
+            onChanged: (phone) {
+              print(phone.completeNumber);
+            },
+            onCountryChanged: (country) {
+              print('Country changed to: ' + country.name);
+            },
+            searchText: "Sélectionner un pays",
           ),
         ),
       ],

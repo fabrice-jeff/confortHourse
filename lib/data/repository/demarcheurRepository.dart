@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../utils/share_preference.dart';
 import '../api/api.dart';
 
 class DemarcheurRepository {
@@ -65,17 +66,19 @@ class DemarcheurRepository {
 
   //Update Information
   Future<Map<String, dynamic>?> updateInformation(data) async {
+    String? token = await SharePreferences.prefs.getString('token');
     final endpoint = Api.updateInformation;
     final url = Uri.parse(api + endpoint);
     final response = await http.post(
       url,
       body: data,
-      headers: {},
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
     );
     Map<String, dynamic>? results;
     try {
       results = jsonDecode(response.body);
-
       return results;
     } catch (e) {
       print('erreur');
@@ -85,12 +88,15 @@ class DemarcheurRepository {
 
   //Update Password
   Future<Map<String, dynamic>?> updatePassword(data) async {
+    String? token = await SharePreferences.prefs.getString('token');
     final endpoint = Api.updatePassword;
     final url = Uri.parse(api + endpoint);
     final response = await http.post(
       url,
       body: data,
-      headers: {},
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
     );
     Map<String, dynamic>? results;
     try {

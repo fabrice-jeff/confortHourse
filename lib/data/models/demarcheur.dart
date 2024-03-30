@@ -30,7 +30,7 @@ class Demarcheur {
   });
 
   factory Demarcheur.fromJson(Map<String, dynamic> json) {
-    Pays pays = Pays.fromJson(json['pays']);
+    Pays pays = Pays.fromJson(json['pays_id']);
     return Demarcheur(
       id: json['id'],
       nom: json['nom'],

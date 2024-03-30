@@ -38,8 +38,15 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _key = GlobalKey<FormState>();
-  late TextEditingController _email = TextEditingController();
-  late TextEditingController _password = TextEditingController();
+  late TextEditingController _email;
+  late TextEditingController _password;
+
+  @override
+  void initState() {
+    _email = TextEditingController();
+    _password = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
                         child: Column(
                           children: [
                             SimpleTextWidget(
-                              text: 'ConfortHourse',
+                              text: ConstantsValues.appName,
                               sizeText: Dimensions.fontsize13,
                             ),
                             SizedBox(

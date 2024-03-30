@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/menu.dart';
 import '../../demarcheurs/views/demarcheur_view.dart';
@@ -33,8 +34,8 @@ class BaseView extends GetView<BaseController> {
           ),
           actions: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(
+              margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+              child: const Icon(
                 Icons.search,
                 size: 25,
               ),
