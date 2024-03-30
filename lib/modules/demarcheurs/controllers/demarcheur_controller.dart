@@ -34,7 +34,6 @@ class DemarcheurController extends GetxController {
 
   Future<void> updatePassWord(Map<String, dynamic> data) async {
     var result = await demarcheurRepository.updatePassword(data);
-    print(result);
     if (result != null && result['success']) {
       // Changer la page une fois conneter
       BaseController baseController = Get.put(BaseController());

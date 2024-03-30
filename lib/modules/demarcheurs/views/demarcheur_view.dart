@@ -55,7 +55,10 @@ class DemarcheurView extends GetView<BaseController> {
         baseController: controller,
       );
     } else {
-      return AddAnnonceView(demarcheur: demarcheur);
+      return AddAnnonceView(
+        demarcheur: demarcheur,
+        baseController: controller,
+      );
     }
   }
 }

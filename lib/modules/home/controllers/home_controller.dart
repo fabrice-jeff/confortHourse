@@ -16,12 +16,6 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  //Get Type Annonce
-  getTypeAnnonce() async {
-    var result = await annonceRepository.getTypeAnnonce();
-    print(result);
-  }
-
   // Get annonce by  limite
   getAnnonceByLimite() async {
     var result = await annonceRepository.getAnnonceByLimite({'nombre': "5"});

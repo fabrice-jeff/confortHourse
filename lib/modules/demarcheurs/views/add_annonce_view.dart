@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,9 @@ import 'user_page.dart';
 
 class AddAnnonceView extends GetView<AnnonceController> {
   final Demarcheur? demarcheur;
-  const AddAnnonceView({super.key, this.demarcheur});
+  final BaseController baseController;
+  const AddAnnonceView(
+      {super.key, this.demarcheur, required this.baseController});
   @override
   Widget build(BuildContext context) {
     Get.put(AnnonceController);
@@ -29,6 +32,7 @@ class AddAnnonceView extends GetView<AnnonceController> {
         child: AddAnnonceForm(
           demarcheur: demarcheur,
           controller: controller,
+          baseController: baseController,
         ),
       ),
     );
@@ -38,11 +42,12 @@ class AddAnnonceView extends GetView<AnnonceController> {
 class AddAnnonceForm extends StatefulWidget {
   final AnnonceController controller;
   final Demarcheur? demarcheur;
-  const AddAnnonceForm({
-    super.key,
-    required this.controller,
-    this.demarcheur,
-  });
+  final BaseController baseController;
+  const AddAnnonceForm(
+      {super.key,
+      required this.controller,
+      this.demarcheur,
+      required this.baseController});
 
   @override
   State<AddAnnonceForm> createState() => _AddAnnonceFormState();
@@ -50,39 +55,31 @@ class AddAnnonceForm extends StatefulWidget {
 
 class _AddAnnonceFormState extends State<AddAnnonceForm> {
   late TextEditingController _titre;
-  late TextEditingController _prix;
-  late TextEditingController _description;
   String? _type;
   String? _categorie;
-  String? _localisation;
+  late TextEditingController _prix;
+  late TextEditingController _localisation;
   File? _file;
   bool _fileSelected = false;
   String? _extension;
+  late TextEditingController _description;
 
   @override
   void initState() {
     _titre = TextEditingController();
     _prix = TextEditingController();
     _description = TextEditingController();
+    _localisation = TextEditingController();
+
     super.initState();
   }
 
   void handleSelectCategorie(String? selectedValue) {
-    for (var categorie in widget.controller.categoriesObjet) {
-      if (selectedValue == categorie.libelle) {
-        _categorie = categorie.libelle;
-        break;
-      }
-    }
+    _categorie = selectedValue;
   }
 
   void handleSelectType(String? selectedValue) {
-    for (var type in widget.controller.typeObjet) {
-      if (selectedValue == type.libelle) {
-        _type = type.libelle;
-        break;
-      }
-    }
+    _type = selectedValue;
   }
 
   void _openFileExplorer() async {
@@ -156,6 +153,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                     // Titre
 
                     TextFieldsWidget(
+                      icon: Icons.account_balance_rounded,
                       label: "Titre",
                       hintText:
                           "Entrer les quartier ou le village ou l'arrondissement",
@@ -170,8 +168,8 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                     // Type de la location
                     SelectFieldsWidget(
                       hintText: "Selectionner un type",
-                      label: "Type",
-                      items: widget.controller.typeArray,
+                      label: "Type annonce",
+                      items: widget.baseController.typeArray,
                       onValueChanged: handleSelectType,
                     ),
 
@@ -183,7 +181,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                     SelectFieldsWidget(
                       hintText: "Sélectionner une catégorie",
                       label: "Catégories",
-                      items: widget.controller.categoriesArray,
+                      items: widget.baseController.categoriesArray,
                       onValueChanged: handleSelectCategorie,
                     ),
                     SizedBox(
@@ -192,6 +190,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
 
                     // Prix de la location
                     TextFieldsWidget(
+                      icon: Icons.bento,
                       label: "Prix",
                       hintText: "Entrer le prix",
                       textInputType: TextInputType.name,
@@ -204,10 +203,11 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
 
                     //Localisation
                     TextFieldsWidget(
-                      label: "Prix",
-                      hintText: "Entrer le prix",
+                      label: "Localisation",
+                      hintText: "Entrer une localisation",
                       textInputType: TextInputType.name,
-                      controller: _prix,
+                      icon: Icons.castle_outlined,
+                      controller: _localisation,
                     ),
                     SizedBox(
                       height: Dimensions.height10 * 2,
@@ -315,18 +315,19 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                           'type': _type,
                           'categorie': _categorie,
                           'prix': _prix.text,
-                          'ville': _localisation,
+                          'ville': _localisation.text,
                           'image': _file,
                           'extension': _extension,
                           'description': _description.text,
                         };
+                        // print(data);
                         widget.controller.addAnnonce(data);
                       },
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Container(
                           alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.67,
+                          width: double.infinity,
                           height: 45,
                           decoration: BoxDecoration(
                             color: AppColors.secondColor,
@@ -335,6 +336,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                           child: BigTextWidget(
                             height: 0,
                             text: "Publier l'annonce",
+                            sizeText: 20,
                             textColor: Colors.white,
                           ),
                         ),

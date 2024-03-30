@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../utils/share_preference.dart';
 import '../api/api.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,12 +10,15 @@ class AnnonceRepository {
 
   // Add Annonce
   Future<Map<String, dynamic>?> addAnnonce(Map<String, dynamic> data) async {
-    final endpoint = Api.addAnnonce;
+    String? token = await SharePreferences.prefs.getString('token');
+    const endpoint = Api.addAnnonce;
     final url = Uri.parse(api + endpoint);
     final response = await http.post(
       url,
       body: data,
-      headers: {},
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
     );
     Map<String, dynamic>? result;
     try {
@@ -22,24 +26,6 @@ class AnnonceRepository {
       return result;
     } catch (e) {
       print('erreur');
-      return null;
-    }
-  }
-
-  // Get type annonnce
-  Future<Map<String, dynamic>?> getTypeAnnonce() async {
-    const endpoint = Api.typeAnnonce;
-    final url = Uri.parse(api + endpoint);
-    final response = await http.get(
-      url,
-      headers: {},
-    );
-    Map<String, dynamic>? result;
-    try {
-      result = jsonDecode(response.body);
-      return result;
-    } catch (e) {
-      print('erreurjkhuholjhojhk');
       return null;
     }
   }

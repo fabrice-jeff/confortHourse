@@ -41,7 +41,8 @@ class SecurityController extends GetxController {
       baseController.changePage(ConstantsValues.ADD_ANNONCE);
       Get.offAndToNamed(Routes.base);
     } else {
-      Get.offAll(() => LoginView());
+      BaseController baseController = Get.put(BaseController());
+      Get.offNamed(Routes.login, arguments: {'baseController': baseController});
     }
   }
 }

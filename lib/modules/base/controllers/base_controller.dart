@@ -4,6 +4,7 @@ import '../../../data/api/api.dart';
 import '../../../data/models/categorie.dart';
 import '../../../data/models/demarcheur.dart';
 import '../../../data/models/pays.dart';
+import '../../../data/models/type_annonce.dart';
 import '../../../data/repository/base_repository.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/constants.dart';
@@ -18,11 +19,14 @@ class BaseController extends GetxController {
   List<Pays> paysObjets = [];
   List<String> paysArray = [];
   final BaseRepository baseRepository = BaseRepository(api: Api.baseUrl);
+  List<TypeAnnonce> typeObjet = [];
+  List<String> typeArray = [];
 
   @override
   void onInit() {
     getPays();
     getCategories();
+    getTypeAnnonce();
     super.onInit();
   }
 
@@ -35,6 +39,7 @@ class BaseController extends GetxController {
         for (var categorie in data) {
           var objet = Categorie.fromJson(categorie);
           categoriesObjet.add(objet);
+          categoriesArray.add(objet.libelle);
         }
       }
     }
@@ -52,6 +57,21 @@ class BaseController extends GetxController {
       }
     }
     update();
+  }
+
+  //Récupération des type d'annonce
+  getTypeAnnonce() async {
+    var result = await baseRepository.getTypeAnnonce();
+    if (result != null && result['success']) {
+      var data = result['datas'];
+      if (data != null) {
+        for (var type in data) {
+          var objet = TypeAnnonce.fromJson(type);
+          typeObjet.add(objet);
+          typeArray.add(objet.libelle);
+        }
+      }
+    }
   }
 
   /// change the selected screen index

@@ -1,4 +1,3 @@
-import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:get/get.dart';
 
 import '../modules/apropos/views/a_propos.dart';
