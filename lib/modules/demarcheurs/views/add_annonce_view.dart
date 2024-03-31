@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ import '../../../widgets/label_form.dart';
 import '../../../widgets/select_fields.dart';
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/text_fields.dart';
+import '../../base/controllers/base_controller.dart';
 import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
 
@@ -26,7 +26,6 @@ class AddAnnonceView extends GetView<AnnonceController> {
       {super.key, this.demarcheur, required this.baseController});
   @override
   Widget build(BuildContext context) {
-    Get.put(AnnonceController);
     return Scaffold(
       body: Container(
         child: AddAnnonceForm(

@@ -17,7 +17,7 @@ class Api {
       '/annonces/total_publication_by_demarcheur';
   static const addAnnonce = "/annonces/add";
   static const recentsPublications =
-      "annonces/recent_publication_by_demarcheur";
+      "/annonces/recent_publication_by_demarcheur";
 
   static const annonceByCategorie = "/annonces/annonces_by_categorie";
   static const otherAnnonceByCategorie =

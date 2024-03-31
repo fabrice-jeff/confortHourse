@@ -1,4 +1,3 @@
-import 'package:conforthourse/modules/demarcheurs/controllers/demarcheur_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +12,7 @@ import '../../../widgets/header_section.dart';
 import '../../../widgets/label_form.dart';
 import '../../../widgets/text_fields.dart';
 import '../../base/controllers/base_controller.dart';
+import '../controllers/demarcheur_controller.dart';
 import 'user_page.dart';
 
 class ParametreProfilView extends GetView<DemarcheurController> {
@@ -374,12 +374,12 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                       InkWell(
                         onTap: () async {
                           // Suppression du compte utilisateur
-                          Map<String, dynamic> data = {
-                            'password': _passwordCompte.text
-                          };
-                          var result = await widget.demarcheurController
-                              .deteleAcount(data);
-                          print(result);
+                          // Map<String, dynamic> data = {
+                          //   'password': _passwordCompte.text
+                          // };
+                          // var result = await widget.demarcheurController
+                          //     .deteleAcount(data);
+                          // print(result);
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15),

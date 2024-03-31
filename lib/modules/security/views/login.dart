@@ -1,4 +1,3 @@
-import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +9,7 @@ import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/text_fields.dart';
+import '../../base/controllers/base_controller.dart';
 import '../controllers/security_controller.dart';
 
 class LoginView extends GetView<SecurityController> {
@@ -48,7 +48,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
-    print(widget.baseController!.paysArray);
     _email = TextEditingController();
     _password = TextEditingController();
     super.initState();

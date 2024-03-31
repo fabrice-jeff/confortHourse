@@ -165,15 +165,16 @@ class LocationWidget extends GetView<HomeController> {
 
                       var otherAnnonces =
                           await controller.getOtherAnnonceByCategorie(data);
-                      var annonces = await controller.getAnnonceByCategorie({
-                        "categorie": location['annonce'].categorie.code,
-                      });
+                      var annonces = [];
+                      // var annonces = await controller.getAnnonceByCategorie({
+                      //   "categorie": location['annonce'].categorie.code,
+                      // });
 
                       // Détails d'une annomce
-                      Get.to(DetailsLocation(
-                          location: location,
-                          otherAnnonces: otherAnnonces,
-                          annonces: annonces));
+                      // Get.to(DetailsLocation(
+                      //     location: location,
+                      //     otherAnnonces: otherAnnonces,
+                      //     annonces: annonces));
                     },
                     child: SimpleTextWidget(
                       text: 'Détails',

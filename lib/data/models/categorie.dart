@@ -8,7 +8,7 @@ class Categorie {
     required this.id,
     required this.libelle,
     this.icon,
-    required this.nombreAnnonce,
+    this.nombreAnnonce,
   });
   factory Categorie.fromJson(Map<String, dynamic> json) => Categorie(
       id: json['id'],

@@ -52,16 +52,16 @@ class CategorieView extends GetView<HomeController> {
                       return InkWell(
                         onTap: () async {
                           // Get annonce by categorie
-                          var annonces = await controller
-                              .getAnnonceByCategorie({
-                            "categorie":
-                                baseController!.categoriesObjet[index].id
-                          });
-                          Get.to(LocationByCategoriePage(
-                            categorie:
-                                baseController!.categoriesObjet[index].libelle,
-                            locations: annonces,
-                          ));
+                          // var annonces = await controller
+                          //     .getAnnonceByCategorie({
+                          //   "categorie":
+                          //       baseController!.categoriesObjet[index].id
+                          // });
+                          // Get.to(LocationByCategoriePage(
+                          //   categorie:
+                          //       baseController!.categoriesObjet[index].libelle,
+                          //   locations: annonces,
+                          // ));
                         },
                         child: CategorieWidget(
                           categorie: baseController!.categoriesObjet[index],

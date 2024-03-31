@@ -33,6 +33,7 @@ class AnnonceRepository {
   //Total publication By Demarcheur
   Future<Map<String, dynamic>?> totalPublication() async {
     String? token = await SharePreferences.prefs.getString('token');
+    print(token);
     const endpoint = Api.totalPublicationByDemarcheur;
     final url = Uri.parse(api + endpoint);
     final response = await http.get(
@@ -41,7 +42,7 @@ class AnnonceRepository {
         'Authorization': "Bearer ${token}",
       },
     );
-
+    print(response.body);
     try {
       Map<String, dynamic>? result;
       result = jsonDecode(response.body);
@@ -62,7 +63,6 @@ class AnnonceRepository {
         'Authorization': "Bearer ${token}",
       },
     );
-
     try {
       Map<String, dynamic>? result;
       result = jsonDecode(response.body);

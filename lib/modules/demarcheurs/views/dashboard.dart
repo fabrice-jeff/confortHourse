@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/api/api.dart';
 import '../../../data/models/demarcheur.dart';
+import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
@@ -20,7 +22,6 @@ class DashboardView extends GetView<AnnonceController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(AnnonceController());
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -124,26 +125,72 @@ class DashboardView extends GetView<AnnonceController> {
                                 label: BigTextWidget(text: "Prix"),
                               ),
                             ],
-                            rows: const <DataRow>[
-                              DataRow(
-                                cells: [
-                                  DataCell(
-                                    Text("Bonjour"),
-                                  ),
-                                  DataCell(
-                                    Text("Bonjour"),
-                                  ),
-                                  DataCell(
-                                    Text("Bonjour"),
-                                  ),
-                                  DataCell(
-                                    Text("Bonjour"),
-                                  ),
-                                  DataCell(
-                                    Text("Bonjour"),
-                                  ),
-                                ],
-                              ),
+                            rows: <DataRow>[
+                              for (var element
+                                  in controller.recentsPublicaation)
+                                DataRow(
+                                  cells: [
+                                    DataCell(
+                                      Container(
+                                        width: double.infinity,
+                                        height: 200,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                              image: NetworkImage(Api.baseUrl +
+                                                  "/" +
+                                                  element['fichiers'][0].path),
+                                              fit: BoxFit.cover),
+                                        ),
+                                      ),
+                                    ),
+                                    DataCell(
+                                      Text(
+                                          element['annonce'].categorie.libelle),
+                                    ),
+                                    DataCell(
+                                      Text(element['annonce']
+                                          .createdAt
+                                          .toString()),
+                                    ),
+                                    DataCell(
+                                      // if(element['annonce'].deleted =)
+                                      (element['annonce'].deleted)
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.secondColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Dimensions.radius10),
+                                              ),
+                                              child: SimpleTextWidget(
+                                                text: "Désactivé",
+                                                textColor: Colors.white,
+                                              ),
+                                            )
+                                          : Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Dimensions.width10 / 2),
+                                              decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Dimensions.radius10),
+                                              ),
+                                              child: SimpleTextWidget(
+                                                text: "Actif",
+                                                fontWeight: FontWeight.w700,
+                                                textColor: Colors.white,
+                                              ),
+                                            ),
+                                    ),
+                                    DataCell(
+                                      Text(element['annonce'].prix + " FCFA"),
+                                    ),
+                                  ],
+                                ),
                             ],
                           ),
                         ),
