@@ -28,33 +28,29 @@ class DemarcheurView extends GetView<BaseController> {
   }
 
   Widget _buildWidget(Demarcheur? demarcheur) {
+    // Dashboard
     if (page == ConstantsValues.DASHBOARD) {
-      // Récupérer le total de publication
-      // Récuperer le total de chambres loués
-      // Prix chambres loué
-      // Annonces recemment publiées
-      return DashboardView(
-        demarcheur: demarcheur,
-      );
-    } else if (page == ConstantsValues.PROFIL_USER) {
-      // Total de location
-      // Location actifs
-      // Location louée
-      // Date création du compte
+      return const DashboardView();
+    }
+    // Profil
+    else if (page == ConstantsValues.PROFIL_USER) {
       return ProfilView(baseController: controller);
-    } else if (page == ConstantsValues.ANNONCES) {
-      // Liste des annonces publiés
+    }
+    // Liste des annonces publiés
+    else if (page == ConstantsValues.ANNONCES) {
       return AnnoncesView(
-        demarcheur: demarcheur,
-      );
-    } else if (page == ConstantsValues.PARAMETRES) {
-      return ParametreProfilView(
-        demarcheur: demarcheur,
         baseController: controller,
       );
-    } else {
+    }
+    //Parametre de profil
+    else if (page == ConstantsValues.PARAMETRES) {
+      return ParametreProfilView(
+        baseController: controller,
+      );
+    }
+    // Ajouter une annonce
+    else {
       return AddAnnonceView(
-        demarcheur: demarcheur,
         baseController: controller,
       );
     }

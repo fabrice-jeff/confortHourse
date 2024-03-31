@@ -5,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
@@ -20,16 +19,13 @@ import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
 
 class AddAnnonceView extends GetView<AnnonceController> {
-  final Demarcheur? demarcheur;
   final BaseController baseController;
-  const AddAnnonceView(
-      {super.key, this.demarcheur, required this.baseController});
+  const AddAnnonceView({super.key, required this.baseController});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: AddAnnonceForm(
-          demarcheur: demarcheur,
           controller: controller,
           baseController: baseController,
         ),
@@ -40,13 +36,9 @@ class AddAnnonceView extends GetView<AnnonceController> {
 
 class AddAnnonceForm extends StatefulWidget {
   final AnnonceController controller;
-  final Demarcheur? demarcheur;
   final BaseController baseController;
   const AddAnnonceForm(
-      {super.key,
-      required this.controller,
-      this.demarcheur,
-      required this.baseController});
+      {super.key, required this.controller, required this.baseController});
 
   @override
   State<AddAnnonceForm> createState() => _AddAnnonceFormState();

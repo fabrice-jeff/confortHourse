@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
@@ -14,9 +13,9 @@ import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
 
 class ProfilView extends GetView<AnnonceController> {
-  final Demarcheur? demarcheur;
   final BaseController? baseController;
-  const ProfilView({super.key, this.demarcheur, this.baseController});
+  const ProfilView({super.key, this.baseController});
+
   Widget _infoUser({required String libelle, required String value}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: Dimensions.height10),

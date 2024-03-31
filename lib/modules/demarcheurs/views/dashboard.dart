@@ -4,21 +4,21 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/api/api.dart';
-import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 import '../../../widgets/simple_text.dart';
+import '../../base/controllers/base_controller.dart';
 import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
 
 class DashboardView extends GetView<AnnonceController> {
-  final Demarcheur? demarcheur;
+  final BaseController? baseController;
   const DashboardView({
     super.key,
-    this.demarcheur,
+    this.baseController,
   });
 
   @override

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/intl_phone_field.dart';
-import '../../../data/models/demarcheur.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
@@ -17,11 +16,9 @@ import '../controllers/demarcheur_controller.dart';
 import 'user_page.dart';
 
 class ParametreProfilView extends GetView<DemarcheurController> {
-  final Demarcheur? demarcheur;
   final BaseController baseController;
   const ParametreProfilView({
     super.key,
-    this.demarcheur,
     required this.baseController,
   });
   @override
@@ -30,7 +27,6 @@ class ParametreProfilView extends GetView<DemarcheurController> {
     return Scaffold(
       body: Container(
         child: ParametreProfilForm(
-          demarcheur: demarcheur,
           demarcheurController: controller,
           baseController: baseController,
         ),
@@ -40,13 +36,11 @@ class ParametreProfilView extends GetView<DemarcheurController> {
 }
 
 class ParametreProfilForm extends StatefulWidget {
-  final Demarcheur? demarcheur;
   final DemarcheurController demarcheurController;
   final BaseController baseController;
 
   const ParametreProfilForm(
       {super.key,
-      this.demarcheur,
       required this.demarcheurController,
       required this.baseController});
 
@@ -69,21 +63,35 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
   late TextEditingController _passwordCompte;
   @override
   void initState() {
-    _nom = TextEditingController(
-        text: (widget.demarcheur == null) ? "" : widget.demarcheur!.nom);
-    _prenoms = TextEditingController(
-        text: (widget.demarcheur == null) ? "" : widget.demarcheur!.prenoms);
-    super.initState();
-    _whatsapp = TextEditingController(
-        text: (widget.demarcheur == null) ? "" : widget.demarcheur!.whatsapp);
-    _telephone = TextEditingController(
-        text: (widget.demarcheur == null) ? "" : widget.demarcheur!.telephone);
-    _description = TextEditingController(
-        text:
-            (widget.demarcheur == null) ? "" : widget.demarcheur!.description);
-    _password = TextEditingController();
-    _confirmPassword = TextEditingController();
-    _passwordCompte = TextEditingController();
+    if (widget.baseController.demarcheur != null) {
+      //Modification des informations personnelles
+      _nom = TextEditingController(text: widget.baseController.demarcheur!.nom);
+      _prenoms = TextEditingController(
+          text: widget.baseController.demarcheur!.prenoms);
+      _whatsapp = TextEditingController(
+          text: widget.baseController.demarcheur!.whatsapp);
+      _telephone = TextEditingController(
+          text: widget.baseController.demarcheur!.telephone);
+      _description = TextEditingController(
+          text: widget.baseController.demarcheur!.description);
+      //Modification du mot de passe
+      _password = TextEditingController();
+      _confirmPassword = TextEditingController();
+      //Suppression du mot de passe
+      _passwordCompte = TextEditingController();
+    } else {
+      //Modification des informations personnelles
+      _nom = TextEditingController();
+      _prenoms = TextEditingController();
+      _whatsapp = TextEditingController();
+      _telephone = TextEditingController();
+      _description = TextEditingController();
+      //Modification du mot de passe
+      _password = TextEditingController();
+      _confirmPassword = TextEditingController();
+      //Suppression du mot de passe
+      _passwordCompte = TextEditingController();
+    }
     super.initState();
   }
 
@@ -142,7 +150,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.add_circle_outline_rounded,
                                   color: Colors.white,
                                 ),
@@ -274,9 +282,9 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 5,
+                                  width: Dimensions.width10,
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.person_outline,
                                   color: Colors.white,
                                 )
@@ -371,9 +379,9 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                                 ),
                               ),
                               SizedBox(
-                                width: 5,
+                                width: Dimensions.width10,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.key_rounded,
                                 color: Colors.white,
                               )
@@ -382,7 +390,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                         ),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: Dimensions.height10 * 3,
                       ),
                       Container(
                         alignment: Alignment.topLeft,
