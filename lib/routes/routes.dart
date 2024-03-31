@@ -11,5 +11,6 @@ class Routes {
   static const colocation = "/colocation";
   static const faqs = '/faqs';
   static const demarcheurDashboard = "/demarcheur_dashboard";
+  static const detailsLocation = "/details_location";
   static const demarcheurAddAnnonce = "/demarcheur_add_annonce";
 }

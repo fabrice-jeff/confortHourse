@@ -95,26 +95,26 @@ class AnnonceRepository {
   // Get villes
   Future<Map<String, dynamic>?> getAnnonceByCategorie(
       Map<String, dynamic> data) async {
-    final endpoint = Api.annonceByCategorie;
+    const endpoint = Api.annonceByCategorie;
     final url = Uri.parse(api + endpoint);
     final response = await http.post(
       url,
       body: data,
       headers: {},
     );
-    Map<String, dynamic>? result;
+
     try {
+      Map<String, dynamic>? result;
       result = jsonDecode(response.body);
       return result;
     } catch (e) {
-      print('erreur');
       return null;
     }
   }
 
-  Future<Map<String, dynamic>?> getOtherAnnonceByCategorie(
+  Future<Map<String, dynamic>?> getAnnonceSimulaireByCategorie(
       Map<String, dynamic> data) async {
-    final endpoint = Api.otherAnnonceByCategorie;
+    const endpoint = Api.annonceSimulaireByCategorie;
     final url = Uri.parse(api + endpoint);
     final response = await http.post(
       url,
@@ -126,7 +126,6 @@ class AnnonceRepository {
       result = jsonDecode(response.body);
       return result;
     } catch (e) {
-      print('erreur');
       return null;
     }
   }

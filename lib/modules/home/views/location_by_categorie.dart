@@ -1,10 +1,13 @@
-import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/big_text.dart';
-import 'package:conforthourse/widgets/header_section.dart';
-import 'package:conforthourse/modules/home/views/location_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:flutter_pagination/widgets/button_styles.dart';
+
+import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
+import '../../../widgets/big_text.dart';
+import '../../../widgets/header_section.dart';
+import 'location_widget.dart';
 
 class LocationByCategoriePage extends StatefulWidget {
   final List<Map<String, dynamic>> locations;
@@ -20,12 +23,19 @@ class LocationByCategoriePage extends StatefulWidget {
 }
 
 class _LocationByCategorieState extends State<LocationByCategoriePage> {
-  int currentPage = 1;
+  int currentPage = 0;
+  PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: BigTextWidget(text: "ConfortHourse"),
+        shadowColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.backgroundColor,
+        title: BigTextWidget(
+          text: ConstantsValues.appName.toUpperCase(),
+          fontWeight: FontWeight.w400,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,21 +45,22 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
               Column(
                 children: [
                   Container(
-                    height: 530 * 2,
+                    height: 530.0 * widget.locations.length,
                     child: PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 2,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: 7,
                       onPageChanged: (index) {
                         setState(() {
-                          currentPage = index + 1;
+                          currentPage = index;
                         });
                       },
+                      controller: pageController,
                       itemBuilder: (context, index) {
                         index = currentPage;
                         return Container(
                           child: ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: widget.locations.length,
                             itemBuilder: (BuildContext context, int position) {
                               var location = widget.locations[position];
@@ -62,7 +73,7 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: 10,
+                      vertical: Dimensions.height10,
                     ),
                     child: Pagination(
                       width: 200,
@@ -86,6 +97,7 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
                       ),
                       onPageChange: (number) {
                         setState(() {
+                          // Il faut changer la page View ici
                           currentPage = number;
                         });
                       },

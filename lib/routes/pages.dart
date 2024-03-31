@@ -7,6 +7,7 @@ import '../modules/categories/views/categorie_view.dart';
 import '../modules/contacts/views/contact_view.dart';
 import '../modules/faqs/views/faqs_view.dart';
 import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/details_location.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/security/bindings/security_binding.dart';
 import '../modules/security/views/login.dart';
@@ -60,9 +61,15 @@ class AppPage {
       name: Routes.faqs,
       page: () => const FaqsView(),
     ),
+    // CATEGORIES
     GetPage(
       name: Routes.categories,
       page: () => const CategorieView(),
+    ),
+    // DETAILS ANNONCES
+    GetPage(
+      name: Routes.detailsLocation,
+      page: () => DetailsLocationView(),
     ),
   ];
 }

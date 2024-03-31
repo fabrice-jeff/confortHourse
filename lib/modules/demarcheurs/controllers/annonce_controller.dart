@@ -53,6 +53,9 @@ class AnnonceController extends GetxController {
       for (var element in data) {
         element['annonce']['categorie_id'] = element['categorie'];
         element['annonce']['type_annonce_id'] = element['type_annonce'];
+        element['annonce']['demarcheur_id'] = element['demarcheur'];
+        element['annonce']['demarcheur_id']['pays_id'] =
+            element['pays_demarcheur'];
         //Créer  une instance d'annonce
         Annonce annonce = Annonce.fromJson(element['annonce']);
         List<Fichier> fichiers = [];
@@ -67,7 +70,6 @@ class AnnonceController extends GetxController {
         };
         recentsPublicaation.add(objet);
       }
-      print(recentsPublicaation.length);
     }
     update();
   }

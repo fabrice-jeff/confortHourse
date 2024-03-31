@@ -1,5 +1,6 @@
 import '../../services/datetime_format.dart';
 import 'categorie.dart';
+import 'demarcheur.dart';
 import 'type_annonce.dart';
 
 class Annonce {
@@ -14,6 +15,7 @@ class Annonce {
   final TypeAnnonce typeAnnonce;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final Demarcheur demarcheur;
   const Annonce({
     required this.id,
     required this.titre,
@@ -26,10 +28,13 @@ class Annonce {
     required this.typeAnnonce,
     required this.createdAt,
     required this.updatedAt,
+    required this.demarcheur,
   });
   factory Annonce.fromJson(Map<String, dynamic> json) {
     Categorie categorie = Categorie.fromJson(json['categorie_id']);
     TypeAnnonce typeAnnonce = TypeAnnonce.fromJson(json['type_annonce_id']);
+    Demarcheur demarcheur = Demarcheur.fromJson(json['demarcheur_id']);
+
     return Annonce(
       id: json['id'],
       titre: json['titre'],
@@ -42,6 +47,7 @@ class Annonce {
       typeAnnonce: typeAnnonce,
       createdAt: dateTimeFormat(json['created_at']),
       updatedAt: dateTimeFormat(json['updated_at']),
+      demarcheur: demarcheur,
     );
   }
 }

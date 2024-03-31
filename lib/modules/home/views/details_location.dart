@@ -3,24 +3,28 @@ import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/header_section.dart';
 
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/title_section.dart';
+import '../controllers/home_controller.dart';
 import 'location_by_categorie.dart';
 import 'location_widget.dart';
 
-class DetailsLocation extends StatelessWidget {
-  final Map<String, dynamic> location;
-  final List<Map<String, dynamic>> otherAnnonces;
-  final List<Map<String, dynamic>> annonces;
+class DetailsLocationView extends GetView<HomeController> {
+  final Map<String, dynamic>? location;
+  final List<Map<String, dynamic>>? otherAnnonces;
 
-  const DetailsLocation(
+  DetailsLocationView(
       {super.key,
-      required this.location,
-      required this.otherAnnonces,
-      required this.annonces});
+      Map<String, dynamic>? location,
+      List<Map<String, dynamic>>? otherAnnonces})
+      : location = location ?? Get.arguments?['location'],
+        otherAnnonces = otherAnnonces ?? Get.arguments?['otherAnnonces'];
+
   Widget _options(IconData icon) {
     return Container(
       alignment: Alignment.center,
@@ -44,8 +48,8 @@ class DetailsLocation extends StatelessWidget {
       appBar: AppBar(
         shadowColor: AppColors.backgroundColor,
         backgroundColor: AppColors.backgroundColor,
-        title: const BigTextWidget(
-          text: "ConforthOurse",
+        title: BigTextWidget(
+          text: ConstantsValues.appName.toUpperCase(),
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -63,7 +67,7 @@ class DetailsLocation extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     image: NetworkImage(
-                        Api.baseUrl + "/" + location['fichiers'][0].path),
+                        Api.baseUrl + "/" + location!['fichiers'][0].path),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -74,7 +78,7 @@ class DetailsLocation extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
-                child: BigTextWidget(text: location['annonce'].ville.libelle),
+                child: BigTextWidget(text: location!['annonce'].ville),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -87,7 +91,7 @@ class DetailsLocation extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.secondColor),
                   child: SimpleTextWidget(
-                    text: location['annonce'].typeAnnonce.libelle,
+                    text: location!['annonce'].typeAnnonce.libelle,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -100,7 +104,7 @@ class DetailsLocation extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 alignment: Alignment.topLeft,
                 child: SimpleTextWidget(
-                  text: "${location['annonce'].prix} FCFA",
+                  text: "${location!['annonce'].prix} FCFA",
                   fontWeight: FontWeight.bold,
                   sizeText: 25,
                   textColor: AppColors.secondColor,
@@ -153,7 +157,7 @@ class DetailsLocation extends StatelessWidget {
                     Container(
                       alignment: Alignment.topLeft,
                       child: SimpleTextWidget(
-                          text: location['annonce'].description),
+                          text: location!['annonce'].description),
                     ),
                   ],
                 ),
@@ -239,17 +243,17 @@ class DetailsLocation extends StatelessWidget {
                             child: Container(
                               height: double.maxFinite,
                               width: double.maxFinite,
-                              margin: EdgeInsets.all(5),
+                              margin: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(45),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     image: AssetImage("images/user.webp"),
                                     fit: BoxFit.cover),
                               ),
                             ),
                           ),
                           SizedBox(
-                            width: 18,
+                            width: Dimensions.height10 * 2,
                           ),
                           Expanded(
                             child: Column(
@@ -259,27 +263,14 @@ class DetailsLocation extends StatelessWidget {
                                     Container(
                                       alignment: Alignment.topLeft,
                                       child: BigTextWidget(
-                                        text: "ConforthOurse",
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Container(
-                                      height: 18,
-                                      width: 18,
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius: BorderRadius.circular(9),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.4,
-                                            spreadRadius: 0.4,
-                                          )
-                                        ],
+                                        text:
+                                            "${location!['annonce'].demarcheur!.nom} ${location!['annonce'].demarcheur!.prenoms}",
                                       ),
                                     ),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: Dimensions.height10 / 2,
                                 ),
                                 Row(
                                   children: [
@@ -289,7 +280,7 @@ class DetailsLocation extends StatelessWidget {
                                       size: 18,
                                     ),
                                     SizedBox(
-                                      width: 5,
+                                      width: Dimensions.height10 / 2,
                                     ),
                                     Container(
                                       alignment: Alignment.topLeft,
@@ -299,6 +290,9 @@ class DetailsLocation extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: Dimensions.height10 / 2,
+                                ),
                                 Row(
                                   children: [
                                     Icon(
@@ -307,7 +301,7 @@ class DetailsLocation extends StatelessWidget {
                                       size: 18,
                                     ),
                                     SizedBox(
-                                      width: 5,
+                                      width: Dimensions.width10 / 2,
                                     ),
                                     Container(
                                       alignment: Alignment.topLeft,
@@ -327,29 +321,33 @@ class DetailsLocation extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 100,
+                height: Dimensions.height10 * 9,
               ),
-              TitleSectionWidget(
+              const TitleSectionWidget(
                   firstText: "ANNONCES SIMILAIRES",
                   secondText: "Découvrez les Annonces Similaires"),
               SizedBox(
-                height: 20,
+                height: Dimensions.height10 * 2,
               ),
               Container(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: otherAnnonces.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: otherAnnonces!.length,
                   itemBuilder: (BuildContext context, int position) {
-                    var location = otherAnnonces[position];
+                    var location = otherAnnonces![position];
                     return LocationWidget(location: location);
                   },
                 ),
               ),
               InkWell(
-                onTap: () {
+                onTap: () async {
+                  //Récupérer annonces par catégorie
+                  var annonces = await controller.getAnnonceByCategorie(
+                    {"categorie": location!['annonce'].categorie.libelle},
+                  );
                   Get.to(LocationByCategoriePage(
-                    categorie: location['annonce'].categorie.libelle,
+                    categorie: location!['annonce'].categorie.libelle,
                     locations: annonces,
                   ));
                 },
@@ -358,12 +356,14 @@ class DetailsLocation extends StatelessWidget {
                     color: AppColors.secondColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: BigTextWidget(
-                    text: ("Voir plus de " +
-                            location['annonce'].categorie.libelle)
-                        .toUpperCase(),
+                    text:
+                        "Voir plus de  ${location!['annonce'].categorie.libelle}"
+                            .toUpperCase(),
                     textColor: const Color.fromARGB(255, 244, 212, 212),
                     sizeText: 16,
                   ),

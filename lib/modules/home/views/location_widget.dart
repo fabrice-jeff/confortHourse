@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
+import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
+import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/simple_text.dart';
 import '../controllers/home_controller.dart';
@@ -10,8 +12,7 @@ import 'details_location.dart';
 
 class LocationWidget extends GetView<HomeController> {
   final Map<String, dynamic> location;
-
-  LocationWidget({super.key, required this.location});
+  const LocationWidget({super.key, required this.location});
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -35,7 +36,7 @@ class LocationWidget extends GetView<HomeController> {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: NetworkImage(
-                          Api.baseUrl + "/" + location['fichiers'][0].path),
+                          "${Api.baseUrl}/${location['fichiers'][0].path}"),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -47,46 +48,46 @@ class LocationWidget extends GetView<HomeController> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   height: 35,
-                  width: 120,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   decoration: BoxDecoration(
                     color: AppColors.secondColor,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(Dimensions.radius10),
                   ),
                   child: SimpleTextWidget(
                     text: location['annonce'].typeAnnonce.libelle,
                     textColor: Colors.white,
                     fontWeight: FontWeight.w500,
-                    sizeText: 16,
+                    sizeText: 15,
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           Container(
             alignment: Alignment.topLeft,
             child: BigTextWidget(
-              text: location['annonce'].ville.libelle,
+              text: location['annonce'].ville,
               textAlign: TextAlign.left,
             ),
           ),
           SizedBox(
-            height: 5,
+            height: Dimensions.height10 / 2,
           ),
           Expanded(
             child: SimpleTextWidget(text: location['annonce'].description),
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           Row(
             children: [
               SimpleTextWidget(
                 text: "Prix",
               ),
-              Spacer(),
+              const Spacer(),
               BigTextWidget(
                 text: location['annonce'].prix + "F / Mois",
                 textColor: AppColors.secondColor,
@@ -94,17 +95,18 @@ class LocationWidget extends GetView<HomeController> {
             ],
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           Divider(
             height: 1,
             color: AppColors.textColor.withOpacity(0.2),
           ),
           SizedBox(
-            height: 10,
+            height: Dimensions.height10,
           ),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   height: 60,
@@ -112,37 +114,17 @@ class LocationWidget extends GetView<HomeController> {
                   decoration: BoxDecoration(
                     color: AppColors.backgroundColor,
                     borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('images/user.webp'),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 5,
-                ),
                 BigTextWidget(
-                  text: "ConforthOurse",
+                  text:
+                      "${location['annonce'].demarcheur!.nom} ${location['annonce'].demarcheur!.prenoms}",
                   height: 0,
                   sizeText: 17,
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Container(
-                  height: 18,
-                  width: 18,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(9),
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 0.4,
-                        spreadRadius: 0.4,
-                      )
-                    ],
-                  ),
-                ),
-                Spacer(),
                 Container(
                   alignment: Alignment.center,
                   height: 40,
@@ -159,22 +141,17 @@ class LocationWidget extends GetView<HomeController> {
                     onPressed: () async {
                       // Get other annonces
                       Map<String, dynamic> data = {
-                        "categorie": location['annonce'].categorie.code,
-                        'annonce': location['annonce'].code
+                        "categorie": location['annonce'].categorie.libelle,
+                        'annonce': location['annonce'].id.toString()
                       };
-
-                      var otherAnnonces =
-                          await controller.getOtherAnnonceByCategorie(data);
-                      var annonces = [];
-                      // var annonces = await controller.getAnnonceByCategorie({
-                      //   "categorie": location['annonce'].categorie.code,
-                      // });
+                      var annoncesSimulaires =
+                          await controller.getAnnonceSimulaireByCategorie(data);
 
                       // Détails d'une annomce
-                      // Get.to(DetailsLocation(
-                      //     location: location,
-                      //     otherAnnonces: otherAnnonces,
-                      //     annonces: annonces));
+                      Get.offAndToNamed(Routes.detailsLocation, arguments: {
+                        'location': location,
+                        'otherAnnonces': annoncesSimulaires
+                      });
                     },
                     child: SimpleTextWidget(
                       text: 'Détails',

@@ -20,7 +20,7 @@ class Api {
       "/annonces/recent_publication_by_demarcheur";
 
   static const annonceByCategorie = "/annonces/annonces_by_categorie";
-  static const otherAnnonceByCategorie =
-      "/annonces/other_annonces_by_categorie";
+  static const annonceSimulaireByCategorie =
+      "/annonces/annonce_simulaire_by_categorie";
   static const annonceByLimite = '/annonces/annonces_by_limite';
 }

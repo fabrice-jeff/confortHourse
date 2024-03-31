@@ -1,13 +1,13 @@
-import 'package:conforthourse/modules/base/controllers/base_controller.dart';
-import 'package:conforthourse/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import 'location_by_categorie.dart';
 import '../../../widgets/big_text.dart';
 import '../../../widgets/list_temoignage.dart';
+import '../../base/controllers/base_controller.dart';
+import 'location_by_categorie.dart';
 import 'location_widget.dart';
 import '../../../widgets/simple_text.dart';
 import '../../../widgets/title_section.dart';
@@ -53,17 +53,17 @@ class HomeView extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () async {
-                          // Get annonce by categorie
-                          // var annonces = await controller
-                          //     .getAnnonceByCategorie({
-                          //   "categorie":
-                          //       baseController!.categoriesObjet[index].id
-                          // });
-                          // Get.to(LocationByCategoriePage(
-                          //   categorie:
-                          //       baseController!.categoriesObjet[index].libelle,
-                          //   locations: annonces,
-                          // ));
+                          //Récupérer annonces par catégorie
+                          var annonces = await controller
+                              .getAnnonceByCategorie({
+                            "categorie":
+                                baseController!.categoriesObjet[index].libelle
+                          });
+                          Get.to(LocationByCategoriePage(
+                            categorie:
+                                baseController!.categoriesObjet[index].libelle,
+                            locations: annonces,
+                          ));
                         },
                         child: CategorieWidget(
                           categorie: baseController!.categoriesObjet[index],
@@ -126,13 +126,13 @@ class HomeView extends GetView<HomeController> {
                   ),
                   alignment: Alignment.center,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFF022956),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        child: TitleSectionWidget(
+                        child: const TitleSectionWidget(
                           firstText: "TEMOIGNAGES",
                           secondText: "Ce Que Nos Clients Disent",
                           colorSecondText: Colors.white,
