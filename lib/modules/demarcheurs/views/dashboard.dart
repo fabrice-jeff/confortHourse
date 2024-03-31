@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../data/api/api.dart';
 import '../../../data/models/demarcheur.dart';
@@ -35,7 +36,7 @@ class DashboardView extends GetView<AnnonceController> {
               statistiqueUser(
                   context: context,
                   primaryColor: const Color(0xFF6259CA),
-                  backgroundColor: Color.fromRGBO(98, 89, 202, 0.2),
+                  backgroundColor: const Color.fromRGBO(98, 89, 202, 0.2),
                   nombre: controller.totalPublicationByDemarcheur.toString(),
                   icon: Icons.home_outlined,
                   text: "Total Publication"),
@@ -44,8 +45,8 @@ class DashboardView extends GetView<AnnonceController> {
               ),
               statistiqueUser(
                   context: context,
-                  primaryColor: Color(0xFF09AD95),
-                  backgroundColor: Color.fromRGBO(0, 230, 130, 0.2),
+                  primaryColor: const Color(0xFF09AD95),
+                  backgroundColor: const Color.fromRGBO(0, 230, 130, 0.2),
                   nombre: controller.totalChambresLouees.toString(),
                   icon: Icons.home_outlined,
                   text: "Chambres louées"),
@@ -54,8 +55,8 @@ class DashboardView extends GetView<AnnonceController> {
               ),
               statistiqueUser(
                   context: context,
-                  primaryColor: Color(0xFFFB6B25),
-                  backgroundColor: Color.fromRGBO(251, 107, 37, 0.2),
+                  primaryColor: const Color(0xFFFB6B25),
+                  backgroundColor: const Color.fromRGBO(251, 107, 37, 0.2),
                   nombre: controller.prixChambreLouees.toString(),
                   icon: CupertinoIcons.money_dollar_circle_fill,
                   text: "Prix Chambres louées"),
@@ -150,9 +151,8 @@ class DashboardView extends GetView<AnnonceController> {
                                           element['annonce'].categorie.libelle),
                                     ),
                                     DataCell(
-                                      Text(element['annonce']
-                                          .createdAt
-                                          .toString()),
+                                      Text(DateFormat("dd/MM/yyyy").format(
+                                          element['annonce'].createdAt)),
                                     ),
                                     DataCell(
                                       // if(element['annonce'].deleted =)

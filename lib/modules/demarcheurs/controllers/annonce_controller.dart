@@ -15,6 +15,7 @@ class AnnonceController extends GetxController {
   int totalPublicationByDemarcheur = 0;
   int totalChambresLouees = 0;
   int prixChambreLouees = 0;
+  int totalChambresActives = 0;
   List<dynamic> recentsPublicaation = [];
 
   addAnnonce(data) async {
@@ -38,6 +39,7 @@ class AnnonceController extends GetxController {
     if (result != null) {
       totalPublicationByDemarcheur = result['datas']['total_publication'];
       totalChambresLouees = result['datas']['total_chambres_louees'];
+      totalChambresActives = result['datas']['total_chambres_actives'];
       prixChambreLouees = result['datas']['prix_chambres_louees'];
     }
     update();

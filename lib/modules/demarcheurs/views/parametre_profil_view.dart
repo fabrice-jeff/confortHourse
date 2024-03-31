@@ -7,9 +7,10 @@ import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 import '../../../widgets/big_text.dart';
-import '../../../widgets/button_add_annonce.dart';
+
 import '../../../widgets/header_section.dart';
 import '../../../widgets/label_form.dart';
+import '../../../widgets/simple_text.dart';
 import '../../../widgets/text_fields.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/demarcheur_controller.dart';
@@ -122,8 +123,43 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                       SizedBox(
                         height: Dimensions.height10,
                       ),
-                      ButtonAddAnnonceWidget(
-                          baseController: widget.baseController),
+
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: InkWell(
+                          onTap: () {
+                            //Interface d'ajout d'une annonce
+                            widget.baseController
+                                .changePage(ConstantsValues.ADD_ANNONCE);
+                          },
+                          child: Container(
+                            height: Dimensions.height10 * 5,
+                            decoration: BoxDecoration(
+                              color: AppColors.secondColor,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: Dimensions.width10,
+                                ),
+                                SimpleTextWidget(
+                                  text: "Ajouter une annonce",
+                                  sizeText: Dimensions.fontsize15,
+                                  textColor: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: Dimensions.height10,
                       ),
@@ -150,9 +186,6 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                         hintText: "Entrer votre prénoms",
                         textInputType: TextInputType.name,
                         controller: _prenoms,
-                      ),
-                      const SizedBox(
-                        height: 20,
                       ),
 
                       SizedBox(

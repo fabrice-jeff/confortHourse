@@ -41,9 +41,7 @@ class DemarcheurView extends GetView<BaseController> {
       // Location actifs
       // Location louée
       // Date création du compte
-      return ProfilView(
-        demarcheur: demarcheur,
-      );
+      return ProfilView(baseController: controller);
     } else if (page == ConstantsValues.ANNONCES) {
       // Liste des annonces publiés
       return AnnoncesView(

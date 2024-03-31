@@ -39,7 +39,7 @@ class UserPage extends GetView<BaseController> {
             width: Dimensions.width10 * 10,
             height: Dimensions.height10 * 10,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.screenWidth),
+              borderRadius: BorderRadius.circular(Dimensions.radius10 * 10),
               image: DecorationImage(
                 image: AssetImage('images/user.webp'),
                 fit: BoxFit.cover,
@@ -52,9 +52,7 @@ class UserPage extends GetView<BaseController> {
           BigTextWidget(
             text: (controller.demarcheur == null)
                 ? ""
-                : controller.demarcheur!.nom +
-                    " " +
-                    controller.demarcheur!.prenoms,
+                : "${controller.demarcheur!.nom} ${controller.demarcheur!.prenoms}",
             sizeText: Dimensions.fontsize30,
             fontWeight: FontWeight.w700,
             height: 0,
