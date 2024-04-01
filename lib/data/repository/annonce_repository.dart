@@ -30,7 +30,13 @@ class AnnonceRepository {
     }
   }
 
-  //Total publication By Demarcheur
+  /**
+   * @data
+   * Total publication By Demarcheur
+   * Total chambres actifs
+   * Prix chambres actif
+   */
+
   Future<Map<String, dynamic>?> totalPublication() async {
     String? token = await SharePreferences.prefs.getString('token');
     print(token);
@@ -42,7 +48,7 @@ class AnnonceRepository {
         'Authorization': "Bearer ${token}",
       },
     );
-    print(response.body);
+
     try {
       Map<String, dynamic>? result;
       result = jsonDecode(response.body);
@@ -52,7 +58,7 @@ class AnnonceRepository {
     }
   }
 
-  //Total publication By Demarcheur
+  //Total recent publication By Demarcheur
   Future<Map<String, dynamic>?> recentsPublication() async {
     String? token = await SharePreferences.prefs.getString('token');
     const endpoint = Api.recentsPublications;
@@ -72,27 +78,27 @@ class AnnonceRepository {
     }
   }
 
-  // Get annonceBy limite
-  Future<Map<String, dynamic>?> getAnnonceByLimite(
-      Map<String, dynamic> data) async {
-    final endpoint = Api.annonceByLimite;
+  //Total publication Actifs By Demarcheur
+  Future<Map<String, dynamic>?> annoncesActifByDemarcheur() async {
+    String? token = await SharePreferences.prefs.getString('token');
+    const endpoint = Api.annoncesByDemarcheur;
     final url = Uri.parse(api + endpoint);
-    final response = await http.post(
+    final response = await http.get(
       url,
-      body: data,
-      headers: {},
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
     );
-    Map<String, dynamic>? result;
     try {
+      Map<String, dynamic>? result;
       result = jsonDecode(response.body);
       return result;
     } catch (e) {
-      print('erreufsdcrEEAZ5');
       return null;
     }
   }
 
-  // Get villes
+  // Annonces par catégorie
   Future<Map<String, dynamic>?> getAnnonceByCategorie(
       Map<String, dynamic> data) async {
     const endpoint = Api.annonceByCategorie;
@@ -112,6 +118,7 @@ class AnnonceRepository {
     }
   }
 
+// Annonces simulairs par catégorie
   Future<Map<String, dynamic>?> getAnnonceSimulaireByCategorie(
       Map<String, dynamic> data) async {
     const endpoint = Api.annonceSimulaireByCategorie;
@@ -120,6 +127,27 @@ class AnnonceRepository {
       url,
       body: data,
       headers: {},
+    );
+    Map<String, dynamic>? result;
+    try {
+      result = jsonDecode(response.body);
+      return result;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Supprimer une annonces
+  Future<Map<String, dynamic>?> deleteAnnonce(Map<String, dynamic> data) async {
+    String? token = await SharePreferences.prefs.getString('token');
+    const endpoint = Api.deleteAnnonce;
+    final url = Uri.parse(api + endpoint);
+    final response = await http.post(
+      url,
+      body: data,
+      headers: {
+        'Authorization': "Bearer ${token}",
+      },
     );
     Map<String, dynamic>? result;
     try {

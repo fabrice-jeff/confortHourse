@@ -11,7 +11,7 @@ import '../../base/controllers/base_controller.dart';
 
 class DemarcheurController extends GetxController {
   DemarcheurRepository demarcheurRepository =
-      DemarcheurRepository(api: Api.baseUrl);
+      DemarcheurRepository(api: Api.baseUrlApi);
 
   Future<void> updateInformation(Map<String, dynamic> data) async {
     var result = await demarcheurRepository.updateInformation(data);
@@ -23,7 +23,7 @@ class DemarcheurController extends GetxController {
         // Changer la page une fois conneter
         BaseController baseController = Get.put(BaseController());
         baseController.currentIndex = 0;
-        baseController.changePage(ConstantsValues.ADD_ANNONCE);
+        baseController.changePage(ConstantsValues.addAnnonces);
         Get.offAndToNamed(Routes.base);
       }
     }
@@ -36,7 +36,7 @@ class DemarcheurController extends GetxController {
       // Changer la page une fois conneter
       BaseController baseController = Get.put(BaseController());
       baseController.currentIndex = 0;
-      baseController.changePage(ConstantsValues.ADD_ANNONCE);
+      baseController.changePage(ConstantsValues.addAnnonces);
       // Deconnexion
       baseController.logout();
     }

@@ -1,4 +1,3 @@
-import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,10 +5,10 @@ import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
 
-import '../../../widgets/big_text.dart';
+import '../../../components/big_text.dart';
+import '../../base/controllers/base_controller.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../home/views/categorie_widget.dart';
-import '../../home/views/location_by_categorie.dart';
 
 class CategorieView extends GetView<HomeController> {
   final BaseController? baseController;

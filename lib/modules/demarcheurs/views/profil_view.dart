@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
-import '../../../widgets/simple_text.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../../components/simple_text.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
@@ -57,7 +57,7 @@ class ProfilView extends GetView<AnnonceController> {
               ? Column(
                   children: [
                     HeaderSectionWidget(text: "PROFILE"),
-                    UserPage(page: ConstantsValues.PROFIL_USER),
+                    UserPage(page: ConstantsValues.profilUser),
                     SizedBox(
                       height: Dimensions.height10 * 2,
                     ),
@@ -92,7 +92,7 @@ class ProfilView extends GetView<AnnonceController> {
                               onTap: () {
                                 //Interface d'ajout d'une annonce
                                 baseController!
-                                    .changePage(ConstantsValues.ADD_ANNONCE);
+                                    .changePage(ConstantsValues.addAnnonces);
                               },
                               child: Container(
                                 height: Dimensions.height10 * 5,

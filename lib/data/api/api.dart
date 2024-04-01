@@ -1,5 +1,8 @@
 class Api {
-  static const baseUrl = "http://10.0.2.2:8000/api";
+  // BASE URL
+  static const baseUrlApi = "http://10.0.2.2:8000/api";
+  static const baseUrl = "http://10.0.2.2:8000";
+
   // Security
   static const login = "/demarcheurs/login";
   static const register = "/demarcheurs/register";
@@ -18,9 +21,10 @@ class Api {
   static const addAnnonce = "/annonces/add";
   static const recentsPublications =
       "/annonces/recent_publication_by_demarcheur";
-
+  static const deleteAnnonce = "/annonces/delete_annonce";
   static const annonceByCategorie = "/annonces/annonces_by_categorie";
   static const annonceSimulaireByCategorie =
       "/annonces/annonce_simulaire_by_categorie";
+  static const annoncesByDemarcheur = "/annonces/annonces_by_demarcheur";
   static const annonceByLimite = '/annonces/annonces_by_limite';
 }

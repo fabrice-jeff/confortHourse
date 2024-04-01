@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/menu.dart';
+import '../../../components/big_text.dart';
+import '../../../components/menu.dart';
 import '../../demarcheurs/views/demarcheur_view.dart';
 import '../../home/views/home_view.dart';
 import '../controllers/base_controller.dart';

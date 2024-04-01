@@ -5,11 +5,12 @@ import '../../../data/api/api.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
 
-import '../../../widgets/simple_text.dart';
-import '../../../widgets/title_section.dart';
+import '../../../components/simple_text.dart';
+import '../../../components/title_section.dart';
+import '../../base/controllers/base_controller.dart';
 import '../controllers/home_controller.dart';
 import 'location_by_categorie.dart';
 import 'location_widget.dart';
@@ -17,13 +18,15 @@ import 'location_widget.dart';
 class DetailsLocationView extends GetView<HomeController> {
   final Map<String, dynamic>? location;
   final List<Map<String, dynamic>>? otherAnnonces;
-
+  final BaseController? baseController;
   DetailsLocationView(
       {super.key,
       Map<String, dynamic>? location,
-      List<Map<String, dynamic>>? otherAnnonces})
+      List<Map<String, dynamic>>? otherAnnonces,
+      BaseController? baseController})
       : location = location ?? Get.arguments?['location'],
-        otherAnnonces = otherAnnonces ?? Get.arguments?['otherAnnonces'];
+        otherAnnonces = otherAnnonces ?? Get.arguments?['otherAnnonces'],
+        baseController = baseController ?? Get.arguments?['baseController'];
 
   Widget _options(IconData icon) {
     return Container(
@@ -343,7 +346,7 @@ class DetailsLocationView extends GetView<HomeController> {
               InkWell(
                 onTap: () async {
                   //Récupérer annonces par catégorie
-                  var annonces = await controller.getAnnonceByCategorie(
+                  var annonces = await baseController!.getAnnonceByCategorie(
                     {"categorie": location!['annonce'].categorie.libelle},
                   );
                   Get.to(LocationByCategoriePage(

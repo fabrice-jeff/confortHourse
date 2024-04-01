@@ -3,7 +3,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
-import 'label_form.dart';
+import '../components/label_form.dart';
 
 class IntlPhoneFieldsComponent extends StatelessWidget {
   final String hintText;

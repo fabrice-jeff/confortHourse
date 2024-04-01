@@ -8,12 +8,12 @@ import 'package:get/get.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
-import '../../../widgets/label_form.dart';
-import '../../../widgets/select_fields.dart';
-import '../../../widgets/simple_text.dart';
-import '../../../widgets/text_fields.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../../components/label_form.dart';
+import '../../../components/select_fields.dart';
+import '../../../components/simple_text.dart';
+import '../../../components/text_fields.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
@@ -102,7 +102,7 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
             children: [
               HeaderSectionWidget(text: "AJOUTER UNE ANNONCE"),
               UserPage(
-                page: ConstantsValues.ADD_ANNONCE,
+                page: ConstantsValues.addAnnonces,
               ),
               SizedBox(
                 height: Dimensions.height10 * 2,
@@ -296,39 +296,50 @@ class _AddAnnonceFormState extends State<AddAnnonceForm> {
                       ),
                     ),
                     SizedBox(
-                      height: 30,
+                      height: Dimensions.height10 * 3,
                     ),
-                    InkWell(
-                      onTap: () {
-                        // Data
-                        Map<String, dynamic> data = {
-                          'titre': _titre.text,
-                          'type': _type,
-                          'categorie': _categorie,
-                          'prix': _prix.text,
-                          'ville': _localisation.text,
-                          'image': _file,
-                          'extension': _extension,
-                          'description': _description.text,
-                        };
-                        // print(data);
-                        widget.controller.addAnnonce(data);
-                      },
-                      child: Align(
-                        alignment: Alignment.topLeft,
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                        onTap: () {
+                          // Data
+                          Map<String, dynamic> data = {
+                            'titre': _titre.text,
+                            'type': _type,
+                            'categorie': _categorie,
+                            'prix': _prix.text,
+                            'ville': _localisation.text,
+                            'image': _file,
+                            'extension': _extension,
+                            'description': _description.text,
+                          };
+                          // print(data);
+                          widget.controller.addAnnonce(data);
+                        },
                         child: Container(
-                          alignment: Alignment.center,
-                          width: double.infinity,
-                          height: 45,
+                          height: Dimensions.height10 * 5,
                           decoration: BoxDecoration(
                             color: AppColors.secondColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius10),
                           ),
-                          child: BigTextWidget(
-                            height: 0,
-                            text: "Publier l'annonce",
-                            sizeText: 20,
-                            textColor: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.add_circle_outline_rounded,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: Dimensions.width10,
+                              ),
+                              SimpleTextWidget(
+                                text: "Ajouter une annonce",
+                                sizeText: Dimensions.fontsize15,
+                                textColor: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
                           ),
                         ),
                       ),

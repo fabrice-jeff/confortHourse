@@ -29,21 +29,21 @@ class DemarcheurView extends GetView<BaseController> {
 
   Widget _buildWidget(Demarcheur? demarcheur) {
     // Dashboard
-    if (page == ConstantsValues.DASHBOARD) {
+    if (page == ConstantsValues.dashboard) {
       return const DashboardView();
     }
     // Profil
-    else if (page == ConstantsValues.PROFIL_USER) {
+    else if (page == ConstantsValues.profilUser) {
       return ProfilView(baseController: controller);
     }
     // Liste des annonces publiés
-    else if (page == ConstantsValues.ANNONCES) {
+    else if (page == ConstantsValues.annonces) {
       return AnnoncesView(
         baseController: controller,
       );
     }
     //Parametre de profil
-    else if (page == ConstantsValues.PARAMETRES) {
+    else if (page == ConstantsValues.parametres) {
       return ParametreProfilView(
         baseController: controller,
       );

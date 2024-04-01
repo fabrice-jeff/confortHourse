@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
-import '../../../widgets/question_faqs.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../../components/question_faqs.dart';
 
 class FaqsView extends StatefulWidget {
   const FaqsView({super.key});

@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/list_temoignage.dart';
+import '../../../components/big_text.dart';
+import '../../../components/list_temoignage.dart';
 import '../../base/controllers/base_controller.dart';
 import 'location_by_categorie.dart';
 import 'location_widget.dart';
-import '../../../widgets/simple_text.dart';
-import '../../../widgets/title_section.dart';
+import '../../../components/simple_text.dart';
+import '../../../components/title_section.dart';
 import '../controllers/home_controller.dart';
 import 'categorie_widget.dart';
 
@@ -54,12 +54,13 @@ class HomeView extends GetView<HomeController> {
                       return InkWell(
                         onTap: () async {
                           //Récupérer annonces par catégorie
-                          var annonces = await controller
+                          var annonces = await baseController!
                               .getAnnonceByCategorie({
                             "categorie":
                                 baseController!.categoriesObjet[index].libelle
                           });
                           Get.to(LocationByCategoriePage(
+                            baseController: baseController,
                             categorie:
                                 baseController!.categoriesObjet[index].libelle,
                             locations: annonces,

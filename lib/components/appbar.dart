@@ -1,5 +1,5 @@
 import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/big_text.dart';
+import 'package:conforthourse/components/big_text.dart';
 import 'package:flutter/material.dart';
 
 class AppBarWidget extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:conforthourse/widgets/big_text.dart';
+import 'package:conforthourse/components/big_text.dart';
 import 'package:flutter/material.dart';
 
 class TitleSectionWidget extends StatelessWidget {

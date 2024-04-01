@@ -12,7 +12,7 @@ import '../../demarcheurs/controllers/annonce_controller.dart';
 
 class SecurityController extends GetxController {
   final DemarcheurRepository demarcheurRepository =
-      DemarcheurRepository(api: Api.baseUrl);
+      DemarcheurRepository(api: Api.baseUrlApi);
 
   //Register
   void register(Map<String, dynamic> data) async {
@@ -38,11 +38,13 @@ class SecurityController extends GetxController {
       BaseController baseController = Get.put(BaseController());
       baseController.currentIndex = 1;
       baseController.demarcheur = SharePreferences.getActeur();
-      baseController.changePage(ConstantsValues.ADD_ANNONCE);
+      baseController.changePage(ConstantsValues.addAnnonces);
       // Récupérer les informations concernants les des annonces
       AnnonceController annonceController = Get.put(AnnonceController());
       annonceController.getTotalPublicationByDemarcheur();
       annonceController.getRecentsPublicationByDemarcheur();
+      annonceController.getMesAnnonces();
+
       Get.offAndToNamed(Routes.base);
     } else {
       BaseController baseController = Get.put(BaseController());

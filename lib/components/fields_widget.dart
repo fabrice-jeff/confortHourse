@@ -1,4 +1,4 @@
-import 'package:conforthourse/widgets/simple_text.dart';
+import 'package:conforthourse/components/simple_text.dart';
 import 'package:flutter/material.dart';
 
 class FieldsWidget extends StatelessWidget {

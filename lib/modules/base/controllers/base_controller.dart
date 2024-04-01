@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 
 import '../../../data/api/api.dart';
+import '../../../data/models/annonce.dart';
 import '../../../data/models/categorie.dart';
 import '../../../data/models/demarcheur.dart';
+import '../../../data/models/fichier.dart';
 import '../../../data/models/pays.dart';
 import '../../../data/models/type_annonce.dart';
+import '../../../data/repository/annonce_repository.dart';
 import '../../../data/repository/base_repository.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/constants.dart';
@@ -13,12 +16,14 @@ import '../../../utils/share_preference.dart';
 class BaseController extends GetxController {
   int currentIndex = 0;
   Demarcheur? demarcheur;
-  String page = ConstantsValues.ADD_ANNONCE;
+  String page = ConstantsValues.addAnnonces;
   List<Categorie> categoriesObjet = [];
   List<String> categoriesArray = [];
   List<Pays> paysObjets = [];
   List<String> paysArray = [];
-  final BaseRepository baseRepository = BaseRepository(api: Api.baseUrl);
+  final BaseRepository baseRepository = BaseRepository(api: Api.baseUrlApi);
+  final AnnonceRepository annonceRepository =
+      AnnonceRepository(api: Api.baseUrlApi);
   List<TypeAnnonce> typeObjet = [];
   List<String> typeArray = [];
 
@@ -74,6 +79,66 @@ class BaseController extends GetxController {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getAnnonceByCategorie(
+      Map<String, dynamic> data) async {
+    List<Map<String, dynamic>> annoncesByCategorie = [];
+    var result = await annonceRepository.getAnnonceByCategorie(data);
+    if (result != null) {
+      var data = result['datas'];
+      for (var element in data) {
+        element['annonce']['categorie_id'] = element['categorie'];
+        element['annonce']['type_annonce_id'] = element['type_annonce'];
+        element['annonce']['demarcheur_id'] = element['demarcheur'];
+        element['annonce']['demarcheur_id']['pays_id'] =
+            element['pays_demarcheur'];
+        //Créer  une instance d'annonce
+        Annonce annonce = Annonce.fromJson(element['annonce']);
+        List<Fichier> fichiers = [];
+        // créer les instances d'objet
+        for (var value in element['fichiers']) {
+          Fichier fichier = Fichier.fromJson(value);
+          fichiers.add(fichier);
+        }
+        Map<String, dynamic> objet = {
+          'annonce': annonce,
+          'fichiers': fichiers,
+        };
+        annoncesByCategorie.add(objet);
+      }
+    }
+    return annoncesByCategorie;
+  }
+
+  Future<List<Map<String, dynamic>>> getAnnonceSimulaireByCategorie(
+      Map<String, dynamic> data) async {
+    List<Map<String, dynamic>> annonceSimularsByCategorie = [];
+    var result = await annonceRepository.getAnnonceSimulaireByCategorie(data);
+    if (result != null) {
+      var data = result['datas'];
+      for (var element in data) {
+        element['annonce']['categorie_id'] = element['categorie'];
+        element['annonce']['type_annonce_id'] = element['type_annonce'];
+        element['annonce']['demarcheur_id'] = element['demarcheur'];
+        element['annonce']['demarcheur_id']['pays_id'] =
+            element['pays_demarcheur'];
+        //Créer  une instance d'annonce
+        Annonce annonce = Annonce.fromJson(element['annonce']);
+        List<Fichier> fichiers = [];
+        // créer les instances d'objet
+        for (var value in element['fichiers']) {
+          Fichier fichier = Fichier.fromJson(value);
+          fichiers.add(fichier);
+        }
+        Map<String, dynamic> objet = {
+          'annonce': annonce,
+          'fichiers': fichiers,
+        };
+        annonceSimularsByCategorie.add(objet);
+      }
+    }
+    return annonceSimularsByCategorie;
+  }
+
   /// change the selected screen index
   changeScreen(int selectedIndex) {
     if (selectedIndex == 1) {
@@ -81,7 +146,7 @@ class BaseController extends GetxController {
       // Verifier si l'utilisateur est connecté
       if (demarcheur != null) {
         // On initsialise le controller Demarcheur
-        page = ConstantsValues.ADD_ANNONCE;
+        page = ConstantsValues.addAnnonces;
         currentIndex = selectedIndex;
       } else {
         BaseController baseController = Get.put(BaseController());
@@ -93,7 +158,7 @@ class BaseController extends GetxController {
       // Verifier si l'utilisateur est connecté
       if (demarcheur != null) {
         // On initsialise le controller Demarcheur
-        page = ConstantsValues.PARAMETRES;
+        page = ConstantsValues.parametres;
         currentIndex = selectedIndex;
       } else {
         BaseController baseController = Get.put(BaseController());

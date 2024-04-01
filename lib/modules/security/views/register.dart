@@ -7,11 +7,11 @@ import '../../../components/intl_phone_field.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
-import '../../../widgets/select_fields.dart';
-import '../../../widgets/simple_text.dart';
-import '../../../widgets/text_fields.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../../components/select_fields.dart';
+import '../../../components/simple_text.dart';
+import '../../../components/text_fields.dart';
 import '../controllers/security_controller.dart';
 import 'login.dart';
 

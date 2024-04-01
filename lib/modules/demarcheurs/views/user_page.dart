@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/simple_text.dart';
+import '../../../components/big_text.dart';
+import '../../../components/simple_text.dart';
 import '../../base/controllers/base_controller.dart';
 
 class UserPage extends GetView<BaseController> {
@@ -75,14 +75,14 @@ class UserPage extends GetView<BaseController> {
           InkWell(
             onTap: () {
               //DASHBOARD
-              controller.changePage(ConstantsValues.DASHBOARD);
+              controller.changePage(ConstantsValues.dashboard);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.DASHBOARD)
+                color: (page == ConstantsValues.dashboard)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(Dimensions.radius10),
@@ -91,7 +91,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.dashboard_outlined,
-                    color: (page == ConstantsValues.DASHBOARD)
+                    color: (page == ConstantsValues.dashboard)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -100,7 +100,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Tableau de bord",
-                    textColor: (page == ConstantsValues.DASHBOARD)
+                    textColor: (page == ConstantsValues.dashboard)
                         ? Colors.white
                         : AppColors.textColor,
                   ),
@@ -111,14 +111,14 @@ class UserPage extends GetView<BaseController> {
           InkWell(
             onTap: () {
               // Changer la page dans le base Controller
-              controller.changePage(ConstantsValues.PROFIL_USER);
+              controller.changePage(ConstantsValues.profilUser);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.PROFIL_USER)
+                color: (page == ConstantsValues.profilUser)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(Dimensions.radius10),
@@ -127,7 +127,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.person_outline,
-                    color: (page == ConstantsValues.PROFIL_USER)
+                    color: (page == ConstantsValues.profilUser)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -136,7 +136,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Mon profile",
-                    textColor: (page == ConstantsValues.PROFIL_USER)
+                    textColor: (page == ConstantsValues.profilUser)
                         ? Colors.white
                         : AppColors.textColor,
                   ),
@@ -147,14 +147,14 @@ class UserPage extends GetView<BaseController> {
           InkWell(
             onTap: () {
               // L'interface MES ANNONCES
-              controller.changePage(ConstantsValues.ANNONCES);
+              controller.changePage(ConstantsValues.annonces);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.ANNONCES)
+                color: (page == ConstantsValues.annonces)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(Dimensions.width10),
@@ -163,7 +163,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.home_outlined,
-                    color: (page == ConstantsValues.ANNONCES)
+                    color: (page == ConstantsValues.annonces)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -172,7 +172,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Mes annonces",
-                    textColor: (page == ConstantsValues.ANNONCES)
+                    textColor: (page == ConstantsValues.annonces)
                         ? Colors.white
                         : AppColors.textColor,
                   ),
@@ -183,14 +183,14 @@ class UserPage extends GetView<BaseController> {
           InkWell(
             onTap: () {
               // L'interface AJOUTER UNE ANNONCE
-              controller.changePage(ConstantsValues.ADD_ANNONCE);
+              controller.changePage(ConstantsValues.addAnnonces);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.ADD_ANNONCE)
+                color: (page == ConstantsValues.addAnnonces)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(Dimensions.radius10),
@@ -199,7 +199,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.add_circle_outline_rounded,
-                    color: (page == ConstantsValues.ADD_ANNONCE)
+                    color: (page == ConstantsValues.addAnnonces)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -208,7 +208,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Publier une annonce",
-                    textColor: (page == ConstantsValues.ADD_ANNONCE)
+                    textColor: (page == ConstantsValues.addAnnonces)
                         ? Colors.white
                         : AppColors.textColor,
                   ),
@@ -219,14 +219,14 @@ class UserPage extends GetView<BaseController> {
           InkWell(
             onTap: () {
               // L'interface PARAMATRE DE PROFIL
-              controller.changePage(ConstantsValues.PARAMETRES);
+              controller.changePage(ConstantsValues.parametres);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               width: double.infinity,
               height: Dimensions.height10 * 5,
               decoration: BoxDecoration(
-                color: (page == ConstantsValues.PARAMETRES)
+                color: (page == ConstantsValues.parametres)
                     ? AppColors.secondColor
                     : Colors.white,
                 borderRadius: BorderRadius.circular(Dimensions.radius10),
@@ -235,7 +235,7 @@ class UserPage extends GetView<BaseController> {
                 children: [
                   Icon(
                     Icons.settings_outlined,
-                    color: (page == ConstantsValues.PARAMETRES)
+                    color: (page == ConstantsValues.parametres)
                         ? Colors.white
                         : AppColors.secondColor,
                   ),
@@ -244,7 +244,7 @@ class UserPage extends GetView<BaseController> {
                   ),
                   SimpleTextWidget(
                     text: "Paramètre de profile",
-                    textColor: (page == ConstantsValues.PARAMETRES)
+                    textColor: (page == ConstantsValues.parametres)
                         ? Colors.white
                         : AppColors.textColor,
                   ),

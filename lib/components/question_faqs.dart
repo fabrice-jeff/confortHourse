@@ -1,5 +1,5 @@
 import 'package:conforthourse/utils/colors.dart';
-import 'package:conforthourse/widgets/simple_text.dart';
+import 'package:conforthourse/components/simple_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

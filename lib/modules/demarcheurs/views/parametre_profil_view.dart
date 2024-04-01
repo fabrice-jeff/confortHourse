@@ -5,12 +5,12 @@ import '../../../components/intl_phone_field.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
+import '../../../components/big_text.dart';
 
-import '../../../widgets/header_section.dart';
-import '../../../widgets/label_form.dart';
-import '../../../widgets/simple_text.dart';
-import '../../../widgets/text_fields.dart';
+import '../../../components/header_section.dart';
+import '../../../components/label_form.dart';
+import '../../../components/simple_text.dart';
+import '../../../components/text_fields.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/demarcheur_controller.dart';
 import 'user_page.dart';
@@ -104,7 +104,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
             child: Column(
               children: [
                 HeaderSectionWidget(text: "PARAMETRES"),
-                UserPage(page: ConstantsValues.PARAMETRES),
+                UserPage(page: ConstantsValues.parametres),
                 const SizedBox(
                   height: 20,
                 ),
@@ -138,7 +138,7 @@ class _ParametreProfilFormState extends State<ParametreProfilForm> {
                           onTap: () {
                             //Interface d'ajout d'une annonce
                             widget.baseController
-                                .changePage(ConstantsValues.ADD_ANNONCE);
+                                .changePage(ConstantsValues.addAnnonces);
                           },
                           child: Container(
                             height: Dimensions.height10 * 5,

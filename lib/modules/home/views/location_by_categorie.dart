@@ -5,18 +5,20 @@ import 'package:flutter_pagination/widgets/button_styles.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../base/controllers/base_controller.dart';
 import 'location_widget.dart';
 
 class LocationByCategoriePage extends StatefulWidget {
   final List<Map<String, dynamic>> locations;
   final String categorie;
-  const LocationByCategoriePage({
-    super.key,
-    required this.categorie,
-    required this.locations,
-  });
+  final BaseController? baseController;
+  const LocationByCategoriePage(
+      {super.key,
+      required this.categorie,
+      required this.locations,
+      this.baseController});
 
   @override
   State<LocationByCategoriePage> createState() => _LocationByCategorieState();
@@ -64,7 +66,10 @@ class _LocationByCategorieState extends State<LocationByCategoriePage> {
                             itemCount: widget.locations.length,
                             itemBuilder: (BuildContext context, int position) {
                               var location = widget.locations[position];
-                              return LocationWidget(location: location);
+                              return LocationWidget(
+                                location: location,
+                                baseController: widget.baseController,
+                              );
                             },
                           ),
                         );

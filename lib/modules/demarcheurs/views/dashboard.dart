@@ -7,9 +7,9 @@ import '../../../data/api/api.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/header_section.dart';
-import '../../../widgets/simple_text.dart';
+import '../../../components/big_text.dart';
+import '../../../components/header_section.dart';
+import '../../../components/simple_text.dart';
 import '../../base/controllers/base_controller.dart';
 import '../controllers/annonce_controller.dart';
 import 'user_page.dart';
@@ -29,7 +29,7 @@ class DashboardView extends GetView<AnnonceController> {
           child: Column(
             children: [
               HeaderSectionWidget(text: "DASHBOARD"),
-              UserPage(page: ConstantsValues.DASHBOARD),
+              UserPage(page: ConstantsValues.dashboard),
               SizedBox(
                 height: Dimensions.height10,
               ),
@@ -97,6 +97,7 @@ class DashboardView extends GetView<AnnonceController> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: DataTable(
+                            dataRowHeight: Dimensions.height10 * 20,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius10),
@@ -133,16 +134,41 @@ class DashboardView extends GetView<AnnonceController> {
                                   cells: [
                                     DataCell(
                                       Container(
-                                        width: double.infinity,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image: NetworkImage(Api.baseUrl +
-                                                  "/" +
-                                                  element['fichiers'][0].path),
-                                              fit: BoxFit.cover),
+                                        width: Dimensions.width10 * 20,
+                                        alignment: Alignment.topLeft,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical:
+                                                      Dimensions.height10),
+                                              width: Dimensions.width10 * 12,
+                                              height: Dimensions.height10 * 12,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    "${Api.baseUrl}/${element['fichiers'][0].path}",
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                width: Dimensions.width10 * 12,
+                                                child: BigTextWidget(
+                                                    textAlign: TextAlign.start,
+                                                    sizeText: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                    text: element['annonce']
+                                                        .ville),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -158,6 +184,9 @@ class DashboardView extends GetView<AnnonceController> {
                                       // if(element['annonce'].deleted =)
                                       (element['annonce'].deleted)
                                           ? Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Dimensions.width10 / 2),
                                               decoration: BoxDecoration(
                                                 color: AppColors.secondColor,
                                                 borderRadius:
@@ -166,6 +195,7 @@ class DashboardView extends GetView<AnnonceController> {
                                               ),
                                               child: SimpleTextWidget(
                                                 text: "Désactivé",
+                                                fontWeight: FontWeight.w700,
                                                 textColor: Colors.white,
                                               ),
                                             )

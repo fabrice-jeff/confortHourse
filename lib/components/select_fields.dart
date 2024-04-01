@@ -1,6 +1,6 @@
 import 'package:conforthourse/utils/colors.dart';
 import 'package:conforthourse/utils/dimensions.dart';
-import 'package:conforthourse/widgets/label_form.dart';
+import 'package:conforthourse/components/label_form.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 

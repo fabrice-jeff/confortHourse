@@ -1,3 +1,4 @@
+import 'package:conforthourse/modules/base/controllers/base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,14 +6,15 @@ import '../../../data/api/api.dart';
 import '../../../routes/routes.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
-import '../../../widgets/simple_text.dart';
+import '../../../components/big_text.dart';
+import '../../../components/simple_text.dart';
 import '../controllers/home_controller.dart';
-import 'details_location.dart';
 
 class LocationWidget extends GetView<HomeController> {
   final Map<String, dynamic> location;
-  const LocationWidget({super.key, required this.location});
+  final BaseController? baseController;
+  const LocationWidget(
+      {super.key, required this.location, this.baseController});
   @override
   Widget build(BuildContext context) {
     Get.put(HomeController());
@@ -144,13 +146,14 @@ class LocationWidget extends GetView<HomeController> {
                         "categorie": location['annonce'].categorie.libelle,
                         'annonce': location['annonce'].id.toString()
                       };
-                      var annoncesSimulaires =
-                          await controller.getAnnonceSimulaireByCategorie(data);
+                      var annoncesSimulaires = await baseController!
+                          .getAnnonceSimulaireByCategorie(data);
 
                       // Détails d'une annomce
                       Get.offAndToNamed(Routes.detailsLocation, arguments: {
                         'location': location,
-                        'otherAnnonces': annoncesSimulaires
+                        'otherAnnonces': annoncesSimulaires,
+                        'baseController': baseController,
                       });
                     },
                     child: SimpleTextWidget(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../data/models/categorie.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/dimensions.dart';
-import '../../../widgets/big_text.dart';
+import '../../../components/big_text.dart';
 
 class CategorieWidget extends StatelessWidget {
   final Categorie categorie;
